@@ -1,0 +1,15 @@
+.crud-header {
+    background-color: #0077cc;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .crud-header:first-child {
+    border-top-left-radius: 5px;
+  }
+  
+  .crud-header:last-child {
+    border-top-right-radius: 5px;
+  }

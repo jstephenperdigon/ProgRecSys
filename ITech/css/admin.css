@@ -1,0 +1,50 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+    body {
+        background-color: #fff;
+    }
+    
+    #navBar {
+        
+    /* Layout Properties */
+
+    height: 130px;
+    
+    /* UI Properties */
+
+    opacity: 1;
+    
+    }
+    
+    #navLogo {
+    
+    /* Layout Properties */
+    
+    width: 100px;
+    height: 100px;
+
+    }
+    
+    
+    #icons{
+        color: #5080ff;
+    }
+    #p1{
+        font-family: Montserrat;
+        margin-top: 1vw;
+        margin-left: 1vw;
+    }
+    #p2{
+        font-family: Montserrat;
+        font-weight: bolder;
+        font-size: 30px;
+    }
+    
+    #mainBtn{
+        border-radius: 24px;
+        background: #5080ff;
+        box-shadow:  -14px 14px 29px #3758b0,
+                     14px -14px 29px #69a8ff;}
+
+    
