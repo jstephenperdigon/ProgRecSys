@@ -570,7 +570,7 @@ $(document).ready(function () {
     if (password != confirmPassword)
         $("#checkpass").html("Password does not match").css("color","red");
     else
-        $("#checkpass").html("Password match").css("color","green");
+        $("#checkpass....").html("Password match").css("color","green");
    });
 });
 
