@@ -242,7 +242,7 @@ specialization of knowledge.</p> <br><br>
         <div class="row">
           <!-- Grid column -->
           <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">
+            <h6 class="text-uppercase mb-4 ">
              Itech
             </h6>
             <p>
