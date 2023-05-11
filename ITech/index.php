@@ -81,8 +81,6 @@
 </div>
 
 </section><!-- End Hero -->
-
-
     <!-- ======= Why Us Section ======= -->
     <section id="why-us" class="why-us section-bg" >
       <div class="container-fluid">
