@@ -24,7 +24,7 @@ if($email != false && $password != false){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title><?php echo $fetch_info['firstName'] ?> | Instruction </title>
+<title><?php echo $fetch_info['firstName'] ?> | Examination </title>
 <link rel="icon" type="image/x-icon" href="../img/logo.png">
     <head>
     <meta charset="utf-8">
@@ -53,12 +53,191 @@ if($email != false && $password != false){
     <link rel="stylesheet" href="../css/style.css">
         <!-- END IMPORTS -->
       <style>
+        :root {
+  --primary-color: rgb(11, 78, 179);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.container-body{
+  align-items: center;
+  margin-top: 200px;
+}
+body {
+  /*height: 100vh; */
+  /*display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+/* Global Stylings */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Progressbar */
+.progressbar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  counter-reset: step;
+  margin: 2rem 0 4rem;
+}
+
+.progressbar::before,
+.progress {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  background-color: #dcdcdc;
+  z-index: -1;
+}
+
+.progress {
+  background-color: var(--primary-color);
+  width: 0%;
+  transition: 0.3s;
+}
+
+.progress-step {
+  width: 2.1875rem;
+  height: 2.1875rem;
+  background-color: #dcdcdc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-step::before {
+  counter-increment: step;
+  content: counter(step);
+}
+
+.progress-step::after {
+  content: attr(data-title);
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.progress-step-active {
+  background-color: var(--primary-color);
+  color: #f3f3f3;
+}
+
+/* Form */
+.form {
+  width: clamp(320px, 30%, 430px);
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 0.35rem;
+  padding: 1.5rem;
+}
+
+.form-step {
+  display: none;
+  transform-origin: top;
+  animation: animate 0.5s;
+}
+
+.form-step-active {
+  display: block;
+}
+
+.input-group {
+  margin: 2rem 0;
+}
+
+
+/* Button */
+.btns-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.btn {
+  padding: 0.75rem;
+  display: block;
+  text-decoration: none;
+  background-color: var(--primary-color);
+  color: #f3f3f3;
+  text-align: center;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn:hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
+}
+.input-group{
+  margin: 1rem 0;
+  
+}
+
+.answer {
+  list-style-type: none;
+  margin: 25px 0 0 0;
+  padding: 0;
+  
+}
+
+.answer input[type="radio"] {
+  opacity: 0.01;
+  z-index: 100;
+  
+}
+
+.answer input[type="radio"]:checked+label,
+.Checked+label {
+  background: #14a44d;
+  border-radius: 20px;
+}
+
+.answer label {
+  padding: 5px;
+  border: 1px solid #CCC;
+  cursor: pointer;
+  z-index: 90;
+  border-radius: 20px;
+}
+
+.answer label:hover {
+  background: #fea510;
+}
       </style>
 </head>
      <!-- Image and text -->
     
 <body>
-
 
 <nav class="nav fixed-top navbar-light bg-white shadow"  >
     <div class="container">
@@ -92,64 +271,185 @@ if($email != false && $password != false){
         </div>
     </div>
 </nav>
-<div class="container">
-<div class="mx-0 mx-sm-auto" style="margin-top: 120px;">
-  <div class="card">
-    <div class="card-header bg-primary">
-      <h5 class="card-title text-white mt-2" id="exampleModalLabel">EXAMINATION</h5>
-    </div>
-    <div class="modal-body mt-5">
+
+
+<div class="container-body">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h2 class="text-center mb-4">Time Remaining</h2>
       <div class="text-center">
-        <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
-        <p>
-          <strong>Please read carefully each questions.</strong>
-        </p>
+          <h5 id="timer">01:00:00</h5>
       </div>
-
-      <hr />
-
-      <form class="px-4 mt-5" action="">
-        <p ><strong>QUESTION 1: </strong></p>
-
-        <div class="form-check mb-2">
-          <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example1" />
-          <label class="form-check-label" for="radio3Example1">
-            Answer 1
-          </label>
-        </div>
-        <div class="form-check mb-2">
-          <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example2" />
-          <label class="form-check-label" for="radio3Example2">
-            Answer 2
-          </label>
-        </div>
-        <div class="form-check mb-2">
-          <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example3" />
-          <label class="form-check-label" for="radio3Example3">
-            Answer 3
-          </label>
-        </div>
-        <div class="form-check mb-2">
-          <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example4" />
-          <label class="form-check-label" for="radio3Example4">
-            Answer 4
-          </label>
-        </div>
-        <div class="form-check mb-2">
-          <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example5" />
-          <label class="form-check-label" for="radio3Example5">
-            Answer 5
-          </label>
-        </div>
-
-      </form>
-    </div>
-    <div class="card-footer text-center" >
-      <button type="button" class="btn btn-primary" style="box-shadow: none;">Submit</button>
     </div>
   </div>
 </div>
-</div>
+
+<form action="#" class="form">
+      <h4 class="text-center">EXAMINATION</h4>
+      <!-- Progress bar -->
+      <div class="progressbar">
+        <div class="progress" id="progress"></div>
+        <div class="progress-step progress-step-active" data-title=""></div>
+        <div class="progress-step" data-title=""></div>
+        <div class="progress-step" data-title=""></div>
+        <div class="progress-step" data-title=""></div>
+      </div>
+
+      <!-- Steps -->
+      <div class="form-step form-step-active">
+        <h4 class="fw-bold text-center mt-3"></h4>
+          <p class="fw-bold text-center">Question 1</p>
+          <ul class="answer text-center">
+            <li>
+              <input type="radio" id="a25" name="amount" />
+              <label for="a25">ANSWER 1</label>
+            </li>
+            <li>
+              <input type="radio" id="a50" name="amount" />
+              <label for="a50">ANSWER 2</label>
+            </li>
+            <li>
+              <input type="radio" id="a75" name="amount"/>
+              <label for="a75">ANSWER 3</label>
+            </li>
+            <li>
+              <input type="radio" id="a100" name="amount" />
+              <label for="a100">ANSWER 4</label>
+            </li>
+          </ul>
+        <div class="">
+          <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
+        </div>
+      </div>
+      <div class="form-step">
+        <div class="input-group">
+          <label for="phone">Phone</label>
+          <input type="text" name="phone" id="phone" />
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" />
+        </div>
+        <div class="btns-group">
+          <a href="#" class="btn btn-prev">Previous</a>
+          <a href="#" class="btn btn-next">Next</a>
+        </div>
+      </div>
+      <div class="form-step">
+        <div class="input-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" name="dob" id="dob" />
+        </div>
+        <div class="input-group">
+          <label for="ID">National ID</label>
+          <input type="number" name="ID" id="ID" />
+        </div>
+        <div class="btns-group">
+          <a href="#" class="btn btn-prev">Previous</a>
+          <a href="#" class="btn btn-next">Next</a>
+        </div>
+      </div>
+      <div class="form-step">
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <div class="input-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            id="confirmPassword"
+          />
+        </div>
+        <div class="btns-group">
+          <a href="#" class="btn btn-prev">Previous</a>
+          <input type="submit" value="Submit" class="btn" />
+        </div>
+      </div>
+    </form>
+<script>
+const prevBtns = document.querySelectorAll(".btn-prev");
+const nextBtns = document.querySelectorAll(".btn-next");
+const progress = document.getElementById("progress");
+const formSteps = document.querySelectorAll(".form-step");
+const progressSteps = document.querySelectorAll(".progress-step");
+
+let formStepsNum = 0;
+
+nextBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    formStepsNum++;
+    updateFormSteps();
+    updateProgressbar();
+  });
+});
+
+prevBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    formStepsNum--;
+    updateFormSteps();
+    updateProgressbar();
+  });
+});
+
+function updateFormSteps() {
+  formSteps.forEach((formStep) => {
+    formStep.classList.contains("form-step-active") &&
+      formStep.classList.remove("form-step-active");
+  });
+
+  formSteps[formStepsNum].classList.add("form-step-active");
+}
+
+function updateProgressbar() {
+  progressSteps.forEach((progressStep, idx) => {
+    if (idx < formStepsNum + 1) {
+      progressStep.classList.add("progress-step-active");
+    } else {
+      progressStep.classList.remove("progress-step-active");
+    }
+  });
+
+  const progressActive = document.querySelectorAll(".progress-step-active");
+
+  progress.style.width =
+    ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
+}
+</script>
+<script>
+  // Select elements
+const timer = document.getElementById('timer');
+
+// Set initial values
+let time = JSON.parse(localStorage.getItem('quizTime')) || 3600;
+let intervalId;
+updateTimerDisplay(time);
+
+// Start the timer
+intervalId = setInterval(() => {
+  time--;
+  updateTimerDisplay(time);
+  localStorage.setItem('quizTime', JSON.stringify(time));
+  if (time === 0) {
+    clearInterval(intervalId);
+    alert('Time is up!');
+    localStorage.removeItem('quizTime');
+  }
+}, 1000);
+
+function updateTimerDisplay(time) {
+  const hours = Math.floor(time / 3600);
+  const minutes = Math.floor((time % 3600) / 60);
+  const seconds = time % 60;
+  timer.textContent = `${padZeroes(hours)}:${padZeroes(minutes)}:${padZeroes(seconds)}`;
+}
+
+function padZeroes(num) {
+  return num.toString().padStart(2, '0');
+}
+
+</script>
     <!-- IMPORTS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <!-- MDB -->

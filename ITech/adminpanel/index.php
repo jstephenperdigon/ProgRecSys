@@ -145,10 +145,7 @@ if($email != false && $password != false){
             <div class="col-md-10">
           <h1>Admin Dashboard</h1>
           <p>Welcome, <?php echo $fetch_info['firstName'] ?>!</p>
-          
-         
         </div>
-
       </div>
       <div
         class="tab-pane fade"
