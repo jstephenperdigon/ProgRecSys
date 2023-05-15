@@ -1,5 +1,4 @@
 <?php require_once "controllerUserData.php"; ?>
-
 <?php 
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
@@ -29,26 +28,14 @@ if($email != false && $password != false){
     <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Font Awesome -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
     <!-- MDB -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!-- END IMPORTS -->
-
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="../css/style.css">
         <!-- END IMPORTS -->
@@ -220,6 +207,7 @@ input {
 .Checked+label {
   background: #14a44d;
   border-radius: 20px;
+  color:#fff;
 }
 
 .answer label {
@@ -231,7 +219,8 @@ input {
 }
 
 .answer label:hover {
-  background: #fea510;
+  background: #4cc175;
+  color: #fff;
 }
       </style>
 </head>
@@ -368,88 +357,8 @@ input {
         </div>
       </div>
     </form>
-<script>
-const prevBtns = document.querySelectorAll(".btn-prev");
-const nextBtns = document.querySelectorAll(".btn-next");
-const progress = document.getElementById("progress");
-const formSteps = document.querySelectorAll(".form-step");
-const progressSteps = document.querySelectorAll(".progress-step");
 
-let formStepsNum = 0;
-
-nextBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    formStepsNum++;
-    updateFormSteps();
-    updateProgressbar();
-  });
-});
-
-prevBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    formStepsNum--;
-    updateFormSteps();
-    updateProgressbar();
-  });
-});
-
-function updateFormSteps() {
-  formSteps.forEach((formStep) => {
-    formStep.classList.contains("form-step-active") &&
-      formStep.classList.remove("form-step-active");
-  });
-
-  formSteps[formStepsNum].classList.add("form-step-active");
-}
-
-function updateProgressbar() {
-  progressSteps.forEach((progressStep, idx) => {
-    if (idx < formStepsNum + 1) {
-      progressStep.classList.add("progress-step-active");
-    } else {
-      progressStep.classList.remove("progress-step-active");
-    }
-  });
-
-  const progressActive = document.querySelectorAll(".progress-step-active");
-
-  progress.style.width =
-    ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
-}
-</script>
-<script>
-  // Select elements
-const timer = document.getElementById('timer');
-
-// Set initial values
-let time = JSON.parse(localStorage.getItem('quizTime')) || 3600;
-let intervalId;
-updateTimerDisplay(time);
-
-// Start the timer
-intervalId = setInterval(() => {
-  time--;
-  updateTimerDisplay(time);
-  localStorage.setItem('quizTime', JSON.stringify(time));
-  if (time === 0) {
-    clearInterval(intervalId);
-    alert('Time is up!');
-    localStorage.removeItem('quizTime');
-  }
-}, 1000);
-
-function updateTimerDisplay(time) {
-  const hours = Math.floor(time / 3600);
-  const minutes = Math.floor((time % 3600) / 60);
-  const seconds = time % 60;
-  timer.textContent = `${padZeroes(hours)}:${padZeroes(minutes)}:${padZeroes(seconds)}`;
-}
-
-function padZeroes(num) {
-  return num.toString().padStart(2, '0');
-}
-
-</script>
+    <script type="text/javascript" src="components_js/exam.js"></script>
     <!-- IMPORTS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <!-- MDB -->
