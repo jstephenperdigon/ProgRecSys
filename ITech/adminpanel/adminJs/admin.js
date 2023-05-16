@@ -1,7 +1,4 @@
 
-
-
-
 /* Add question form submission handling --> */
 
 var addQuestionForm = document.getElementById("add-question-form");

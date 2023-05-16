@@ -1,9 +1,10 @@
-<?php require_once('controllerUserData.php')?>
-<?php 
+<?php require_once('controllerUserData.php') ?>
+<?php
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,8 +17,9 @@
     style="width: 100%; border-collapse: collapse; border: 0px; border-spacing: 0px; font-family: Arial, Helvetica, sans-serif; background-color: rgb(239, 239, 239);">
     <tbody>
       <tr>
-        <td align ="center" style="padding: 1rem 2rem; vertical-align: top; width: 100%;">
-          <table role="presentation" style="max-width: 600px; border-collapse: collapse; border: 0px; border-spacing: 0px; text-align: left;">
+        <td align="center" style="padding: 1rem 2rem; vertical-align: top; width: 100%;">
+          <table role="presentation"
+            style="max-width: 600px; border-collapse: collapse; border: 0px; border-spacing: 0px; text-align: left;">
             <tbody>
               <tr>
                 <td style="padding: 40px 0px 0px;">
@@ -29,9 +31,13 @@
                       <h1 style="margin: 1rem 0">Verification code</h1>
                       <p style="padding-bottom: 16px">Please use the verification code below to sign in.</p>
                       <p style="padding-bottom: 16px"><strong style="font-size: 130%">
-                        <?php echo $fetch_info['code'] ?><?php echo $fetch_info['code1'] ?><?php echo $fetch_info['code2'] ?>
-                        <?php echo $fetch_info['code3'] ?><?php echo $fetch_info['code4'] ?><?php echo $fetch_info['code5'] ?>
-                      </strong></p>
+                          <?php echo $fetch_info['code'] ?>
+                          <?php echo $fetch_info['code1'] ?>
+                          <?php echo $fetch_info['code2'] ?>
+                          <?php echo $fetch_info['code3'] ?>
+                          <?php echo $fetch_info['code4'] ?>
+                          <?php echo $fetch_info['code5'] ?>
+                        </strong></p>
                       <p style="padding-bottom: 16px">If you didn’t request this, you can ignore this email.</p>
                       <p style="padding-bottom: 16px">Thanks,<br>ITech Team</p>
                     </div>

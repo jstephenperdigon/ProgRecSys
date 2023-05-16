@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body
+{
+    background-color: #fff;
+}
+    .wrong .fa-check
+{
+    display: none;
+}
+.good .fa-times
+{
+    display: none;
+}
+    
+#navBar {
+    
+/* Layout Properties */
+height: 150px;
+
+
+/* UI Properties */
+
+
+}
+
+#navLogo {
+
+/* Layout Properties */
+width: 100px;
+height: 100px;
+}
+.button {
+border: 1px solid #fff;
+border-radius: 20px;
+color: #fff;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 1px;
+padding: 15px 60px;
+text-decoration: none;
+text-transform: uppercase;
+}
+.submit-btn {
+border: none;
+border-radius: 25px;
+color: #fff;
+cursor: pointer;
+font-size: 11px;
+letter-spacing: 1px;
+margin-top: 15px;
+padding: 15px 50px;
+text-transform: uppercase;
+}
+#login .submit-btn {
+background: #5080ff;
+}
+#register .submit-btn {
+background: #5080ff;
+}
+#container {
+border-radius: 20px;
+height: 600px;
+margin:auto;
+overflow: hidden;
+}
+#register {
+background: #fff;
+float: right;
+height: 100%;
+position: relative;
+width: 50%;
+text-align: center;
+top: -2500px;
+z-index: 1;
+}
+#register h1 {
+padding: 10% 0 25px;
+}
+#register h1 {
+color: #5080ff;
+}
+#register p {
+font-size: 12px;
+font-weight: 300;
+letter-spacing: 0.3px;
+padding: 20px;
+}
+#input1{
+font-weight: 300;
+margin: 6px;
+padding: 6px;
+padding-bottom: 10px;
+
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+-moz-appearance: textfield;
+}
+
+::-moz-selection { /* Code for Firefox */
+color: white;
+background: gray;
+}
+
+::selection {
+color: white;
+background: gray;
+}
+.error {
+border-color: red;
+}
+input:invalid {
+border-style: solid;
+border-width: 2px;
+border-color: red;
+}
+.form-control.is-invalid, .was-validated .form-control:invalid {
+  margin-bottom: 0rem;
+  background-image: none;
+  border-color: #dc4c64;
+}
+  

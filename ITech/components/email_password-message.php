@@ -14,21 +14,25 @@
     <tbody>
       <tr>
         <td align="center" style="padding: 1rem 2rem; vertical-align: top; width: 100%;">
-          <table role="presentation" style="max-width: 600px; border-collapse: collapse; border: 0px; border-spacing: 0px; text-align: left;">
+          <table role="presentation"
+            style="max-width: 600px; border-collapse: collapse; border: 0px; border-spacing: 0px; text-align: left;">
             <tbody>
               <tr>
                 <td style="padding: 40px 0px 0px;">
                   <div style="text-align: left;">
-                    <div style="padding-bottom: 20px;"><img src="https://i.ibb.co/Qbnj4mz/logo.png" alt="Company" style="width: 56px;"></div>
+                    <div style="padding-bottom: 20px;"><img src="https://i.ibb.co/Qbnj4mz/logo.png" alt="Company"
+                        style="width: 56px;"></div>
                   </div>
                   <div style="padding: 20px; background-color: rgb(255, 255, 255);">
                     <div style="color: rgb(0, 0, 0); text-align: left;">
                       <h1 style="margin: 1rem 0">Trouble signing in?</h1>
-                      <p style="padding-bottom: 16px">We've received a request to reset the password for this user account.</p>
+                      <p style="padding-bottom: 16px">We've received a request to reset the password for this user
+                        account.</p>
                       <p style="padding-bottom: 16px"><a href="#" target="_blank"
                           style="padding: 12px 24px; border-radius: 4px; color: #FFF; background: #2B52F5;display: inline-block;margin: 0.5rem 0;">Reset
                           your password</a></p>
-                      <p style="padding-bottom: 16px">If you didn't ask to reset your password, you can ignore this email.</p>
+                      <p style="padding-bottom: 16px">If you didn't ask to reset your password, you can ignore this
+                        email.</p>
                       <p style="padding-bottom: 16px">Thanks,<br>The Mailmeteor team</p>
                     </div>
                   </div>

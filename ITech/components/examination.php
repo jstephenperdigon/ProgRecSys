@@ -1,372 +1,386 @@
 <?php require_once "controllerUserData.php"; ?>
-<?php 
+<?php
 $email = $_SESSION['email'];
 $password = $_SESSION['password'];
-if($email != false && $password != false){
-    $sql = "SELECT * FROM usertable WHERE email = '$email'";
-    $run_Sql = mysqli_query($con, $sql);
-    if($run_Sql){
-        $fetch_info = mysqli_fetch_assoc($run_Sql);
-        $status = $fetch_info['status'];
-        $code = $fetch_info['code'];
-        if($status == "verified"){
-            if($code != 0){
-                header('Location: reset-code.php');
-            }
-        }else{
-            header('Location: user-otp.php');
-        }
+if ($email != false && $password != false) {
+  $sql = "SELECT * FROM usertable WHERE email = '$email'";
+  $run_Sql = mysqli_query($con, $sql);
+  if ($run_Sql) {
+    $fetch_info = mysqli_fetch_assoc($run_Sql);
+    $status = $fetch_info['status'];
+    $code = $fetch_info['code'];
+    if ($status == "verified") {
+      if ($code != 0) {
+        header('Location: reset-code.php');
+      }
+    } else {
+      header('Location: user-otp.php');
     }
-}else{
-    header('Location: ../index.php');
+  }
+} else {
+  header('Location: ../index.php');
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<title><?php echo $fetch_info['firstName'] ?> | Examination </title>
+<title>
+  <?php echo $fetch_info['firstName'] ?> | Examination
+</title>
 <link rel="icon" type="image/x-icon" href="../img/logo.png">
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
-    <!-- MDB -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-        <!-- END IMPORTS -->
-      <style>
-        :root {
-  --primary-color: rgb(11, 78, 179);
-}
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-.container-body{
-  align-items: center;
-  margin-top: 200px;
-}
-body {
-  /*height: 100vh; */
-  /*display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
-}
-/* Global Stylings */
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <!-- END IMPORTS -->
+  <style>
+    :root {
+      --primary-color: rgb(11, 78, 179);
+    }
 
-input {
-  display: block;
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-}
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-.width-50 {
-  width: 50%;
-}
+    .container-body {
+      align-items: center;
+      margin-top: 200px;
+    }
 
-.ml-auto {
-  margin-left: auto;
-}
+    body {
+      /*height: 100vh; */
+      /*display: flex; */
+      /* align-items: center; */
+      /* justify-content: center; */
+    }
 
-.text-center {
-  text-align: center;
-}
+    /* Global Stylings */
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
 
-/* Progressbar */
-.progressbar {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  counter-reset: step;
-  margin: 2rem 0 4rem;
-}
+    input {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+    }
 
-.progressbar::before,
-.progress {
-  content: "";
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 4px;
-  width: 100%;
-  background-color: #dcdcdc;
-  z-index: -1;
-}
+    .width-50 {
+      width: 50%;
+    }
 
-.progress {
-  background-color: var(--primary-color);
-  width: 0%;
-  transition: 0.3s;
-}
+    .ml-auto {
+      margin-left: auto;
+    }
 
-.progress-step {
-  width: 2.1875rem;
-  height: 2.1875rem;
-  background-color: #dcdcdc;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .text-center {
+      text-align: center;
+    }
 
-.progress-step::before {
-  counter-increment: step;
-  content: counter(step);
-}
+    /* Progressbar */
+    .progressbar {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      counter-reset: step;
+      margin: 2rem 0 4rem;
+    }
 
-.progress-step::after {
-  content: attr(data-title);
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  font-size: 0.85rem;
-  color: #666;
-}
+    .progressbar::before,
+    .progress {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 4px;
+      width: 100%;
+      background-color: #dcdcdc;
+      z-index: -1;
+    }
 
-.progress-step-active {
-  background-color: var(--primary-color);
-  color: #f3f3f3;
-}
+    .progress {
+      background-color: var(--primary-color);
+      width: 0%;
+      transition: 0.3s;
+    }
 
-/* Form */
-.form {
-  width: clamp(320px, 30%, 430px);
-  margin: 0 auto;
-  border: 1px solid #ccc;
-  border-radius: 0.35rem;
-  padding: 1.5rem;
-}
+    .progress-step {
+      width: 2.1875rem;
+      height: 2.1875rem;
+      background-color: #dcdcdc;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.form-step {
-  display: none;
-  transform-origin: top;
-  animation: animate 0.5s;
-}
+    .progress-step::before {
+      counter-increment: step;
+      content: counter(step);
+    }
 
-.form-step-active {
-  display: block;
-}
+    .progress-step::after {
+      content: attr(data-title);
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      font-size: 0.85rem;
+      color: #666;
+    }
 
-.input-group {
-  margin: 2rem 0;
-}
+    .progress-step-active {
+      background-color: var(--primary-color);
+      color: #f3f3f3;
+    }
+
+    /* Form */
+    .form {
+      width: clamp(320px, 30%, 430px);
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      border-radius: 0.35rem;
+      padding: 1.5rem;
+    }
+
+    .form-step {
+      display: none;
+      transform-origin: top;
+      animation: animate 0.5s;
+    }
+
+    .form-step-active {
+      display: block;
+    }
+
+    .input-group {
+      margin: 2rem 0;
+    }
 
 
-/* Button */
-.btns-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
+    /* Button */
+    .btns-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
 
-.btn {
-  padding: 0.75rem;
-  display: block;
-  text-decoration: none;
-  background-color: var(--primary-color);
-  color: #f3f3f3;
-  text-align: center;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.btn:hover {
-  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
-}
-.input-group{
-  margin: 1rem 0;
-  
-}
+    .btn {
+      padding: 0.75rem;
+      display: block;
+      text-decoration: none;
+      background-color: var(--primary-color);
+      color: #f3f3f3;
+      text-align: center;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-.answer {
-  list-style-type: none;
-  margin: 25px 0 0 0;
-  padding: 0;
-  
-}
+    .btn:hover {
+      box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
+    }
 
-.answer input[type="radio"] {
-  opacity: 0.01;
-  z-index: 100;
-  
-}
+    .input-group {
+      margin: 1rem 0;
 
-.answer input[type="radio"]:checked+label,
-.Checked+label {
-  background: #14a44d;
-  border-radius: 20px;
-  color:#fff;
-}
+    }
 
-.answer label {
-  padding: 5px;
-  border: 1px solid #CCC;
-  cursor: pointer;
-  z-index: 90;
-  border-radius: 20px;
-}
+    .answer {
+      list-style-type: none;
+      margin: 25px 0 0 0;
+      padding: 0;
 
-.answer label:hover {
-  background: #4cc175;
-  color: #fff;
-}
-      </style>
+    }
+
+    .answer input[type="radio"] {
+      opacity: 0.01;
+      z-index: 100;
+
+    }
+
+    .answer input[type="radio"]:checked+label,
+    .Checked+label {
+      background: #14a44d;
+      border-radius: 20px;
+      color: #fff;
+    }
+
+    .answer label {
+      padding: 5px;
+      border: 1px solid #CCC;
+      cursor: pointer;
+      z-index: 90;
+      border-radius: 20px;
+    }
+
+    .answer label:hover {
+      background: #4cc175;
+      color: #fff;
+    }
+  </style>
 </head>
-     <!-- Image and text -->
-    
+<!-- Image and text -->
+
 <body>
 
-<nav class="nav fixed-top navbar-light bg-white shadow"  >
+  <nav class="nav fixed-top navbar-light bg-white shadow">
     <div class="container">
-        <div class="row justify-content-end align-items-center">  
-            <div class="col-auto ">
-                <a class="navbar-brand" href="home.php"><img src="../img/logo.png"  id="navLogo">
-                 </a>
-            </div>
-            <div class="col justify-content-start">
-            Program Recommendation System 
-            </div>
-            <div class="col text-center">
-            <!-- Example split primary button -->
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary"><?php echo $fetch_info['firstName'] ?></button>
-              <button
-                type="button"
-                class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                data-mdb-toggle="dropdown"
-                aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu">
-                <li> <a class="dropdown-item" href="user-completion.php">Settings</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>  <a class="dropdown-item" href="logout-user.php">Logout</a></li>
-              </ul>
-            </div>
-  
-            </div>
+      <div class="row justify-content-end align-items-center">
+        <div class="col-auto ">
+          <a class="navbar-brand" href="home.php"><img src="../img/logo.png" id="navLogo">
+          </a>
         </div>
+        <div class="col justify-content-start">
+          Program Recommendation System
+        </div>
+        <div class="col text-center">
+          <!-- Example split primary button -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary">
+              <?php echo $fetch_info['firstName'] ?>
+            </button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+              data-mdb-toggle="dropdown" aria-expanded="false">
+              <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li> <a class="dropdown-item" href="user-completion.php">Settings</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li> <a class="dropdown-item" href="logout-user.php">Logout</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
     </div>
-</nav>
+  </nav>
 
 
-<div class="container-body">
-  <div class="row">
-    <div class="col-md-8 mx-auto">
-      <h2 class="text-center mb-4">Time Remaining</h2>
-      <div class="text-center">
+  <div class="container-body">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <h2 class="text-center mb-4">Time Remaining</h2>
+        <div class="text-center">
           <h5 id="timer">01:00:00</h5>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<form action="#" class="form">
-      <h4 class="text-center">EXAMINATION</h4>
-      <!-- Progress bar -->
-      <div class="progressbar">
-        <div class="progress" id="progress"></div>
-        <div class="progress-step progress-step-active" data-title=""></div>
-        <div class="progress-step" data-title=""></div>
-        <div class="progress-step" data-title=""></div>
-        <div class="progress-step" data-title=""></div>
-      </div>
+  <form action="#" class="form">
+    <h4 class="text-center">EXAMINATION</h4>
+    <!-- Progress bar -->
+    <div class="progressbar">
+      <div class="progress" id="progress"></div>
+      <div class="progress-step progress-step-active" data-title=""></div>
+      <div class="progress-step" data-title=""></div>
+      <div class="progress-step" data-title=""></div>
+      <div class="progress-step" data-title=""></div>
+    </div>
 
-      <!-- Steps -->
-      <div class="form-step form-step-active">
-        <h4 class="fw-bold text-center mt-3"></h4>
-          <p class="fw-bold text-center">Question 1</p>
-          <ul class="answer text-center">
-            <li>
-              <input type="radio" id="a25" name="amount" />
-              <label for="a25">ANSWER 1</label>
-            </li>
-            <li>
-              <input type="radio" id="a50" name="amount" />
-              <label for="a50">ANSWER 2</label>
-            </li>
-            <li>
-              <input type="radio" id="a75" name="amount"/>
-              <label for="a75">ANSWER 3</label>
-            </li>
-            <li>
-              <input type="radio" id="a100" name="amount" />
-              <label for="a100">ANSWER 4</label>
-            </li>
-          </ul>
-        <div class="">
-          <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
-        </div>
+    <!-- Steps -->
+    <div class="form-step form-step-active">
+      <h4 class="fw-bold text-center mt-3"></h4>
+      <p class="fw-bold text-center">Question 1</p>
+      <ul class="answer text-center">
+        <li>
+          <input type="radio" id="a25" name="amount" />
+          <label for="a25">ANSWER 1</label>
+        </li>
+        <li>
+          <input type="radio" id="a50" name="amount" />
+          <label for="a50">ANSWER 2</label>
+        </li>
+        <li>
+          <input type="radio" id="a75" name="amount" />
+          <label for="a75">ANSWER 3</label>
+        </li>
+        <li>
+          <input type="radio" id="a100" name="amount" />
+          <label for="a100">ANSWER 4</label>
+        </li>
+      </ul>
+      <div class="">
+        <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
       </div>
-      <div class="form-step">
-        <div class="input-group">
-          <label for="phone">Phone</label>
-          <input type="text" name="phone" id="phone" />
-        </div>
-        <div class="input-group">
-          <label for="email">Email</label>
-          <input type="text" name="email" id="email" />
-        </div>
-        <div class="btns-group">
-          <a href="#" class="btn btn-prev">Previous</a>
-          <a href="#" class="btn btn-next">Next</a>
-        </div>
+    </div>
+    <div class="form-step">
+      <div class="input-group">
+        <label for="phone">Phone</label>
+        <input type="text" name="phone" id="phone" />
       </div>
-      <div class="form-step">
-        <div class="input-group">
-          <label for="dob">Date of Birth</label>
-          <input type="date" name="dob" id="dob" />
-        </div>
-        <div class="input-group">
-          <label for="ID">National ID</label>
-          <input type="number" name="ID" id="ID" />
-        </div>
-        <div class="btns-group">
-          <a href="#" class="btn btn-prev">Previous</a>
-          <a href="#" class="btn btn-next">Next</a>
-        </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" />
       </div>
-      <div class="form-step">
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input type="password" name="password" id="password" />
-        </div>
-        <div class="input-group">
-          <label for="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-          />
-        </div>
-        <div class="btns-group">
-          <a href="#" class="btn btn-prev">Previous</a>
-          <input type="submit" value="Submit" class="btn" />
-        </div>
+      <div class="btns-group">
+        <a href="#" class="btn btn-prev">Previous</a>
+        <a href="#" class="btn btn-next">Next</a>
       </div>
-    </form>
+    </div>
+    <div class="form-step">
+      <div class="input-group">
+        <label for="dob">Date of Birth</label>
+        <input type="date" name="dob" id="dob" />
+      </div>
+      <div class="input-group">
+        <label for="ID">National ID</label>
+        <input type="number" name="ID" id="ID" />
+      </div>
+      <div class="btns-group">
+        <a href="#" class="btn btn-prev">Previous</a>
+        <a href="#" class="btn btn-next">Next</a>
+      </div>
+    </div>
+    <div class="form-step">
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+      </div>
+      <div class="input-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" />
+      </div>
+      <div class="btns-group">
+        <a href="#" class="btn btn-prev">Previous</a>
+        <input type="submit" value="Submit" class="btn" />
+      </div>
+    </div>
+  </form>
 
-    <script type="text/javascript" src="components_js/exam.js"></script>
-    <!-- IMPORTS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
-    <!-- MDB -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
-    <!-- END IMPORTS -->
+  <script type="text/javascript" src="components_js/exam.js"></script>
+  <!-- IMPORTS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+  <!-- MDB -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <!-- END IMPORTS -->
 </body>
-</html>  
+
+</html>
