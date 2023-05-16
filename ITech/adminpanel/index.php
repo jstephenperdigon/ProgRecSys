@@ -1,27 +1,7 @@
 <?php require_once "../components/controllerUserData.php"; ?>
+<?php require "./components/header.php"; ?>
 
-<?php 
-$email = $_SESSION['email'];
-$password = $_SESSION['password'];
-if($email != false && $password != false){
-    $sql = "SELECT * FROM usertable WHERE email = '$email'";
-    $run_Sql = mysqli_query($con, $sql);
-    if($run_Sql){
-        $fetch_info = mysqli_fetch_assoc($run_Sql);
-        $status = $fetch_info['status'];
-        $code = $fetch_info['code'];
-        if($status == "verified"){
-            if($code != 0){
-                header('Location: reset-code.php');
-            }
-        }else{
-            header('Location: user-otp.php');
-        }
-    }
-}else{
-    header('Location: ../index.php');
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <title><?php echo $fetch_info['firstName'] ?> | Home </title>
@@ -284,62 +264,6 @@ if($email != false && $password != false){
   </div>
 </div>
 </div>
-
-<!-- Add question form submission handling -->
-<script>
-  var addQuestionForm = document.getElementById("add-question-form");
-
-  addQuestionForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    // Get form values
-    var questionText = document.getElementById("question-text").value;
-    var answerA = document.getElementById("answer-a").value;
-    var answerB = document.getElementById("answer-b").value;
-    var answerC = document.getElementById("answer-c").value;
-    var answerD = document.getElementById("answer-d").value;
-    var correctAnswer = document.getElementById("correct-answer").value;
-
-    // Send form data to server
-    fetch('/add-question', {
-      method: 'POST',
-      body: JSON.stringify({
-        questionText: questionText,
-        answers: [answerA, answerB, answerC, answerD],
-        correctAnswer: correctAnswer
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      // Handle server response
-      if (response.ok) {
-        alert("Question added successfully!");
-      } else {
-        alert("Error adding question.");
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  });
-</script>
-
-<script>
-
-  if (window.history && window.history.pushState) {
-    window.history.pushState('forward', null, './');
-    $(window).on('popstate', function() {
-      window.history.pushState('forward', null, './');
-    });
-  }
-</script>
-
-   
-
-      
-
 
     <!-- IMPORTS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
