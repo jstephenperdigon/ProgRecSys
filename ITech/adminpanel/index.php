@@ -1,6 +1,6 @@
 <?php require_once "../components/controllerUserData.php"; ?>
 <?php require "./components/header.php"; ?>
-<?php require "./query/addExamination.php"; ?>
+<?php require "./query/examinationController.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <title>
