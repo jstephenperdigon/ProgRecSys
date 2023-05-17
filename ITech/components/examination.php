@@ -21,6 +21,12 @@ if ($email != false && $password != false) {
   header('Location: ../index.php');
 }
 ?>
+<?php
+
+$sql = "SELECT * FROM examinationtbl";
+$questions = $con->query($sql);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <title>
@@ -283,7 +289,7 @@ if ($email != false && $password != false) {
   </div>
 
   <form action="#" class="form">
-    <h4 class="text-center">EXAMINATION</h4>
+    <h4 class="text-center">PART 1</h4>
     <!-- Progress bar -->
     <div class="progressbar">
       <div class="progress" id="progress"></div>
@@ -291,28 +297,40 @@ if ($email != false && $password != false) {
       <div class="progress-step" data-title=""></div>
       <div class="progress-step" data-title=""></div>
       <div class="progress-step" data-title=""></div>
+      <div class="progress-step" data-title=""></div>
+      <div class="progress-step" data-title=""></div>
+      <div class="progress-step" data-title=""></div>
+      <div class="progress-step" data-title=""></div>
+      <div class="progress-step" data-title=""></div>
+      <div class="progress-step" data-title=""></div>
     </div>
+
 
     <!-- Steps -->
     <div class="form-step form-step-active">
-      <h4 class="fw-bold text-center mt-3"></h4>
-      <p class="fw-bold text-center">Question 1</p>
+
+      <h4 class="fw-bold text-center mt-3">
+        <?php
+        $row = mysqli_fetch_assoc($questions)
+          ?>
+        <?php echo $row["question"] ?>
+      </h4>
       <ul class="answer text-center">
         <li>
-          <input type="radio" id="a25" name="amount" />
-          <label for="a25">ANSWER 1</label>
+          <input type="radio" id="choiceA" name="choiceA" />
+          <label for="choiceA">ANSWER 1</label>
         </li>
         <li>
-          <input type="radio" id="a50" name="amount" />
-          <label for="a50">ANSWER 2</label>
+          <input type="radio" id="choiceB" name="choiceB" />
+          <label for="choiceB">ANSWER 2</label>
         </li>
         <li>
-          <input type="radio" id="a75" name="amount" />
-          <label for="a75">ANSWER 3</label>
+          <input type="radio" id="choiceC" name="choiceC" />
+          <label for="choiceC">ANSWER 3</label>
         </li>
         <li>
-          <input type="radio" id="a100" name="amount" />
-          <label for="a100">ANSWER 4</label>
+          <input type="radio" id="choiceD" name="choiceD" />
+          <label for="choiceD">ANSWER 4</label>
         </li>
       </ul>
       <div class="">
@@ -320,42 +338,60 @@ if ($email != false && $password != false) {
       </div>
     </div>
     <div class="form-step">
-      <div class="input-group">
-        <label for="phone">Phone</label>
-        <input type="text" name="phone" id="phone" />
-      </div>
-      <div class="input-group">
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" />
-      </div>
+      <h4 class="fw-bold text-center mt-3">
+        <?php
+        $row = mysqli_fetch_assoc($questions)
+          ?>
+        <?php echo $row["question"] ?>
+      </h4>
+      <ul class="answer text-center">
+        <li>
+          <input type="radio" id="choiceA1" name="choiceA1" />
+          <label for="choiceA1">ANSWER 1</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceB1" name="choiceB1" />
+          <label for="choiceB1">ANSWER 2</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceC1" name="choiceC1" />
+          <label for="choiceC1">ANSWER 3</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceD1" name="choiceD1" />
+          <label for="choiceD1">ANSWER 4</label>
+        </li>
+      </ul>
       <div class="btns-group">
         <a href="#" class="btn btn-prev">Previous</a>
         <a href="#" class="btn btn-next">Next</a>
       </div>
     </div>
     <div class="form-step">
-      <div class="input-group">
-        <label for="dob">Date of Birth</label>
-        <input type="date" name="dob" id="dob" />
-      </div>
-      <div class="input-group">
-        <label for="ID">National ID</label>
-        <input type="number" name="ID" id="ID" />
-      </div>
-      <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-        <a href="#" class="btn btn-next">Next</a>
-      </div>
-    </div>
-    <div class="form-step">
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" />
-      </div>
-      <div class="input-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" name="confirmPassword" id="confirmPassword" />
-      </div>
+      <h4 class="fw-bold text-center mt-3">
+        <?php
+        $row = mysqli_fetch_assoc($questions)
+          ?>
+        <?php echo $row["question"] ?>
+      </h4>
+      <ul class="answer text-center">
+        <li>
+          <input type="radio" id="choiceA2" name="choiceA2" />
+          <label for="choiceA2">ANSWER 1</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceB2" name="choiceB2" />
+          <label for="choiceB2">ANSWER 2</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceC2" name="choiceC2" />
+          <label for="choiceC2">ANSWER 3</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceD2" name="choiceD2" />
+          <label for="choiceD2">ANSWER 4</label>
+        </li>
+      </ul>
       <div class="btns-group">
         <a href="#" class="btn btn-prev">Previous</a>
         <input type="submit" value="Submit" class="btn" />
