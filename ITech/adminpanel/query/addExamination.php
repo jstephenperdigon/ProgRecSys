@@ -1,36 +1,24 @@
-<?php
-$errors = array();
 
-//if user signup button
+<!-- ADD QUESTION -->
+<?php
 if (isset($_POST['addQuestion'])) {
-    // Generate a unique ID
-    $uniqueID = uniqid();
+    $uid = uniqid();
+    $keyAnswer = mysqli_real_escape_string($con, $_POST['keyAnswer']);
     $question = mysqli_real_escape_string($con, $_POST['question']);
     $choiceA = mysqli_real_escape_string($con, $_POST['choiceA']);
     $choiceB = mysqli_real_escape_string($con, $_POST['choiceB']);
     $choiceC = mysqli_real_escape_string($con, $_POST['choiceC']);
     $choiceD = mysqli_real_escape_string($con, $_POST['choiceD']);
-    $key = mysqli_real_escape_string($con, $_POST['key']);
-
-    $questionCheck = "SELECT * FROM examinationtbl WHERE question = '$question'";
-    $result = mysqli_query($con, $questionCheck);
-    if (mysqli_num_rows($result) > 0) {
-        $errors['question'] = " Question is already in use!.";
+    $query = "INSERT INTO examinationtbl (uid,question,answer,option1,option2,option3,option4) VALUES ('$uid','$question','$keyAnswer', '$choiceA', '$choiceB', '$choiceC', '$choiceD')";
+    if (!mysqli_query($con, $query)) {
+        echo "THE DATA IS NOT INSERTED!";
+    } else {
+        echo "THE DATA IS INSERTED!";
+         // Redirect to a different page after successful submission
+         header("Location: index.php");
+         exit(); 
+         // Make sure to exit to prevent further script execution
     }
-
-    if (count($errors) === 0) {
-
-        $inserQuestion = "INSERT INTO examinationtbl ()
-                        values('$choiceA',)";
-        $data_check = mysqli_query($con, $inserQuestion);
-        if ($data_check) {
-
-        } else {
-            $errors['db-error'] = "Failed while inserting data into database!";
-        }
-    }
-
 }
-
-
 ?>
+<!-- ADD QUESTION -->

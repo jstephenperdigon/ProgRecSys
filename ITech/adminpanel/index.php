@@ -1,7 +1,6 @@
 <?php require_once "../components/controllerUserData.php"; ?>
 <?php require "./components/header.php"; ?>
-
-
+<?php require "./query/addExamination.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <title>
@@ -31,7 +30,7 @@
 <body>
 
 
-
+    <!-- NAV BAR -->
     <nav class="nav fixed-top  bg-white shadow">
         <div class="container">
             <div class="row justify-content-end align-items-center">
@@ -75,7 +74,7 @@
             </div>
         </div>
     </nav>
-
+    <!-- NAV BAR -->
     <div class="container" style="margin-top: 120px;">
         <div class="row w-100">
             <div class="col-3">
@@ -122,35 +121,32 @@
                             <div class="row">
                                 <div class="col-md-8 offset-md-2 mt-5">
                                     <h3>Create a new question:</h3>
-                                    <form id="add-question-form">
+                                    <form id="add-question-form" action="index.php" method="POST">
                                         <div class="form-group">
                                             <label class="form-label mt-5" for="question-text">Question:</label>
-                                            <textarea class="form-control" id="question-text" name="question"
-                                                rows="3"></textarea>
+                                            <textarea class="form-control" id="question-text" name="question" rows="3">
+
+                                            </textarea>
                                         </div>
                                         <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input type="text" id="answer-a" class="form-control" name="choiceA"
-                                                required />
+                                            <input type="text" id="answer-a" class="form-control" name="choiceA" />
                                             <label class="form-label" for="answer-a">Choice A</label>
                                         </div>
                                         <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input type="text" id="answer-b" class="form-control" name="choiceB"
-                                                required />
+                                            <input type="text" id="answer-b" class="form-control" name="choiceB" />
                                             <label class="form-label" for="answer-b">Choice B</label>
                                         </div>
                                         <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input type="text" id="answer-c" class="form-control" name="choiceC"
-                                                required />
+                                            <input type="text" id="answer-c" class="form-control" name="choiceC" />
                                             <label class="form-label" for="answer-c">Choice C</label>
                                         </div>
                                         <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input type="text" id="answer-d" class="form-control" name="choiceD"
-                                                required />
+                                            <input type="text" id="answer-d" class="form-control" name="choiceD" />
                                             <label class="form-label" for="answer-d">Choice D</label>
                                         </div>
                                         <div class="form-group mt-5">
                                             <label for="correct-answer">Correct Answer:</label>
-                                            <select class="form-control" id="correct-answer" name="key">
+                                            <select class="form-control" id="correct-answer" name="keyAnswer">
                                                 <option value="A">A</option>
                                                 <option value="B">B</option>
                                                 <option value="C">C</option>
