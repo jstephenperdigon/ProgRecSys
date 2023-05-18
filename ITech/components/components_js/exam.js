@@ -76,3 +76,18 @@ function updateProgressbar() {
   function padZeroes(num) {
     return num.toString().padStart(2, '0');
   }
+
+ /* var radioButtons = document.querySelectorAll("input[type='radio']");
+
+radioButtons.forEach(function(radioButton) {
+  radioButton.addEventListener("click", function(event) {
+    var clickedRadio = event.target;
+
+    // Uncheck all other radio buttons
+    radioButtons.forEach(function(radio) {
+      if (radio !== clickedRadio) {
+        radio.checked = false;
+      }
+    });
+  });
+}); */

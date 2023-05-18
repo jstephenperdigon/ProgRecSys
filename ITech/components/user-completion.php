@@ -168,7 +168,7 @@ if ($email != false && $password != false) {
                         </div><br>
                         <div class="row">
                           <div class="col d-flex justify-content-end">
-                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                            <button class="btn btn-primary" type="submit" >Save Changes</button>
                           </div>
                         </div>
                       </form>

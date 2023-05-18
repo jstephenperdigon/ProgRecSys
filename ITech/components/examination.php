@@ -21,6 +21,14 @@ if ($email != false && $password != false) {
   header('Location: ../index.php');
 }
 ?>
+<?php
+
+$sql = "SELECT * FROM examinationtbl";
+$questions = $con->query($sql);
+
+$sequel = "SELECT * FROM examinationtbl";
+$answers = $con->query($sequel);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <title>
@@ -148,10 +156,10 @@ if ($email != false && $password != false) {
 
     /* Form */
     .form {
-      width: clamp(320px, 30%, 430px);
+      width: clamp(1000px, 30%, 430px);
       margin: 0 auto;
       border: 1px solid #ccc;
-      border-radius: 0.35rem;
+      border-radius: 50px;
       padding: 1.5rem;
     }
 
@@ -172,12 +180,14 @@ if ($email != false && $password != false) {
 
     /* Button */
     .btns-group {
+      margin-top: 20px;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
 
-    .btn {
+    .btn-body{
+      margin-top: 20px;
       padding: 0.75rem;
       display: block;
       text-decoration: none;
@@ -271,9 +281,9 @@ if ($email != false && $password != false) {
   </nav>
 
 
-  <div class="container-body">
-    <div class="row">
-      <div class="col-md-8 mx-auto">
+  <div class="container" style="margin-top: 200px;">
+    <div class="row align-items-center">
+      <div class="col">
         <h2 class="text-center mb-4">Time Remaining</h2>
         <div class="text-center">
           <h5 id="timer">01:00:00</h5>
@@ -282,8 +292,8 @@ if ($email != false && $password != false) {
     </div>
   </div>
 
-  <form action="#" class="form">
-    <h4 class="text-center">EXAMINATION</h4>
+  <form action="#" class="form container" method="POST">
+    <h4 class="text-center">PART 1</h4>
     <!-- Progress bar -->
     <div class="progressbar">
       <div class="progress" id="progress"></div>
@@ -297,6 +307,7 @@ if ($email != false && $password != false) {
       <div class="progress-step" data-title=""></div>
       <div class="progress-step" data-title=""></div>
       <div class="progress-step" data-title=""></div>
+<<<<<<< HEAD
       
     
       
@@ -339,10 +350,50 @@ if ($email != false && $password != false) {
         <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
 
 
+=======
+    </div>
+
+
+    <!-- Steps -->
+    <div class="form-step form-step-active">
+
+      <h4 class="fw-bold text-center mt-3">
+        <?php
+        $row = mysqli_fetch_assoc($questions)
+          ?>
+        <?php echo $row["question"] ?>
+      </h4>
+      <ul class="answer text-center">
+        <li>
+          <input type="radio" id="choiceA" name="q1" />
+          <label for="choiceA">
+            <?php
+        $row = mysqli_fetch_assoc($answers)
+          ?>
+        <?php echo $row["option1"] ?>
+        </label>
+        </li>
+        <li>
+          <input type="radio" id="choiceB" name="q1" />
+          <label for="choiceB">ANSWER 2</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceC" name="q1" />
+          <label for="choiceC">ANSWER 3</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceD" name="q1" />
+          <label for="choiceD">ANSWER 4</label>
+        </li>
+      </ul>
+      <div class="">
+        <a href="#" class="btn-body btn-next width-50 ml-auto">Next</a>
+>>>>>>> ProgRecSys/main
       </div>
     
     </div>
     <div class="form-step">
+<<<<<<< HEAD
     <?php
        
        $query = mysqli_query($con, "select * from examinationtbl WHERE id = '2'");
@@ -370,12 +421,39 @@ if ($email != false && $password != false) {
          <label for="a101"><?php echo $row->option4; ?></label>
        </li>
      </ul>
+=======
+      <h4 class="fw-bold text-center mt-3">
+        <?php
+        $row = mysqli_fetch_assoc($questions)
+          ?>
+        <?php echo $row["question"] ?>
+      </h4>
+      <ul class="answer text-center">
+        <li>
+          <input type="radio" id="choiceA1" name="q2" />
+          <label for="choiceA1">ANSWER 1</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceB1" name="q2" />
+          <label for="choiceB1">ANSWER 2</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceC1" name="q2" />
+          <label for="choiceC1">ANSWER 3</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceD1" name="q2" />
+          <label for="choiceD1">ANSWER 4</label>
+        </li>
+      </ul>
+>>>>>>> ProgRecSys/main
       <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-        <a href="#" class="btn btn-next">Next</a>
+        <a href="#" class="btn-body btn-prev">Previous</a>
+        <a href="#" class="btn-body btn-next">Next</a>
       </div>
     </div>
     <div class="form-step">
+<<<<<<< HEAD
     <?php
        
        $query = mysqli_query($con, "select * from examinationtbl WHERE id = '3'");
@@ -439,6 +517,35 @@ if ($email != false && $password != false) {
       <div class="btns-group">
         <a href="#" class="btn btn-prev">Previous</a>
         <a href="#" class="btn btn-next">Next</a>
+=======
+      <h4 class="fw-bold text-center mt-3">
+        <?php
+        $row = mysqli_fetch_assoc($questions)
+          ?>
+        <?php echo $row["question"] ?>
+      </h4>
+      <ul class="answer text-center">
+        <li>
+          <input type="radio" id="choiceA2" name="q3" />
+          <label for="choiceA2">ANSWER 1</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceB2" name="q3" />
+          <label for="choiceB2">ANSWER 2</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceC2" name="q3" />
+          <label for="choiceC2">ANSWER 3</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceD2" name="q3" />
+          <label for="choiceD2">ANSWER 4</label>
+        </li>
+      </ul>
+      <div class="btns-group">
+        <a href="#" class="btn-body btn-prev">Previous</a>
+        <input type="submit" value="Submit" class="btn-body" />
+>>>>>>> ProgRecSys/main
       </div>
     </div>
         <div class="form-step">
