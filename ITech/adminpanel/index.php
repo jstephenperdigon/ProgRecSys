@@ -33,13 +33,13 @@
 
 <body>
 
-<!-- Edit Modal -->
+    <!-- Edit Modal -->
 <div id="editModal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Question</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="editForm" method="POST" action="index.php">
@@ -81,6 +81,7 @@
         </div>
     </div>
 </div>
+
 
 
     <!-- NAV BAR -->
@@ -204,8 +205,7 @@
                                     <form id="add-question-form" action="index.php" method="POST">
                                         <div class="form-group">
                                             <label class="form-label mt-5" for="question-text">Question:</label>
-                                            <textarea class="form-control" id="question-text" name="question">
-                                            </textarea>
+                                            <textarea class="form-control" id="question-text" name="question"></textarea>
                                         </div>
                                         <div class="form-outline flex-fill mb-0 mt-5">
                                             <input type="text" id="answer-a" class="form-control" name="choiceA" />

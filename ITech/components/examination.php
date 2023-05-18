@@ -309,6 +309,26 @@ $answers = $con->query($sequel);
       <div class="progress-step" data-title=""></div>
     </div>
 
+    <?php
+// Query the database to fetch all questions and answers
+$sql = "SELECT id, question, answer, option1, option2, option3, option4 FROM examinationtbl";
+$result = mysqli_query($con, $sql);
+
+// Check if any rows are found
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $questionId = $row['id'];
+        $question = $row['question'];
+        $answer = $row['answer'];
+        $option1 = $row['option1'];
+        $option2 = $row['option2'];
+        $option3 = $row['option3'];
+        $option4 = $row['option4'];
+    }
+  }
+// Close the database connection
+mysqli_close($con);
+?>
 
     <!-- Steps -->
     <div class="form-step form-step-active">
@@ -321,25 +341,28 @@ $answers = $con->query($sequel);
       </h4>
       <ul class="answer text-center">
         <li>
-          <input type="radio" id="choiceA" name="q1" />
+          <input type="radio" id="choiceA" name= <?php $questionId ?> />
           <label for="choiceA">
-            <?php
-        $row = mysqli_fetch_assoc($answers)
-          ?>
-        <?php echo $row["option1"] ?>
+          <?php echo $option1 ?>
         </label>
         </li>
         <li>
-          <input type="radio" id="choiceB" name="q1" />
-          <label for="choiceB">ANSWER 2</label>
+          <input type="radio" id="choiceB" name= <?php $questionId ?> />
+          <label for="choiceB">
+            <?php echo $option2 ?>
+          </label>
         </li>
         <li>
           <input type="radio" id="choiceC" name="q1" />
-          <label for="choiceC">ANSWER 3</label>
+          <label for="choiceC">
+          <?php echo $option3 ?>
+          </label>
         </li>
         <li>
           <input type="radio" id="choiceD" name="q1" />
-          <label for="choiceD">ANSWER 4</label>
+          <label for="choiceD">
+          <?php echo $option4 ?>
+          </label>
         </li>
       </ul>
       <div class="">
@@ -356,7 +379,8 @@ $answers = $con->query($sequel);
       <ul class="answer text-center">
         <li>
           <input type="radio" id="choiceA1" name="q2" />
-          <label for="choiceA1">ANSWER 1</label>
+          <label for="choiceA1">
+          </label>
         </li>
         <li>
           <input type="radio" id="choiceB1" name="q2" />
