@@ -112,7 +112,6 @@
             <div class="col-9">
                 <!-- Tab content -->
                 <div class="tab-content" id="v-tabs-tabContent">
-                    
                     <div class="tab-pane fade show" id="v-tabs-home" role="tabpanel" aria-labelledby="v-tabs-home-tab">
                         <!-- Main content area -->
                         <div class="col-md-10">
@@ -123,13 +122,14 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-tabs-profile" role="tabpanel" aria-labelledby="v-tabs-profile-tab">
-                    <?php
+                        <?php
                         if (isset($_SESSION['info'])) {
                             ?>
-                            <div class="alert alert-success text-center fade show" role="alert">
+                            <div class="alert alert-success text-center fade show">
                                 <?php echo $_SESSION['info']; ?>
                             </div>
                             <?php
+                            unset($_SESSION['info']); // Clear the success message variable
                         }
                         ?>
                         <?php
@@ -140,6 +140,7 @@
                                     <?php
                                     echo $showerror;
                             }
+                            unset($errors); // Clear the errors array
                             ?>
                             </div>
                             <?php
@@ -185,60 +186,60 @@
                                             Question</button>
                                     </form>
                                     <div class="container">
-                                                <div class="container-fluid">
-                                                    <div class="row">
-                                                        <div class="col-md-8 mt-5">
-                                                            <table class="table align-middle mb-0 bg-white">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th style="background-color: #202020; color: #fff;">
-                                                                            ID
-                                                                        </th>
-                                                                        <th class="">QUESTION</th>
-                                                                        <th>ANSWER</th>
-                                                                        <th>A</th>
-                                                                        <th>B</th>
-                                                                        <th>C</th>
-                                                                        <th>D</th>
-                                                                        <th>ACTION</th>
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-8 mt-5">
+                                                    <table class="table align-middle mb-0 bg-white">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="background-color: #202020; color: #fff;">
+                                                                    ID
+                                                                </th>
+                                                                <th class="">QUESTION</th>
+                                                                <th>ANSWER</th>
+                                                                <th>A</th>
+                                                                <th>B</th>
+                                                                <th>C</th>
+                                                                <th>D</th>
+                                                                <th>ACTION</th>
 
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php
-                                                                    // Connect to the database
-                                                                    $con = mysqli_connect('localhost', 'root', '', 'userform');
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            // Connect to the database
+                                                            $con = mysqli_connect('localhost', 'root', '', 'userform');
 
-                                                                    // Query the database for records
-                                                                    $sql = "SELECT * FROM examinationtbl";
-                                                                    $result = mysqli_query($con, $sql);
+                                                            // Query the database for records
+                                                            $sql = "SELECT * FROM examinationtbl";
+                                                            $result = mysqli_query($con, $sql);
 
-                                                                    // Loop through the records and display them in the table
-                                                                    while ($row = mysqli_fetch_assoc($result)) {
-                                                                        echo "<tr>";
-                                                                        echo "<td>" . $row['id'] . "</td>";
-                                                                        echo "<td>" . $row['question'] . "</td>";
-                                                                        echo "<td>" . $row['answer'] . "</td>";
-                                                                        echo "<td>" . $row['option1'] . "</td>";
-                                                                        echo "<td>" . $row['option2'] . "</td>";
-                                                                        echo "<td>" . $row['option3'] . "</td>";
-                                                                        echo "<td>" . $row['option4'] . "</td>";
-                                                                        echo "<td>";
-                                                                        echo "<a id=" . $row['id'] . "' class='btn btn-sm btn-danger' style='box-shadow: none'>Delete</a>";
-                                                                        echo "</td>";
-                                                                        echo "<td>";
-                                                                        echo "<a id=" . $row['id'] . "' class='btn btn-sm btn-warning' style='box-shadow: none'>Edit</a>";
-                                                                        echo "</td>";
-                                                                        echo "</tr>";
-                                                                    }
-                                                                    // Close the database connection
-                                                                    mysqli_close($con);
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
+                                                            // Loop through the records and display them in the table
+                                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                                echo "<tr>";
+                                                                echo "<td>" . $row['id'] . "</td>";
+                                                                echo "<td>" . $row['question'] . "</td>";
+                                                                echo "<td>" . $row['answer'] . "</td>";
+                                                                echo "<td>" . $row['option1'] . "</td>";
+                                                                echo "<td>" . $row['option2'] . "</td>";
+                                                                echo "<td>" . $row['option3'] . "</td>";
+                                                                echo "<td>" . $row['option4'] . "</td>";
+                                                                echo "<td>";
+                                                                echo "<a id=" . $row['id'] . "' class='btn btn-sm btn-danger' style='box-shadow: none'>Delete</a>";
+                                                                echo "</td>";
+                                                                echo "<td>";
+                                                                echo "<a id=" . $row['id'] . "' class='btn btn-sm btn-warning' style='box-shadow: none'>Edit</a>";
+                                                                echo "</td>";
+                                                                echo "</tr>";
+                                                            }
+                                                            // Close the database connection
+                                                            mysqli_close($con);
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
