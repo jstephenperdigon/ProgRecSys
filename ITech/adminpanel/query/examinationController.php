@@ -1,6 +1,8 @@
-
 <!-- ADD QUESTION -->
 <?php
+
+$info = array();
+
 if (isset($_POST['addQuestion'])) {
     $uid = uniqid();
     $keyAnswer = mysqli_real_escape_string($con, $_POST['keyAnswer']);
@@ -13,7 +15,8 @@ if (isset($_POST['addQuestion'])) {
     if (!mysqli_query($con, $query)) {
         echo "THE DATA IS NOT INSERTED!";
     } else {
-        echo "THE DATA IS INSERTED!";
+        $info = "Question Added Succesfully!";
+        $_SESSION['info'] = $info;
          // Redirect to a different page after successful submission
          header("Location: index.php");
          exit(); 
@@ -48,4 +51,7 @@ if (isset($_POST['editQuestion'])) {
         // Make sure to exit to prevent further script execution
     }
 }
+
+
+
 ?>

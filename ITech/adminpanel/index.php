@@ -79,27 +79,30 @@
         </div>
     </nav>
     <!-- NAV BAR -->
-    <div class="container-fluid" style="margin-top: 120px;">
+    <div class="container-fluid" style="margin-top: 180px;">
         <div class="row w-100">
             <div class="col-3">
                 <div class="nav flex-column nav-tabs text-center" id="v-tabs-tab" role="tablist"
                     aria-orientation="vertical">
-                    <ul class="nav flex-column nav-pills">
+                    <ul class="nav flex-column nav-pills ">
                         <!-- Tab navs -->
                         <li class="nav-item">
-                            <a class="nav-link active" id="v-tabs-home-tab" data-mdb-toggle="tab" href="#v-tabs-home"
-                                role="tab" aria-controls="v-tabs-home" aria-selected="true">
-                                Home</a>
+                            <a class="nav-link" id="v-tabs-home-tab" data-mdb-toggle="tab" href="#v-tabs-home"
+                                role="tab" aria-controls="v-tabs-home" aria-selected="false">
+                                Home
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="v-tabs-profile-tab" data-mdb-toggle="tab" href="#v-tabs-profile"
                                 role="tab" aria-controls="v-tabs-profile" aria-selected="false">
-                                Manage Examination</a>
+                                Manage Examination
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="v-tabs-messages-tab" data-mdb-toggle="tab" href="#v-tabs-messages"
                                 role="tab" aria-controls="v-tabs-messages" aria-selected="false">
-                                Manage Users</a>
+                                Manage Users
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -109,8 +112,7 @@
             <div class="col-9">
                 <!-- Tab content -->
                 <div class="tab-content" id="v-tabs-tabContent">
-                    <div class="tab-pane fade show active" id="v-tabs-home" role="tabpanel"
-                        aria-labelledby="v-tabs-home-tab">
+                    <div class="tab-pane fade show" id="v-tabs-home" role="tabpanel" aria-labelledby="v-tabs-home-tab">
                         <!-- Main content area -->
                         <div class="col-md-10">
                             <h1>Admin Dashboard</h1>
@@ -120,20 +122,37 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-tabs-profile" role="tabpanel" aria-labelledby="v-tabs-profile-tab">
+                        <?php
+                        if (isset($_SESSION['info'])) {
+                            ?>
+                            <div class="alert alert-success text-center fade show">
+                                <?php echo $_SESSION['info']; ?>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        if (count($errors) > 0) {
+                            foreach ($errors as $showerror) {
+                                ?>
+                                <div class="container alert alert-danger text-center">
+                                    <?php
+                                    echo $showerror;
+                            }
+                            ?>
+                            </div>
+                            <?php
+                        }
+                        ?>
                         <!-- Add question form -->
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-8 ">
                                     <h3>Create a new question:</h3>
                                     <form id="add-question-form" action="index.php" method="POST">
-                                        <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input type="text" id="qid" class="form-control" name="qid" />
-                                            <label class="form-label" for="id">ID</label>
-                                        </div>
                                         <div class="form-group">
                                             <label class="form-label mt-5" for="question-text">Question:</label>
-                                            <textarea class="form-control" id="question-text" name="question" rows="3">
-
+                                            <textarea class="form-control" id="question-text" name="question">
                                             </textarea>
                                         </div>
                                         <div class="form-outline flex-fill mb-0 mt-5">
@@ -167,8 +186,6 @@
                                             Question</button>
                                     </form>
                                     <div class="container">
-                                        <div class="row">
-                                            <div class="col-auto">
                                                 <div class="container-fluid">
                                                     <div class="row">
                                                         <div class="col-md-8 mt-5">
@@ -209,7 +226,7 @@
                                                                         echo "<td>" . $row['option4'] . "</td>";
                                                                         echo "<td>" . $row['questionAddedDT'] . "</td>";
                                                                         echo "<td>";
-                                                                        echo "<a href = id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
+                                                                        echo "<a id=" . $row['id'] . "' class='btn btn-sm btn-danger' style='box-shadow: none'>Delete</a>";
                                                                         echo "</td>";
                                                                         echo "</tr>";
                                                                     }
@@ -221,8 +238,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
                                     </div>
 
                                 </div>
@@ -231,79 +246,82 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="v-tabs-messages" role="tabpanel" aria-labelledby="v-tabs-messages-tab">
-                    <div class="container">
-                        <h1 class="text-center mt-5">ADD RECORD</h1>
+                    <div class="container-fluid">
                         <div class="row mt-5">
                             <div class="col-md-6 mx-auto">
                                 <form method="POST" action="process.php">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-outline form-group flex-fill mb-3">
-                                                <input type="text" id="firstName" class="form-control" name="firstName"
-                                                    required />
-                                                <label class="form-label" for="firstName">First Name</label>
+                                    <h1 class="text-center mt-5">ADD RECORD</h1>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-outline form-group flex-fill mb-3">
+                                                    <input type="text" id="firstName" class="form-control"
+                                                        name="firstName" required />
+                                                    <label class="form-label" for="firstName">First Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-outline form-group flex-fill mb-3">
+                                                    <input type="text" id="lastName" class="form-control"
+                                                        name="lastName" required />
+                                                    <label class="form-label" for="lastName">Last Name</label>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-outline form-group flex-fill mb-3">
-                                                <input type="text" id="lastName" class="form-control" name="lastName"
-                                                    required />
-                                                <label class="form-label" for="lastName">Last Name</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-outline form-group flex-fill mb-3">
+                                                    <input type="text" id="middleInitial" class="form-control"
+                                                        name="middleInitial" required />
+                                                    <label class="form-label" for="middleInitial">Middle Initial</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-outline form-group flex-fill mb-3">
+                                                    <input type="text" id="mobileNumber" class="form-control"
+                                                        name="mobileNumber" required />
+                                                    <label class="form-label" for="mobileNumber">Mobile Number</label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-outline form-group flex-fill mb-3">
-                                                <input type="text" id="middleInitial" class="form-control"
-                                                    name="middleInitial" required />
-                                                <label class="form-label" for="middleInitial">Middle Initial</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-outline form-group flex-fill mb-3">
+                                                    <input type="text" id="email" class="form-control" name="email"
+                                                        required />
+                                                    <label class="form-label" for="email">Email</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-outline form-group flex-fill mb-3">
+                                                    <input type="text" id="password" class="form-control"
+                                                        name="password" required />
+                                                    <label class="form-label" for="password">Password</label>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-outline form-group flex-fill mb-3">
-                                                <input type="text" id="mobileNumber" class="form-control"
-                                                    name="mobileNumber" required />
-                                                <label class="form-label" for="mobileNumber">Mobile Number</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-outline form-group flex-fill mb-3">
-                                                <input type="text" id="email" class="form-control" name="email"
-                                                    required />
-                                                <label class="form-label" for="email">Email</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-outline form-group flex-fill mb-3">
-                                                <input type="text" id="password" class="form-control" name="password"
-                                                    required />
-                                                <label class="form-label" for="password">Password</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="role" class="form-label mt-5"><strong>USER TYPE</strong></label>
-                                        <ul class="role text-center">
-                                            <li>
-                                                <input type="radio" id="choiceA1" name="q2" />
-                                                <label for="choiceA1">Student</label>
-                                            </li>
-                                            <li>
-                                                <input type="radio" id="choiceB1" name="q2" />
-                                                <label for="choiceB1">Administrator</label>
-                                            </li>
-                                            <li>
-                                                <input type="radio" id="choiceC1" name="q2" />
-                                                <label for="choiceC1">Developer</label>
-                                            </li>
-                                        </ul>
+                                        <div class="mb-3">
+                                            <label for="role" class="form-label mt-5"><strong>USER TYPE</strong></label>
+                                            <ul class="role text-center">
+                                                <li>
+                                                    <input type="radio" id="choiceA1" name="q2" />
+                                                    <label for="choiceA1">Student</label>
+                                                </li>
+                                                <li>
+                                                    <input type="radio" id="choiceB1" name="q2" />
+                                                    <label for="choiceB1">Administrator</label>
+                                                </li>
+                                                <li>
+                                                    <input type="radio" id="choiceC1" name="q2" />
+                                                    <label for="choiceC1">Developer</label>
+                                                </li>
+                                            </ul>
 
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Add Record</button>
+                                        </div>
+                                        <div class="d-flex flex-row-reverse">
+                                            <button type="submit" class="btn btn-primary" style="box-shadow: none;">Add
+                                                Record</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -374,7 +392,7 @@
         </div>
     </div>
     </div>
-
+    <script src="adminJs/admin.js"></script>
     <!-- IMPORTS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
