@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <title>
-    <?php echo $fetch_info['firstName'] ?> | Home
+    <?php echo $fetch_info['firstName'] ?> | Admin
 </title>
 
 <head>
