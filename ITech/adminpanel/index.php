@@ -110,7 +110,19 @@
             </div>
 
             <div class="col-9">
-            <div id="alertContainer">
+                <!-- Tab content -->
+                <div class="tab-content" id="v-tabs-tabContent">
+                    
+                    <div class="tab-pane fade show" id="v-tabs-home" role="tabpanel" aria-labelledby="v-tabs-home-tab">
+                        <!-- Main content area -->
+                        <div class="col-md-10">
+                            <h1>Admin Dashboard</h1>
+                            <p>Welcome,
+                                <?php echo $fetch_info['firstName'] ?>!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-tabs-profile" role="tabpanel" aria-labelledby="v-tabs-profile-tab">
                     <?php
                         if (isset($_SESSION['info'])) {
                             ?>
@@ -133,21 +145,6 @@
                             <?php
                         }
                         ?>
-                        </div>
-                <!-- Tab content -->
-                <div class="tab-content" id="v-tabs-tabContent">
-                   
-                    <div class="tab-pane fade show" id="v-tabs-home" role="tabpanel" aria-labelledby="v-tabs-home-tab">
-                        <!-- Main content area -->
-                        <div class="col-md-10">
-                            <h1>Admin Dashboard</h1>
-                            <p>Welcome,
-                                <?php echo $fetch_info['firstName'] ?>!
-                            </p>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-tabs-profile" role="tabpanel" aria-labelledby="v-tabs-profile-tab">
-                        
                         <!-- Add question form -->
                         <div class="container">
                             <div class="row">
