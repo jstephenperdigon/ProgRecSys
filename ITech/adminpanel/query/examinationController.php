@@ -22,8 +22,6 @@ if (isset($_POST['addQuestion'])) {
 ?>
 <!-- DELETE QUESTION -->
 
-
-
 <!-- EDIT QUESTION -->
 <?php
 if (isset($_POST['editQuestion'])) {

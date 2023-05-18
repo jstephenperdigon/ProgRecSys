@@ -43,3 +43,5 @@ document.addEventListener('DOMContentLoaded', function() {
     alertElement.classList.add('fade');
   }, 2000);
 });
+
+
