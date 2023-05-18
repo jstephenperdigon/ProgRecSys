@@ -110,22 +110,11 @@
             </div>
 
             <div class="col-9">
-                <!-- Tab content -->
-                <div class="tab-content" id="v-tabs-tabContent">
-                    <div class="tab-pane fade show" id="v-tabs-home" role="tabpanel" aria-labelledby="v-tabs-home-tab">
-                        <!-- Main content area -->
-                        <div class="col-md-10">
-                            <h1>Admin Dashboard</h1>
-                            <p>Welcome,
-                                <?php echo $fetch_info['firstName'] ?>!
-                            </p>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-tabs-profile" role="tabpanel" aria-labelledby="v-tabs-profile-tab">
-                        <?php
+            <div id="alertContainer">
+                    <?php
                         if (isset($_SESSION['info'])) {
                             ?>
-                            <div class="alert alert-success text-center fade show">
+                            <div class="alert alert-success text-center fade show" role="alert">
                                 <?php echo $_SESSION['info']; ?>
                             </div>
                             <?php
@@ -144,6 +133,21 @@
                             <?php
                         }
                         ?>
+                        </div>
+                <!-- Tab content -->
+                <div class="tab-content" id="v-tabs-tabContent">
+                   
+                    <div class="tab-pane fade show" id="v-tabs-home" role="tabpanel" aria-labelledby="v-tabs-home-tab">
+                        <!-- Main content area -->
+                        <div class="col-md-10">
+                            <h1>Admin Dashboard</h1>
+                            <p>Welcome,
+                                <?php echo $fetch_info['firstName'] ?>!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-tabs-profile" role="tabpanel" aria-labelledby="v-tabs-profile-tab">
+                        
                         <!-- Add question form -->
                         <div class="container">
                             <div class="row">
@@ -182,26 +186,24 @@
                                         </div>
                                         <button type="submit" name="addQuestion" class="btn btn-primary mt-5">Add
                                             Question</button>
-                                        <button type="submit" name="editQuestion" class="btn btn-primary mt-5">Edit
-                                            Question</button>
                                     </form>
                                     <div class="container">
                                                 <div class="container-fluid">
                                                     <div class="row">
                                                         <div class="col-md-8 mt-5">
-                                                            <table class="table">
+                                                            <table class="table align-middle mb-0 bg-white">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th
-                                                                            style="background-color: #202020; color: #fff;">
-                                                                            ID</th>
-                                                                        <th>Question</th>
-                                                                        <th>Answer</th>
+                                                                        <th style="background-color: #202020; color: #fff;">
+                                                                            ID
+                                                                        </th>
+                                                                        <th class="">QUESTION</th>
+                                                                        <th>ANSWER</th>
                                                                         <th>A</th>
                                                                         <th>B</th>
                                                                         <th>C</th>
                                                                         <th>D</th>
-                                                                        <th>Date Modified</th>
+                                                                        <th>ACTION</th>
 
                                                                     </tr>
                                                                 </thead>
@@ -224,9 +226,11 @@
                                                                         echo "<td>" . $row['option2'] . "</td>";
                                                                         echo "<td>" . $row['option3'] . "</td>";
                                                                         echo "<td>" . $row['option4'] . "</td>";
-                                                                        echo "<td>" . $row['questionAddedDT'] . "</td>";
                                                                         echo "<td>";
                                                                         echo "<a id=" . $row['id'] . "' class='btn btn-sm btn-danger' style='box-shadow: none'>Delete</a>";
+                                                                        echo "</td>";
+                                                                        echo "<td>";
+                                                                        echo "<a id=" . $row['id'] . "' class='btn btn-sm btn-warning' style='box-shadow: none'>Edit</a>";
                                                                         echo "</td>";
                                                                         echo "</tr>";
                                                                     }
