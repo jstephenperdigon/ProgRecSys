@@ -291,13 +291,13 @@ $answers = $con->query($sequel);
       </div>
     </div>
   </div>
-  
+
   <?php
   // Query the database to fetch all questions and answers
   $sql = "SELECT id, question, answer, option1, option2, option3, option4 FROM examinationtbl";
   $result = mysqli_query($con, $sql);
-?>
-<form action="#" class="form container" method="POST">
+  ?>
+  <form action="#" class="form container" method="POST">
     <h4 class="text-center">PART 1</h4>
     <!-- Progress bar -->
     <div class="progressbar">
@@ -364,33 +364,33 @@ $answers = $con->query($sequel);
     // Close the database connection
     mysqli_close($con);
     ?>
-  </div>
-
-  <div class="form-step">
-    <div class="btns-group">
-      <a href="#" class="btn-body btn-prev ">Previous</a>
-      <input type="submit" value="Submit" class="btn-body" />
     </div>
-  </div>
-</form>
+
+    <div class="form-step">
+      <div class="btns-group">
+        <a href="#" class="btn-body btn-prev ">Previous</a>
+        <input type="submit" value="Submit" class="btn-body" />
+      </div>
+    </div>
+  </form>
 
 
-<script>
-  
-  
+  <script>
+
+
     const prevButton = document.querySelector('.btn-prev');
     const nextButtons = document.querySelectorAll('.btn-next');
 
     // Disable previous button on the first question
     if (prevButton.classList.contains('disabled')) {
-      prevButton.addEventListener('click', function(event) {
+      prevButton.addEventListener('click', function (event) {
         event.preventDefault();
       });
     }
 
     // Enable/disable previous button based on the current question
-    nextButtons.forEach(function(button, index) {
-      button.addEventListener('click', function() {
+    nextButtons.forEach(function (button, index) {
+      button.addEventListener('click', function () {
         prevButton.classList.remove('disabled');
         if (index === 0) {
           prevButton.classList.add('disabled');
