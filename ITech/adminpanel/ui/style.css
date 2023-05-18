@@ -50,7 +50,7 @@ input {
 
 .role input[type="radio"]:checked+label,
 .Checked+label {
-    background: #5080ff;
+    background: #E4A11B;
     border-radius: 20px;
     color: #fff;
 }
@@ -64,14 +64,14 @@ input {
 }
 
 .role label:hover {
-    background: #496fd8;
+    background: #E4A11B;
     color: #fff;
 }
 
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   --mdb-nav-pills-link-active-bg: #202020;
-  --mdb-nav-pills-link-active-color: #E4A11B;
+  --mdb-nav-pills-link-active-color: #ffffff;
   --mdb-nav-pills-link-active-border-color: #E4A11B;
   background-color: var(--mdb-nav-pills-link-active-bg);
   color: var(--mdb-nav-pills-link-active-color);

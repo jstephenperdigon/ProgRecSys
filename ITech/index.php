@@ -236,7 +236,7 @@
 
   <!-- Remove the container if you want to extend the Footer to full width. -->
   <!-- Footer -->
-  <footer class="text-center text-lg-start text-white" style="background-color: #5080ff">
+  <footer class="text-center text-lg-start text-white" style="background-color: #E4A11B">
     <!-- Grid container -->
     <div id="footer" class="container p-4 pb-0">
       <!-- Section: Links -->
