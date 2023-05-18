@@ -58,10 +58,10 @@
                 <div class="col text-center ">
                     <!-- Example split primary button -->
                     <div class="btn-group" style="box-shadow: none;">
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" class="btn btn-warning">
                             <?php echo $fetch_info['firstName'] ?>
                         </button>
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                        <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split"
                             data-mdb-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
