@@ -186,7 +186,7 @@ $answers = $con->query($sequel);
       gap: 1.5rem;
     }
 
-    .btn-body{
+    .btn-body {
       margin-top: 20px;
       padding: 0.75rem;
       display: block;
@@ -291,8 +291,13 @@ $answers = $con->query($sequel);
       </div>
     </div>
   </div>
-
-  <form action="#" class="form container" method="POST">
+  
+  <?php
+  // Query the database to fetch all questions and answers
+  $sql = "SELECT id, question, answer, option1, option2, option3, option4 FROM examinationtbl";
+  $result = mysqli_query($con, $sql);
+?>
+<form action="#" class="form container" method="POST">
     <h4 class="text-center">PART 1</h4>
     <!-- Progress bar -->
     <div class="progressbar">
@@ -308,15 +313,13 @@ $answers = $con->query($sequel);
       <div class="progress-step" data-title=""></div>
       <div class="progress-step" data-title=""></div>
     </div>
-
     <?php
-// Query the database to fetch all questions and answers
-$sql = "SELECT id, question, answer, option1, option2, option3, option4 FROM examinationtbl";
-$result = mysqli_query($con, $sql);
+    // Check if any rows are found
+    if (mysqli_num_rows($result) > 0) {
+      $questionCount = mysqli_num_rows($result);
+      $currentQuestion = 1;
 
-// Check if any rows are found
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
+      while ($row = mysqli_fetch_assoc($result)) {
         $questionId = $row['id'];
         $question = $row['question'];
         $answer = $row['answer'];
@@ -324,114 +327,74 @@ if (mysqli_num_rows($result) > 0) {
         $option2 = $row['option2'];
         $option3 = $row['option3'];
         $option4 = $row['option4'];
+
+        // Display the current question and answer options
+        echo '
+        <div class="form-step' . ($currentQuestion === 1 ? ' form-step-active' : '') . '">
+          <h4 class="fw-bold text-center mt-3">' . $question . '</h4>
+          <ul class="answer text-center">
+            <li>
+              <input type="radio" id="choiceA' . $questionId . '" name="q' . $currentQuestion . '" />
+              <label for="choiceA' . $questionId . '">' . $option1 . '</label>
+            </li>
+            <li>
+              <input type="radio" id="choiceB' . $questionId . '" name="q' . $currentQuestion . '" />
+              <label for="choiceB' . $questionId . '">' . $option2 . '</label>
+            </li>
+            <li>
+              <input type="radio" id="choiceC' . $questionId . '" name="q' . $currentQuestion . '" />
+              <label for="choiceC' . $questionId . '">' . $option3 . '</label>
+            </li>
+            <li>
+              <input type="radio" id="choiceD' . $questionId . '" name="q' . $currentQuestion . '" />
+              <label for="choiceD' . $questionId . '">' . $option4 . '</label>
+            </li>
+          </ul>
+          <div class="btns-group">
+            <a href="#" class="btn-body btn-prev' . ($currentQuestion === 1 ? ' disabled' : '') . '">Previous</a>
+            <a href="#" class="btn-body btn-next justify-content-end">Next</a>
+          </div>
+        </div>
+        ';
+
+        $currentQuestion++;
+      }
     }
-  }
-// Close the database connection
-mysqli_close($con);
-?>
 
-    <!-- Steps -->
-    <div class="form-step form-step-active">
+    // Close the database connection
+    mysqli_close($con);
+    ?>
+  </div>
 
-      <h4 class="fw-bold text-center mt-3">
-        <?php
-        $row = mysqli_fetch_assoc($questions)
-          ?>
-        <?php echo $row["question"] ?>
-      </h4>
-      <ul class="answer text-center">
-        <li>
-          <input type="radio" id="choiceA" name= <?php $questionId ?> />
-          <label for="choiceA">
-          <?php echo $option1 ?>
-        </label>
-        </li>
-        <li>
-          <input type="radio" id="choiceB" name= <?php $questionId ?> />
-          <label for="choiceB">
-            <?php echo $option2 ?>
-          </label>
-        </li>
-        <li>
-          <input type="radio" id="choiceC" name="q1" />
-          <label for="choiceC">
-          <?php echo $option3 ?>
-          </label>
-        </li>
-        <li>
-          <input type="radio" id="choiceD" name="q1" />
-          <label for="choiceD">
-          <?php echo $option4 ?>
-          </label>
-        </li>
-      </ul>
-      <div class="">
-        <a href="#" class="btn-body btn-next width-50 ml-auto">Next</a>
-      </div>
+  <div class="form-step">
+    <div class="btns-group">
+      <a href="#" class="btn-body btn-prev ">Previous</a>
+      <input type="submit" value="Submit" class="btn-body" />
     </div>
-    <div class="form-step">
-      <h4 class="fw-bold text-center mt-3">
-        <?php
-        $row = mysqli_fetch_assoc($questions)
-          ?>
-        <?php echo $row["question"] ?>
-      </h4>
-      <ul class="answer text-center">
-        <li>
-          <input type="radio" id="choiceA1" name="q2" />
-          <label for="choiceA1">
-          </label>
-        </li>
-        <li>
-          <input type="radio" id="choiceB1" name="q2" />
-          <label for="choiceB1">ANSWER 2</label>
-        </li>
-        <li>
-          <input type="radio" id="choiceC1" name="q2" />
-          <label for="choiceC1">ANSWER 3</label>
-        </li>
-        <li>
-          <input type="radio" id="choiceD1" name="q2" />
-          <label for="choiceD1">ANSWER 4</label>
-        </li>
-      </ul>
-      <div class="btns-group">
-        <a href="#" class="btn-body btn-prev">Previous</a>
-        <a href="#" class="btn-body btn-next">Next</a>
-      </div>
-    </div>
-    <div class="form-step">
-      <h4 class="fw-bold text-center mt-3">
-        <?php
-        $row = mysqli_fetch_assoc($questions)
-          ?>
-        <?php echo $row["question"] ?>
-      </h4>
-      <ul class="answer text-center">
-        <li>
-          <input type="radio" id="choiceA2" name="q3" />
-          <label for="choiceA2">ANSWER 1</label>
-        </li>
-        <li>
-          <input type="radio" id="choiceB2" name="q3" />
-          <label for="choiceB2">ANSWER 2</label>
-        </li>
-        <li>
-          <input type="radio" id="choiceC2" name="q3" />
-          <label for="choiceC2">ANSWER 3</label>
-        </li>
-        <li>
-          <input type="radio" id="choiceD2" name="q3" />
-          <label for="choiceD2">ANSWER 4</label>
-        </li>
-      </ul>
-      <div class="btns-group">
-        <a href="#" class="btn-body btn-prev">Previous</a>
-        <input type="submit" value="Submit" class="btn-body" />
-      </div>
-    </div>
-  </form>
+  </div>
+</form>
+<script>
+  
+    const prevButton = document.querySelector('.btn-prev');
+    const nextButtons = document.querySelectorAll('.btn-next');
 
+    // Disable previous button on the first question
+    if (prevButton.classList.contains('disabled')) {
+      prevButton.addEventListener('click', function(event) {
+        event.preventDefault();
+      });
+    }
+
+    // Enable/disable previous button based on the current question
+    nextButtons.forEach(function(button, index) {
+      button.addEventListener('click', function() {
+        prevButton.classList.remove('disabled');
+        if (index === 0) {
+          prevButton.classList.add('disabled');
+        }
+      });
+    });
+  </script>
   <script type="text/javascript" src="components_js/exam.js"></script>
   <!-- IMPORTS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
