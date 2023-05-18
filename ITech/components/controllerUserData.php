@@ -45,7 +45,7 @@ if (isset($_POST['login'])) {
                     setcookie('password', '', time() - (60 * 60 * 24));
                 }
                 header('location: registrarpanel/index.php');
-                  // <alex edit>
+                  // <alex edit> 
             }else if ($status == 'verified' && $user_type == 'Student') {
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
