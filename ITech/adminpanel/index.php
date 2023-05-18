@@ -33,6 +33,55 @@
 
 <body>
 
+<!-- Edit Modal -->
+<div id="editModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Question</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" method="POST" action="index.php">
+                    <input type="hidden" id="editId" name="id">
+                    <div class="mb-3">
+                        <label for="editQuestion" class="form-label">Question:</label>
+                        <input type="text" class="form-control" id="editQuestion" name="question" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAnswer" class="form-label">Answer:</label>
+                        <select class="form-select" id="editAnswer" name="answer" required>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editOption1" class="form-label">Option A:</label>
+                        <input type="text" class="form-control" id="editOption1" name="option1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editOption2" class="form-label">Option B:</label>
+                        <input type="text" class="form-control" id="editOption2" name="option2" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editOption3" class="form-label">Option C:</label>
+                        <input type="text" class="form-control" id="editOption3" name="option3" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editOption4" class="form-label">Option D:</label>
+                        <input type="text" class="form-control" id="editOption4" name="option4" required>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" name="editQuestion" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <!-- NAV BAR -->
     <nav class="nav fixed-top  bg-white shadow">
@@ -226,10 +275,11 @@
                                                                 echo "<td>" . $row['option3'] . "</td>";
                                                                 echo "<td>" . $row['option4'] . "</td>";
                                                                 echo "<td>";
-                                                                echo "<a id=" . $row['id'] . "' class='btn btn-sm btn-danger' style='box-shadow: none'>Delete</a>";
+                                                                echo "<a onclick='deleteRecord(" . $row['id'] . ")' class='btn btn-sm btn-danger' style='box-shadow: none'>Delete</a>";
                                                                 echo "</td>";
                                                                 echo "<td>";
-                                                                echo "<a id=" . $row['id'] . "' class='btn btn-sm btn-warning' style='box-shadow: none'>Edit</a>";
+                                                                echo "<a data-id='" . $row['id'] . "' data-question='" . $row['question'] . "' data-answer='" . $row['answer'] . "' data-option1='" . $row['option1'] . "' data-option2='" . $row['option2'] . "' data-option3='" . $row['option3'] . "' data-option4='" . $row['option4'] . "' 
+                                                                class='btn btn-sm btn-warning edit-btn' style='box-shadow: none' onclick='showEditModal(this)'>Edit</a>";
                                                                 echo "</td>";
                                                                 echo "</tr>";
                                                             }
@@ -242,7 +292,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -395,6 +444,8 @@
         </div>
     </div>
     </div>
+
+
     <script src="adminJs/admin.js"></script>
     <!-- IMPORTS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
