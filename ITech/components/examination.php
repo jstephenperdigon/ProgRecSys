@@ -302,7 +302,7 @@ if ($email != false && $password != false) {
       
     </div>
 
-   <!-- Steps -->
+   <!-- Steps --><!-- alex -->
    <div class="form-step form-step-active">
       <h4 class="fw-bold text-center mt-3"></h4>
       <?php
