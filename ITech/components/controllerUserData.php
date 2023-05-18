@@ -33,7 +33,20 @@ if (isset($_POST['login'])) {
                     setcookie('password', '', time() - (60 * 60 * 24));
                 }
                 header('location: adminpanel/index.php');
-            } else if ($status == 'verified' && $user_type == 'Student') {
+                // <alex edit>
+            }else if ($status == 'verified' && $user_type == 'Registrar') {
+                $_SESSION['email'] = $email;
+                $_SESSION['password'] = $password;
+                if (isset($_POST['remember_me'])) {
+                    setcookie('email', $_POST['email'], time() + (60 * 60 * 24));
+                    setcookie('password', $_POST['password'], time() + (60 * 60 * 24));
+                } else {
+                    setcookie('email', '', time() - (60 * 60 * 24));
+                    setcookie('password', '', time() - (60 * 60 * 24));
+                }
+                header('location: registrarpanel/index.php');
+                  // <alex edit>
+            }else if ($status == 'verified' && $user_type == 'Student') {
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
                 if (isset($_POST['remember_me'])) {
@@ -291,4 +304,10 @@ if (isset($_POST['change-password'])) {
 if (isset($_POST['login-now'])) {
     header('Location: ../index.php');
 }
-?>
+
+
+
+       
+       
+       
+        

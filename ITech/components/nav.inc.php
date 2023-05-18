@@ -176,14 +176,14 @@ if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
           <div class="form-title text-center">
             <h1 class="">SIGN IN</h1>
             <hr class="hr" />
-            <div class="d-flex flex-column text-center">
+            <!-- <div class="d-flex flex-column text-center">
 
-              <button onclick="window.location = '<?php echo $login_url; ?>'" type="submit"
+            <button onclick="window.location = '<?php echo $login_url; ?>'" type="submit"
                 class="btn btn-primary btn-block mb-4 mt-2"><i class="fa-brands fa-google"></i> SIGN IN WITH
-                GOOGLE</button>
-            </div>
+                GOOGLE</button> -->
+            <!-- </div>
             <hr class="hr" /> OR
-          </div>
+          </div> -->
           <div class="d-flex flex-column text-center">
             <form class="needs-validation" action="index.php" method="POST" autocomplete="" novalidate>
               <!-- Email input -->
