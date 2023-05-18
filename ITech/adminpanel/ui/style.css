@@ -13,3 +13,57 @@
   .crud-header:last-child {
     border-top-right-radius: 5px;
   }
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+}
+
+.width-50 {
+    width: 50%;
+}
+
+.input-group {
+    margin: 2rem 0;
+}
+
+.role {
+    list-style-type: none;
+    margin: 25px 0 0 0;
+    padding: 0;
+
+}
+
+.role input[type="radio"] {
+    opacity: 0.01;
+    z-index: 100;
+
+}
+
+.role input[type="radio"]:checked+label,
+.Checked+label {
+    background: #14a44d;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.role label {
+    padding: 5px;
+    border: 1px solid #CCC;
+    cursor: pointer;
+    z-index: 90;
+    border-radius: 20px;
+}
+
+.role label:hover {
+    background: #4cc175;
+    color: #fff;
+}

@@ -23,7 +23,11 @@
 
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="ui/style.css">
     <!-- END IMPORTS -->
+    <style>
+
+    </style>
 </head>
 <!-- Image and text -->
 
@@ -75,7 +79,7 @@
         </div>
     </nav>
     <!-- NAV BAR -->
-    <div class="container" style="margin-top: 120px;">
+    <div class="container-fluid" style="margin-top: 120px;">
         <div class="row w-100">
             <div class="col-3">
                 <div class="nav flex-column nav-tabs text-center" id="v-tabs-tab" role="tablist"
@@ -119,10 +123,10 @@
                         <!-- Add question form -->
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-8 offset-md-2 mt-5">
+                                <div class="col-md-8 ">
                                     <h3>Create a new question:</h3>
                                     <form id="add-question-form" action="index.php" method="POST">
-                                    <div class="form-outline flex-fill mb-0 mt-5">
+                                        <div class="form-outline flex-fill mb-0 mt-5">
                                             <input type="text" id="qid" class="form-control" name="qid" />
                                             <label class="form-label" for="id">ID</label>
                                         </div>
@@ -162,152 +166,213 @@
                                         <button type="submit" name="editQuestion" class="btn btn-primary mt-5">Edit
                                             Question</button>
                                     </form>
-                                     <div class="container">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <div class="container-fluid">
+                                    <div class="container">
                                         <div class="row">
-                                            <div class="col-md-8 mt-5">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="background-color: #202020; color: #fff;">ID</th>
-                                                            <th>Question</th>
-                                                            <th>Answer</th>
-                                                            <th>A</th>
-                                                            <th>B</th>
-                                                            <th>C</th>
-                                                            <th>D</th>
-                                                            <th>Date Modified</th>
-                                                            
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        // Connect to the database
-                                                        $con = mysqli_connect('localhost', 'root', '', 'userform');
+                                            <div class="col-auto">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-md-8 mt-5">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th
+                                                                            style="background-color: #202020; color: #fff;">
+                                                                            ID</th>
+                                                                        <th>Question</th>
+                                                                        <th>Answer</th>
+                                                                        <th>A</th>
+                                                                        <th>B</th>
+                                                                        <th>C</th>
+                                                                        <th>D</th>
+                                                                        <th>Date Modified</th>
 
-                                                        // Query the database for records
-                                                        $sql = "SELECT * FROM examinationtbl";
-                                                        $result = mysqli_query($con, $sql);
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php
+                                                                    // Connect to the database
+                                                                    $con = mysqli_connect('localhost', 'root', '', 'userform');
 
-                                                        // Loop through the records and display them in the table
-                                                        while ($row = mysqli_fetch_assoc($result)) {
-                                                            echo "<tr>";
-                                                            echo "<td>" . $row['id'] . "</td>";
-                                                            echo "<td>" . $row['question'] . "</td>";
-                                                            echo "<td>" . $row['answer'] . "</td>";
-                                                            echo "<td>" . $row['option1'] . "</td>";
-                                                            echo "<td>" . $row['option2'] . "</td>";
-                                                            echo "<td>" . $row['option3'] . "</td>";
-                                                            echo "<td>" . $row['option4'] . "</td>";
-                                                            echo "<td>" . $row['questionAddedDT'] . "</td>";
-                                                            echo "<td>";
-                                                            echo "<a href = id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
-                                                            echo "</td>";
-                                                            echo "</tr>";
-                                                        }
-                                                        // Close the database connection
-                                                        mysqli_close($con);
-                                                        ?>
-                                                    </tbody>
-                                                </table>
+                                                                    // Query the database for records
+                                                                    $sql = "SELECT * FROM examinationtbl";
+                                                                    $result = mysqli_query($con, $sql);
+
+                                                                    // Loop through the records and display them in the table
+                                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                                        echo "<tr>";
+                                                                        echo "<td>" . $row['id'] . "</td>";
+                                                                        echo "<td>" . $row['question'] . "</td>";
+                                                                        echo "<td>" . $row['answer'] . "</td>";
+                                                                        echo "<td>" . $row['option1'] . "</td>";
+                                                                        echo "<td>" . $row['option2'] . "</td>";
+                                                                        echo "<td>" . $row['option3'] . "</td>";
+                                                                        echo "<td>" . $row['option4'] . "</td>";
+                                                                        echo "<td>" . $row['questionAddedDT'] . "</td>";
+                                                                        echo "<td>";
+                                                                        echo "<a href = id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
+                                                                        echo "</td>";
+                                                                        echo "</tr>";
+                                                                    }
+                                                                    // Close the database connection
+                                                                    mysqli_close($con);
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-tabs-messages" role="tabpanel"
-                        aria-labelledby="v-tabs-messages-tab">
-                        <div class="col-auto">
-                            <h2>Add Record</h2>
-                            <form method="POST" action="add_record.php">
-                                <div class="form-group">
-                                    <label for="name">Name:</label>
-                                    <input type="text" class="form-control" name="name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email:</label>
-                                    <input type="email" class="form-control" name="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">Phone:</label>
-                                    <input type="text" class="form-control" name="phone" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary mt-5">Add</button>
-                            </form>
-                        </div>
-                        <!-- Sidebar navigation -->
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-md-8 mt-5">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="background-color: #202020; color: #fff;">ID</th>
-                                                            <th>First Name</th>
-                                                            <th>Middle Initial</th>
-                                                            <th>Last Name</th>
-                                                            <th>Email</th>
-                                                            <th>Mobile Number</th>
-                                                            <th>Status</th>
-                                                            <th>Role</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        // Connect to the database
-                                                        $con = mysqli_connect('localhost', 'root', '', 'userform');
-
-                                                        // Query the database for records
-                                                        $sql = "SELECT * FROM usertable";
-                                                        $result = mysqli_query($con, $sql);
-
-                                                        // Loop through the records and display them in the table
-                                                        while ($row = mysqli_fetch_assoc($result)) {
-                                                            echo "<tr>";
-                                                            echo "<td>" . $row['id'] . "</td>";
-                                                            echo "<td>" . $row['lastName'] . "</td>";
-                                                            echo "<td>" . $row['middleInitial'] . "</td>";
-                                                            echo "<td>" . $row['firstName'] . "</td>";
-                                                            echo "<td>" . $row['email'] . "</td>";
-                                                            echo "<td>" . $row['phoneNumber'] . "</td>";
-                                                            echo "<td>" . $row['status'] . "</td>";
-                                                            echo "<td>" . $row['role'] . "</td>";
-                                                            echo "<td>";
-                                                            echo "<a href='edit_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Edit</a>";
-                                                            echo "<a href='delete_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
-                                                            echo "</td>";
-                                                            echo "</tr>";
-                                                        }
-                                                        // Close the database connection
-                                                        mysqli_close($con);
-                                                        ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-                <!-- Tab content -->
+                <div class="tab-pane fade" id="v-tabs-messages" role="tabpanel" aria-labelledby="v-tabs-messages-tab">
+                    <div class="container">
+                        <h1 class="text-center mt-5">ADD RECORD</h1>
+                        <div class="row mt-5">
+                            <div class="col-md-6 mx-auto">
+                                <form method="POST" action="process.php">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-outline form-group flex-fill mb-3">
+                                                <input type="text" id="firstName" class="form-control" name="firstName"
+                                                    required />
+                                                <label class="form-label" for="firstName">First Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-outline form-group flex-fill mb-3">
+                                                <input type="text" id="lastName" class="form-control" name="lastName"
+                                                    required />
+                                                <label class="form-label" for="lastName">Last Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-outline form-group flex-fill mb-3">
+                                                <input type="text" id="middleInitial" class="form-control"
+                                                    name="middleInitial" required />
+                                                <label class="form-label" for="middleInitial">Middle Initial</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-outline form-group flex-fill mb-3">
+                                                <input type="text" id="mobileNumber" class="form-control"
+                                                    name="mobileNumber" required />
+                                                <label class="form-label" for="mobileNumber">Mobile Number</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-outline form-group flex-fill mb-3">
+                                                <input type="text" id="email" class="form-control" name="email"
+                                                    required />
+                                                <label class="form-label" for="email">Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-outline form-group flex-fill mb-3">
+                                                <input type="text" id="password" class="form-control" name="password"
+                                                    required />
+                                                <label class="form-label" for="password">Password</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="role" class="form-label mt-5"><strong>USER TYPE</strong></label>
+                                        <ul class="role text-center">
+                                            <li>
+                                                <input type="radio" id="choiceA1" name="q2" />
+                                                <label for="choiceA1">Student</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" id="choiceB1" name="q2" />
+                                                <label for="choiceB1">Administrator</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" id="choiceC1" name="q2" />
+                                                <label for="choiceC1">Developer</label>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Add Record</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sidebar navigation -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-8 mt-5">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="background-color: #202020; color: #fff;">ID</th>
+                                                        <th>First Name</th>
+                                                        <th>Middle Initial</th>
+                                                        <th>Last Name</th>
+                                                        <th>Email</th>
+                                                        <th>Mobile Number</th>
+                                                        <th>Status</th>
+                                                        <th>Role</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    // Connect to the database
+                                                    $con = mysqli_connect('localhost', 'root', '', 'userform');
+
+                                                    // Query the database for records
+                                                    $sql = "SELECT * FROM usertable";
+                                                    $result = mysqli_query($con, $sql);
+
+                                                    // Loop through the records and display them in the table
+                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                        echo "<tr>";
+                                                        echo "<td>" . $row['id'] . "</td>";
+                                                        echo "<td>" . $row['lastName'] . "</td>";
+                                                        echo "<td>" . $row['middleInitial'] . "</td>";
+                                                        echo "<td>" . $row['firstName'] . "</td>";
+                                                        echo "<td>" . $row['email'] . "</td>";
+                                                        echo "<td>" . $row['phoneNumber'] . "</td>";
+                                                        echo "<td>" . $row['status'] . "</td>";
+                                                        echo "<td>" . $row['role'] . "</td>";
+                                                        echo "<td>";
+                                                        echo "<a href='edit_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Edit</a>";
+                                                        echo "<a href='delete_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
+                                                        echo "</td>";
+                                                        echo "</tr>";
+                                                    }
+                                                    // Close the database connection
+                                                    mysqli_close($con);
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+            <!-- Tab content -->
         </div>
+    </div>
     </div>
 
     <!-- IMPORTS -->
