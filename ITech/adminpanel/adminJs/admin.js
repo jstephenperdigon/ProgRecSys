@@ -43,26 +43,3 @@ document.addEventListener('DOMContentLoaded', function() {
     alertElement.classList.add('fade');
   }, 2000);
 });
-
-function deleteRecord(id) {
-  if (confirm("Are you sure you want to delete this record?")) {
-      // Send an AJAX request to delete the record
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "index.php", true);
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-              // Check the response and display a success message
-              if (xhr.responseText.trim() === "success") {
-                  alert("Record deleted successfully.");
-                  // Refresh the page to update the table
-                  location.reload();
-              } else {
-                  alert("Failed to delete the record.");
-              }
-          }
-      };
-      // Send the ID as a parameter to the PHP script
-      xhr.send("delete_id=" + id);
-  }
-}
