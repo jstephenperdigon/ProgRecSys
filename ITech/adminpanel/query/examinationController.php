@@ -18,6 +18,7 @@ if (isset($_POST['addQuestion'])) {
     } else {
         $errors['db-error'] = "Failed to add question!";
     }
+    
 }
 ?>
 <!-- DELETE QUESTION -->
