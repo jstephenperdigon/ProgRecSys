@@ -145,7 +145,6 @@
                             </div>
                             <?php
                         }
-
                         ?>
                         <!-- Add question form -->
                         <div class="container">
