@@ -373,7 +373,10 @@ $answers = $con->query($sequel);
     </div>
   </div>
 </form>
+
+
 <script>
+  
   
     const prevButton = document.querySelector('.btn-prev');
     const nextButtons = document.querySelectorAll('.btn-next');
