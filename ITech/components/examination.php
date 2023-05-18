@@ -21,6 +21,14 @@ if ($email != false && $password != false) {
   header('Location: ../index.php');
 }
 ?>
+<?php
+
+$sql = "SELECT * FROM examinationtbl";
+$questions = $con->query($sql);
+
+$sequel = "SELECT * FROM examinationtbl";
+$answers = $con->query($sequel);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <title>
@@ -148,10 +156,10 @@ if ($email != false && $password != false) {
 
     /* Form */
     .form {
-      width: clamp(320px, 30%, 430px);
+      width: clamp(1000px, 30%, 430px);
       margin: 0 auto;
       border: 1px solid #ccc;
-      border-radius: 0.35rem;
+      border-radius: 50px;
       padding: 1.5rem;
     }
 
@@ -172,12 +180,14 @@ if ($email != false && $password != false) {
 
     /* Button */
     .btns-group {
+      margin-top: 20px;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
 
-    .btn {
+    .btn-body{
+      margin-top: 20px;
       padding: 0.75rem;
       display: block;
       text-decoration: none;
@@ -271,9 +281,9 @@ if ($email != false && $password != false) {
   </nav>
 
 
-  <div class="container-body">
-    <div class="row">
-      <div class="col-md-8 mx-auto">
+  <div class="container" style="margin-top: 200px;">
+    <div class="row align-items-center">
+      <div class="col">
         <h2 class="text-center mb-4">Time Remaining</h2>
         <div class="text-center">
           <h5 id="timer">01:00:00</h5>
@@ -282,8 +292,8 @@ if ($email != false && $password != false) {
     </div>
   </div>
 
-  <form action="#" class="form">
-    <h4 class="text-center">EXAMINATION</h4>
+  <form action="#" class="form container" method="POST">
+    <h4 class="text-center">PART 1</h4>
     <!-- Progress bar -->
     <div class="progressbar">
       <div class="progress" id="progress"></div>
@@ -297,350 +307,104 @@ if ($email != false && $password != false) {
       <div class="progress-step" data-title=""></div>
       <div class="progress-step" data-title=""></div>
       <div class="progress-step" data-title=""></div>
-      
-    
-      
     </div>
 
-   <!-- Steps --><!-- alex -->
-   <div class="form-step form-step-active">
-      <h4 class="fw-bold text-center mt-3"></h4>
-      <?php
-       
-        $query = mysqli_query($con, "select * from examinationtbl WHERE id = '1'");
-        $row = mysqli_fetch_object($query);
-        ?>
-    
-      <p><strong>1.<?php echo $row->question; ?> </strong></p>
-     
-      <form action="" method="post">
+
+    <!-- Steps -->
+    <div class="form-step form-step-active">
+
+      <h4 class="fw-bold text-center mt-3">
+        <?php
+        $row = mysqli_fetch_assoc($questions)
+          ?>
+        <?php echo $row["question"] ?>
+      </h4>
       <ul class="answer text-center">
         <li>
-      
-          <input type="radio" id="a25" name="amount" value="A" />
-          <label for="a25"><?php echo $row->option1; ?></label>
-         
+          <input type="radio" id="choiceA" name="q1" />
+          <label for="choiceA">
+            <?php
+        $row = mysqli_fetch_assoc($answers)
+          ?>
+        <?php echo $row["option1"] ?>
+        </label>
         </li>
         <li>
-          <input type="radio" id="a50" name="amount" value="B" />
-          <label for="a50"><?php echo $row->option2; ?></label>
+          <input type="radio" id="choiceB" name="q1" />
+          <label for="choiceB">ANSWER 2</label>
         </li>
         <li>
-          <input type="radio" id="a75" name="amount"value="C" />
-          <label for="a75"><?php echo $row->option3; ?></label>
+          <input type="radio" id="choiceC" name="q1" />
+          <label for="choiceC">ANSWER 3</label>
         </li>
         <li>
-          <input type="radio" id="a100" name="amount"value="D"/>
-          <label for="a100"><?php echo $row->option4; ?></label>
+          <input type="radio" id="choiceD" name="q1" />
+          <label for="choiceD">ANSWER 4</label>
         </li>
       </ul>
       <div class="">
-
-        <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
-
-
-      </div>
-    
-    </div>
-    <div class="form-step">
-    <?php
-       
-       $query = mysqli_query($con, "select * from examinationtbl WHERE id = '2'");
-       $row = mysqli_fetch_object($query);
-       ?>
-   
-     <p><strong>2.<?php echo $row->question; ?> </strong></p>
-     
-          
-     <ul class="answer text-center">
-       <li>
-         <input type="radio" id="a26" name="amount" value="A"/>
-         <label for="a26"><?php echo $row->option1; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="a51" name="amount" value="B"/>
-         <label for="a51"><?php echo $row->option2; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="a76" name="amount" value="C"/>
-         <label for="a76"><?php echo $row->option3; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="a101" name="amount" value="D"/>
-         <label for="a101"><?php echo $row->option4; ?></label>
-       </li>
-     </ul>
-      <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-        <a href="#" class="btn btn-next">Next</a>
+        <a href="#" class="btn-body btn-next width-50 ml-auto">Next</a>
       </div>
     </div>
     <div class="form-step">
-    <?php
-       
-       $query = mysqli_query($con, "select * from examinationtbl WHERE id = '3'");
-       $row = mysqli_fetch_object($query);
-       ?>
-   
-     <p><strong>3.<?php echo $row->question; ?> </strong></p>
-     
-          
-     <ul class="answer text-center">
-       <li>
-         <input type="radio" id="a257" name="amount" value="A"/>
-         <label for="a257"><?php echo $row->option1; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="a52" name="amount" value="B"/>
-         <label for="a52"><?php echo $row->option2; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="a72" name="amount" value="c"/>
-         <label for="a72"><?php echo $row->option3; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="a102" name="amount" value="D"/>
-         <label for="a102"><?php echo $row->option4; ?></label>
-       </li>
-     </ul>
+      <h4 class="fw-bold text-center mt-3">
+        <?php
+        $row = mysqli_fetch_assoc($questions)
+          ?>
+        <?php echo $row["question"] ?>
+      </h4>
+      <ul class="answer text-center">
+        <li>
+          <input type="radio" id="choiceA1" name="q2" />
+          <label for="choiceA1">ANSWER 1</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceB1" name="q2" />
+          <label for="choiceB1">ANSWER 2</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceC1" name="q2" />
+          <label for="choiceC1">ANSWER 3</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceD1" name="q2" />
+          <label for="choiceD1">ANSWER 4</label>
+        </li>
+      </ul>
       <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-        <a href="#" class="btn btn-next">Next</a>
+        <a href="#" class="btn-body btn-prev">Previous</a>
+        <a href="#" class="btn-body btn-next">Next</a>
       </div>
     </div>
     <div class="form-step">
-    <?php
-       
-       $query = mysqli_query($con, "select * from examinationtbl WHERE id = '4'");
-       $row = mysqli_fetch_object($query);
-       ?>
-   
-     <p><strong>4.<?php echo $row->question; ?> </strong></p>
-     
-          
-     <ul class="answer text-center">
-       <li>
-         <input type="radio" id="1" name="amount" value="A"/>
-         <label for="1"><?php echo $row->option1; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="2" name="amount" value="B"/>
-         <label for="2"><?php echo $row->option2; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="3" name="amount" value="C"/>
-         <label for="3"><?php echo $row->option3; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="4" name="amount" value="D"/>
-         <label for="4"><?php echo $row->option4; ?></label>
-       </li>
-     </ul>
+      <h4 class="fw-bold text-center mt-3">
+        <?php
+        $row = mysqli_fetch_assoc($questions)
+          ?>
+        <?php echo $row["question"] ?>
+      </h4>
+      <ul class="answer text-center">
+        <li>
+          <input type="radio" id="choiceA2" name="q3" />
+          <label for="choiceA2">ANSWER 1</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceB2" name="q3" />
+          <label for="choiceB2">ANSWER 2</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceC2" name="q3" />
+          <label for="choiceC2">ANSWER 3</label>
+        </li>
+        <li>
+          <input type="radio" id="choiceD2" name="q3" />
+          <label for="choiceD2">ANSWER 4</label>
+        </li>
+      </ul>
       <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-        <a href="#" class="btn btn-next">Next</a>
+        <a href="#" class="btn-body btn-prev">Previous</a>
+        <input type="submit" value="Submit" class="btn-body" />
       </div>
-    </div>
-        <div class="form-step">
-    <?php
-       
-       $query = mysqli_query($con, "select * from examinationtbl WHERE id = '5'");
-       $row = mysqli_fetch_object($query);
-       ?>
-   
-     <p><strong>3.<?php echo $row->question; ?> </strong></p>
-     
-          
-     <ul class="answer text-center">
-       <li>
-         <input type="radio" id="111" name="amount" value="A"/>
-         <label for="111"><?php echo $row->option1; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="222" name="amount" value="B"/>
-         <label for="222"><?php echo $row->option2; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="333" name="amount" value="c"/>
-         <label for="333"><?php echo $row->option3; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="444" name="amount" value="D"/>
-         <label for="444"><?php echo $row->option4; ?></label>
-       </li>
-     </ul>
-      <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-        <a href="#" class="btn btn-next">Next</a>
-      </div>
-    </div>
-    <div class="form-step">
-    <?php
-       
-       $query = mysqli_query($con, "select * from examinationtbl WHERE id = '6'");
-       $row = mysqli_fetch_object($query);
-       ?>
-   
-     <p><strong>3.<?php echo $row->question; ?> </strong></p>
-     
-          
-     <ul class="answer text-center">
-       <li>
-         <input type="radio" id="555" name="amount" value="A"/>
-         <label for="555"><?php echo $row->option1; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="666" name="amount" value="B"/>
-         <label for="666"><?php echo $row->option2; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="777" name="amount" value="c"/>
-         <label for="777"><?php echo $row->option3; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="888" name="amount" value="D"/>
-         <label for="888"><?php echo $row->option4; ?></label>
-       </li>
-     </ul>
-      <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-        <a href="#" class="btn btn-next">Next</a>
-      </div>
-    </div>
-    <div class="form-step">
-    <?php
-       
-       $query = mysqli_query($con, "select * from examinationtbl WHERE id = '7'");
-       $row = mysqli_fetch_object($query);
-       ?>
-   
-     <p><strong>3.<?php echo $row->question; ?> </strong></p>
-     
-          
-     <ul class="answer text-center">
-       <li>
-         <input type="radio" id="999" name="amount" value="A"/>
-         <label for="999"><?php echo $row->option1; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="123" name="amount" value="B"/>
-         <label for="123"><?php echo $row->option2; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="1234" name="amount" value="c"/>
-         <label for="1234"><?php echo $row->option3; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="12345" name="amount" value="D"/>
-         <label for="12345"><?php echo $row->option4; ?></label>
-       </li>
-     </ul>
-      <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-        <a href="#" class="btn btn-next">Next</a>
-      </div>
-    </div>
-    <div class="form-step">
-    <?php
-       
-       $query = mysqli_query($con, "select * from examinationtbl WHERE id = '8'");
-       $row = mysqli_fetch_object($query);
-       ?>
-   
-     <p><strong>3.<?php echo $row->question; ?> </strong></p>
-     
-          
-     <ul class="answer text-center">
-       <li>
-         <input type="radio" id="12" name="amount" value="A"/>
-         <label for="12"><?php echo $row->option1; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="13" name="amount" value="B"/>
-         <label for="13"><?php echo $row->option2; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="14" name="amount" value="c"/>
-         <label for="14"><?php echo $row->option3; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="15" name="amount" value="D"/>
-         <label for="15"><?php echo $row->option4; ?></label>
-       </li>
-     </ul>
-      <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-        <a href="#" class="btn btn-next">Next</a>
-      </div>
-    </div>
-    <div class="form-step">
-    <?php
-       
-       $query = mysqli_query($con, "select * from examinationtbl WHERE id = '9'");
-       $row = mysqli_fetch_object($query);
-       ?>
-   
-     <p><strong>3.<?php echo $row->question; ?> </strong></p>
-     
-          
-     <ul class="answer text-center">
-       <li>
-         <input type="radio" id="16" name="amount" value="A"/>
-         <label for="16"><?php echo $row->option1; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="17" name="amount" value="B"/>
-         <label for="17"><?php echo $row->option2; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="18" name="amount" value="c"/>
-         <label for="18"><?php echo $row->option3; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="19" name="amount" value="D"/>
-         <label for="19"><?php echo $row->option4; ?></label>
-       </li>
-     </ul>
-      <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-        <a href="#" class="btn btn-next">Next</a>
-      </div>
-    </div>
-    <div class="form-step">
-    <?php
-       
-       $query = mysqli_query($con, "select * from examinationtbl WHERE id = '10'");
-       $row = mysqli_fetch_object($query);
-       ?>
-   
-     <p><strong>3.<?php echo $row->question; ?> </strong></p>
-     
-          
-     <ul class="answer text-center">
-       <li>
-         <input type="radio" id="a1" name="amount" value="A"/>
-         <label for="a1"><?php echo $row->option1; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="a2" name="amount" value="B"/>
-         <label for="a2"><?php echo $row->option2; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="a3" name="amount" value="c"/>
-         <label for="a3"><?php echo $row->option3; ?></label>
-       </li>
-       <li>
-         <input type="radio" id="a4" name="amount" value="D"/>
-         <label for="a4"><?php echo $row->option4; ?></label>
-       </li>
-     </ul>
-      <div class="btns-group">
-        <a href="#" class="btn btn-prev">Previous</a>
-       
-
-        <input type="submit" value="Submit" name ="submit" action="controllerUserData.php"class="btn" />
-  </div>
-     
     </div>
   </form>
 
