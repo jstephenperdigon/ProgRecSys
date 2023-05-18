@@ -184,74 +184,76 @@ if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
             <!-- </div>
             <hr class="hr" /> OR
           </div> -->
-          <div class="d-flex flex-column text-center">
-            <form class="needs-validation" action="index.php" method="POST" autocomplete="" novalidate>
-              <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input type="email" id="username" name="email" class="form-control" value="<?php echo $id ?>" required />
-                <label class="form-label" for="username">Email address</label>
-              </div>
-
-              <!-- Password input -->
-              <div class="form-outline input-group mb-4">
-                <input type="password" id="loginpass" class="form-control" name="password" value="<?php echo $pass ?>"
-                  required />
-                <label class="form-label" for="loginpass">Password</label>
-                <div class="input-group-append" role="button" title="veiw password" id="passBtn">
-                  <span class="input-group-text" style="background: #fff; border: none;">
-                    <i class=" far fa-eye fa-eye-slash" id="togglePassword" style="cursor: pointer;"
-                      aria-hidden="true"></i>
-                  </span>
+            <div class="d-flex flex-column text-center">
+              <form class="needs-validation" action="index.php" method="POST" autocomplete="" novalidate>
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input type="email" id="username" name="email" class="form-control" value="<?php echo $id ?>"
+                    required />
+                  <label class="form-label" for="username">Email address</label>
                 </div>
-                <script>
-                  //*<-----Show password script----->
-                  const togglePassword = document.querySelector('#togglePassword');
-                  const password = document.querySelector('#loginpass');
-                  togglePassword.addEventListener('click', function (e) {
-                    // toggle the type attribute
-                    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                    password.setAttribute('type', type);
-                    // toggle the eye slash icon
-                    this.classList.toggle('fa-eye-slash');
-                  });
-                </script>
-              </div>
 
-
-              <!-- 2 column grid layout for inline styling -->
-              <div class="row mb-4">
-                <div class="col d-flex justify-content-center">
-                  <!-- Checkbox -->
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="form2Example31" name="remember_me"
-                      checked />
-                    <label class="form-check-label" for="form2Example31"> Remember me </label>
+                <!-- Password input -->
+                <div class="form-outline input-group mb-4">
+                  <input type="password" id="loginpass" class="form-control" name="password" value="<?php echo $pass ?>"
+                    required />
+                  <label class="form-label" for="loginpass">Password</label>
+                  <div class="input-group-append" role="button" title="veiw password" id="passBtn">
+                    <span class="input-group-text" style="background: #fff; border: none;">
+                      <i class=" far fa-eye fa-eye-slash" id="togglePassword" style="cursor: pointer;"
+                        aria-hidden="true"></i>
+                    </span>
                   </div>
-                </div>
-
-                <div class="col">
-                  <!-- Simple link -->
-                  <a href="#!" data-target="#pwdModal" data-toggle="modal" data-dismiss="modal"
-                    onClick="$('#loginModal').modal('hide')">Forgot password?</a>
                   <script>
-                    $('#loginModal').on('hidden.bs.modal', function () {
-                      // Load up a new modal...
-                      $('#pwModal').modal('show')
-                    })
+                    //*<-----Show password script----->
+                    const togglePassword = document.querySelector('#togglePassword');
+                    const password = document.querySelector('#loginpass');
+                    togglePassword.addEventListener('click', function (e) {
+                      // toggle the type attribute
+                      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                      password.setAttribute('type', type);
+                      // toggle the eye slash icon
+                      this.classList.toggle('fa-eye-slash');
+                    });
                   </script>
                 </div>
-              </div>
-              <!-- Submit button -->
-              <button type="submit" name="login" onclick="return myFunction()"
-                class="btn btn-primary btn-block mb-4">Sign in</button>
-              <!-- Register buttons -->
-              <div class="text-center">
-                <p>Not a member? <a href="components/signup-user.php">Register</a></p>
-
-              </div>
-            </form>
 
 
+                <!-- 2 column grid layout for inline styling -->
+                <div class="row mb-4">
+                  <div class="col d-flex justify-content-center">
+                    <!-- Checkbox -->
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="form2Example31" name="remember_me"
+                        checked />
+                      <label class="form-check-label" for="form2Example31"> Remember me </label>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <!-- Simple link -->
+                    <a href="#!" data-target="#pwdModal" data-toggle="modal" data-dismiss="modal"
+                      onClick="$('#loginModal').modal('hide')">Forgot password?</a>
+                    <script>
+                      $('#loginModal').on('hidden.bs.modal', function () {
+                        // Load up a new modal...
+                        $('#pwModal').modal('show')
+                      })
+                    </script>
+                  </div>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" name="login" onclick="return myFunction()"
+                  class="btn btn-primary btn-block mb-4">Sign in</button>
+                <!-- Register buttons -->
+                <div class="text-center">
+                  <p>Not a member? <a href="components/signup-user.php">Register</a></p>
+
+                </div>
+              </form>
+
+
+            </div>
           </div>
         </div>
       </div>
