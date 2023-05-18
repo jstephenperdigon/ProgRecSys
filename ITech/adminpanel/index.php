@@ -122,6 +122,10 @@
                                 <div class="col-md-8 offset-md-2 mt-5">
                                     <h3>Create a new question:</h3>
                                     <form id="add-question-form" action="index.php" method="POST">
+                                    <div class="form-outline flex-fill mb-0 mt-5">
+                                            <input type="text" id="qid" class="form-control" name="qid" />
+                                            <label class="form-label" for="id">ID</label>
+                                        </div>
                                         <div class="form-group">
                                             <label class="form-label mt-5" for="question-text">Question:</label>
                                             <textarea class="form-control" id="question-text" name="question" rows="3">
@@ -155,7 +159,67 @@
                                         </div>
                                         <button type="submit" name="addQuestion" class="btn btn-primary mt-5">Add
                                             Question</button>
+                                        <button type="submit" name="editQuestion" class="btn btn-primary mt-5">Edit
+                                            Question</button>
                                     </form>
+                                     <div class="container">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-8 mt-5">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="background-color: #202020; color: #fff;">ID</th>
+                                                            <th>Question</th>
+                                                            <th>Answer</th>
+                                                            <th>A</th>
+                                                            <th>B</th>
+                                                            <th>C</th>
+                                                            <th>D</th>
+                                                            <th>Date Modified</th>
+                                                            
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        // Connect to the database
+                                                        $con = mysqli_connect('localhost', 'root', '', 'userform');
+
+                                                        // Query the database for records
+                                                        $sql = "SELECT * FROM examinationtbl";
+                                                        $result = mysqli_query($con, $sql);
+
+                                                        // Loop through the records and display them in the table
+                                                        while ($row = mysqli_fetch_assoc($result)) {
+                                                            echo "<tr>";
+                                                            echo "<td>" . $row['id'] . "</td>";
+                                                            echo "<td>" . $row['question'] . "</td>";
+                                                            echo "<td>" . $row['answer'] . "</td>";
+                                                            echo "<td>" . $row['option1'] . "</td>";
+                                                            echo "<td>" . $row['option2'] . "</td>";
+                                                            echo "<td>" . $row['option3'] . "</td>";
+                                                            echo "<td>" . $row['option4'] . "</td>";
+                                                            echo "<td>" . $row['questionAddedDT'] . "</td>";
+                                                            echo "<td>";
+                                                            echo "<a href = id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
+                                                            echo "</td>";
+                                                            echo "</tr>";
+                                                        }
+                                                        // Close the database connection
+                                                        mysqli_close($con);
+                                                        ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                                 </div>
                             </div>
                         </div>
