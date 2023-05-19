@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-bottom: 2px solid #d2d6dd;
+}
+
+th {
+    padding: 1rem 0.4rem;
+    text-align: left;
+}
+
+td {
+    padding: .8rem 0.4rem;
+}
+
+thead {
+    border-top: 2px solid #d2d6dd;
+    border-bottom: 2px solid #d2d6dd;
+    background-color: #efefef;
+}
+
+tfoot {
+    border-top: 2px solid #d2d6dd;
+    border-bottom: 2px solid #d2d6dd;
+}
+
+table.striped tr:nth-of-type(2n) {
+    background-color: #f3f3f6;
+}
