@@ -204,7 +204,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-auto ">
-                                   <div class="containerd-flex justify-content-center align-items-center">
+                                    <div class="containerd-flex justify-content-center align-items-center">
                                         <div class="card w-100">
                                             <h3 class="card-header text-center">CREATE NEW QUESTION</h3>
                                             <div class="card-body">
@@ -314,11 +314,11 @@
                 </div>
                 <div class="tab-pane fade" id="v-tabs-messages" role="tabpanel" aria-labelledby="v-tabs-messages-tab">
                     <div class="container-fluid">
-                        <div class="row mt-5">
-                            <div class="col-md-6 mx-auto">
-                                <form method="POST" action="process.php">
-                                    <h1 class="text-center mt-5">ADD RECORD</h1>
-                                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mx-auto">
+                                <form method="POST" action="index.php">
+                                    <h1 class="text-center">ADD RECORD</h1>
+                                    <div class="card-body mt-5">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-outline form-group flex-fill mb-3">
@@ -378,10 +378,6 @@
                                                     <input type="radio" id="choiceB1" name="q2" />
                                                     <label for="choiceB1">Administrator</label>
                                                 </li>
-                                                <li>
-                                                    <input type="radio" id="choiceC1" name="q2" />
-                                                    <label for="choiceC1">Developer</label>
-                                                </li>
                                             </ul>
 
                                         </div>
@@ -395,23 +391,22 @@
                         </div>
                     </div>
                     <!-- Sidebar navigation -->
-                    <div class="row">
-                        <div class="col-auto">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-8 mt-5">
-                                        <table class="table">
-                                            <thead>
+                    <div class="container mt-5 align-items-center">
+                    <h3 class="text-center">MANAGE USERS</h3>
+                    <div class="row align-items-center">
+                                            <div class="col-auto mt-5">
+                                            <table class="table align-middle mb-0 bg-white">
+                                            <thead class="text-center">
                                                 <tr>
                                                     <th style="background-color: #202020; color: #fff;">ID</th>
-                                                    <th>First Name</th>
-                                                    <th>Middle Initial</th>
-                                                    <th>Last Name</th>
-                                                    <th>Email</th>
-                                                    <th>Mobile Number</th>
-                                                    <th>Status</th>
-                                                    <th>Role</th>
-                                                    <th>Actions</th>
+                                                    <th>FIRST NAME</th>
+                                                    <th>MIDDLE INITIAL</th>
+                                                    <th>LAST NAME</th>
+                                                    <th>EMAIL</th>
+                                                    <th>MOBILE NUMBER</th>
+                                                    <th>STATUS</th>
+                                                    <th>ROLE</th>
+                                                    <th>ACTIONS</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -424,8 +419,12 @@
                                                 $result = mysqli_query($con, $sql);
 
                                                 // Loop through the records and display them in the table
+                                                $rowColor = false; // Variable to track the row color
                                                 while ($row = mysqli_fetch_assoc($result)) {
-                                                    echo "<tr>";
+                                                    // Determine the row class based on the row color variable
+                                                    $rowClass = $rowColor ? 'even-row' : 'odd-row';
+
+                                                    echo "<tr class='$rowClass'>";
                                                     echo "<td>" . $row['id'] . "</td>";
                                                     echo "<td>" . $row['lastName'] . "</td>";
                                                     echo "<td>" . $row['middleInitial'] . "</td>";
@@ -436,17 +435,21 @@
                                                     echo "<td>" . $row['role'] . "</td>";
                                                     echo "<td>";
                                                     echo "<a href='edit_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Edit</a>";
+                                                    echo "</td>";
+                                                    echo "<td>";
                                                     echo "<a href='delete_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
                                                     echo "</td>";
                                                     echo "</tr>";
+
+                                                    // Toggle the row color
+                                                    $rowColor = !$rowColor;
                                                 }
                                                 // Close the database connection
                                                 mysqli_close($con);
                                                 ?>
                                             </tbody>
                                         </table>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>

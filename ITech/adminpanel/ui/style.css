@@ -86,5 +86,13 @@ tr.even {
     background-color: #ffffff;
 }
 
+.odd-row {
+    background-color: #f2f2f2; /* Set the background color for odd rows */
+}
+
+.even-row {
+    background-color: #ffffff; /* Set the background color for even rows */
+}
+
 
 
