@@ -34,53 +34,53 @@
 <body>
 
     <!-- Edit Modal -->
-<div id="editModal" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Question</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="editForm" method="POST" action="index.php">
-                    <input type="hidden" id="editId" name="id">
-                    <div class="mb-3">
-                        <label for="editQuestion" class="form-label">Question:</label>
-                        <input type="text" class="form-control" id="editQuestion" name="question" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editAnswer" class="form-label">Answer:</label>
-                        <select class="form-select" id="editAnswer" name="answer" required>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editOption1" class="form-label">Option A:</label>
-                        <input type="text" class="form-control" id="editOption1" name="option1" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editOption2" class="form-label">Option B:</label>
-                        <input type="text" class="form-control" id="editOption2" name="option2" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editOption3" class="form-label">Option C:</label>
-                        <input type="text" class="form-control" id="editOption3" name="option3" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editOption4" class="form-label">Option D:</label>
-                        <input type="text" class="form-control" id="editOption4" name="option4" required>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" name="editQuestion" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
+    <div id="editModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Question</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm" method="POST" action="index.php">
+                        <input type="hidden" id="editId" name="id">
+                        <div class="mb-3">
+                            <label for="editQuestion" class="form-label">Question:</label>
+                            <input type="text" class="form-control" id="editQuestion" name="question" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editAnswer" class="form-label">Answer:</label>
+                            <select class="form-select" id="editAnswer" name="answer" required>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editOption1" class="form-label">Option A:</label>
+                            <input type="text" class="form-control" id="editOption1" name="option1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editOption2" class="form-label">Option B:</label>
+                            <input type="text" class="form-control" id="editOption2" name="option2" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editOption3" class="form-label">Option C:</label>
+                            <input type="text" class="form-control" id="editOption3" name="option3" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editOption4" class="form-label">Option D:</label>
+                            <input type="text" class="form-control" id="editOption4" name="option4" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" name="editQuestion" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -172,31 +172,34 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-tabs-profile" role="tabpanel" aria-labelledby="v-tabs-profile-tab">
-                        <?php
-                        if (isset($_SESSION['info'])) {
-                            ?>
-                            <div class="alert alert-success text-center fade show">
-                                <?php echo $_SESSION['info']; ?>
-                            </div>
+                        <div class="alert">
                             <?php
-                            unset($_SESSION['info']); // Clear the success message variable
-                        }
-                        ?>
-                        <?php
-                        if (count($errors) > 0) {
-                            foreach ($errors as $showerror) {
+                            if (isset($_SESSION['info'])) {
                                 ?>
-                                <div class="container alert alert-danger text-center">
-                                    <?php
-                                    echo $showerror;
+                                <div class="alert alert-success text-center fade show">
+                                    <?php echo $_SESSION['info']; ?>
+                                </div>
+                                <?php
+                                unset($_SESSION['info']); // Clear the success message variable
                             }
-                            unset($errors); // Clear the errors array
                             ?>
-                            </div>
                             <?php
-                        }
+                            if (count($errors) > 0) {
+                                foreach ($errors as $showerror) {
+                                    ?>
+                                    <div class="container alert alert-danger text-center">
+                                        <?php
+                                        echo $showerror;
+                                }
+                                unset($errors); // Clear the errors array
+                                ?>
+                                </div>
+                                <?php
+                            }
 
-                        ?>
+                            ?>
+                        </div>
+
                         <!-- Add question form -->
                         <div class="container">
                             <div class="row">
@@ -205,7 +208,8 @@
                                     <form id="add-question-form" action="index.php" method="POST">
                                         <div class="form-group">
                                             <label class="form-label mt-5" for="question-text">Question:</label>
-                                            <textarea class="form-control" id="question-text" name="question"></textarea>
+                                            <textarea class="form-control" id="question-text"
+                                                name="question"></textarea>
                                         </div>
                                         <div class="form-outline flex-fill mb-0 mt-5">
                                             <input type="text" id="answer-a" class="form-control" name="choiceA" />
@@ -226,10 +230,6 @@
                                         <div class="form-group mt-5">
                                             <label for="correct-answer">Correct Answer:</label>
                                             <select class="form-control" id="correct-answer" name="keyAnswer">
-                                                <option value="A">A</option>
-                                                <option value="B">B</option>
-                                                <option value="C">C</option>
-                                                <option value="D">D</option>
                                             </select>
                                         </div>
                                         <button type="submit" name="addQuestion" class="btn btn-primary mt-5">Add

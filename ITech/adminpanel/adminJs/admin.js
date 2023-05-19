@@ -35,15 +35,6 @@ if (window.history && window.history.pushState) {
     });
   });
   
-// JavaScript code to fade out the alert after 3 seconds
-document.addEventListener('DOMContentLoaded', function() {
-  var alertElement = document.querySelector('.alert');
-  setTimeout(function() {
-    alertElement.classList.remove('show');
-    alertElement.classList.add('fade');
-  }, 2000);
-});
-
 function deleteRecord(id) {
   if (confirm("Are you sure you want to delete this record?")) {
       // Send an AJAX request to delete the record
@@ -92,3 +83,92 @@ function showEditModal(element) {
   var editModal = new bootstrap.Modal(document.getElementById("editModal"));
   editModal.show();
 }
+
+// Fetch the input fields and select element
+const choiceAInput = document.getElementById('answer-a');
+const choiceBInput = document.getElementById('answer-b');
+const choiceCInput = document.getElementById('answer-c');
+const choiceDInput = document.getElementById('answer-d');
+const correctAnswerSelect = document.getElementById('correct-answer');
+
+// Add event listeners to the input fields
+choiceAInput.addEventListener('input', updateDropdownOptions);
+choiceBInput.addEventListener('input', updateDropdownOptions);
+choiceCInput.addEventListener('input', updateDropdownOptions);
+choiceDInput.addEventListener('input', updateDropdownOptions);
+
+// Function to update the dropdown options
+function updateDropdownOptions() {
+  // Clear existing options
+  correctAnswerSelect.innerHTML = '';
+
+  // Create options and append them to the select element
+  const options = [
+    { value: 'A', label: choiceAInput.value },
+    { value: 'B', label: choiceBInput.value },
+    { value: 'C', label: choiceCInput.value },
+    { value: 'D', label: choiceDInput.value }
+  ];
+
+  options.forEach(function (option) {
+    const optionElement = document.createElement('option');
+    optionElement.value = option.value;
+    optionElement.text = option.label;
+    correctAnswerSelect.appendChild(optionElement);
+  });
+}
+
+// Add event listener to the form submission
+document.getElementById('add-question-form').addEventListener('submit', function (event) {
+  event.preventDefault(); // Prevent form submission
+
+  // Get the selected dropdown option
+  const selectedOption = correctAnswerSelect.options[correctAnswerSelect.selectedIndex];
+
+  // Get the actual text value of the selected option
+  const selectedOptionValue = selectedOption.value;
+
+  // Get the values of the input fields
+  const question = document.getElementById('question-text').value;
+  const choiceA = choiceAInput.value;
+  const choiceB = choiceBInput.value;
+  const choiceC = choiceCInput.value;
+  const choiceD = choiceDInput.value;
+
+  // Create an object with the form data
+  const formData = {
+    question: question,
+    option1: choiceA,
+    option2: choiceB,
+    option3: choiceC,
+    option4: choiceD,
+    answer: selectedOptionValue
+  };
+
+  // Send an AJAX request to the server
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', './query/examinationController.php'); // Replace 'your-php-file.php' with the actual PHP file that handles the form submission
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // Request was successful
+      console.log('Form submitted successfully');
+      // Reset the form
+      event.target.reset();
+    } else {
+      // Request failed
+      console.error('Form submission failed');
+    }
+  };
+  xhr.send(JSON.stringify(formData));
+});
+
+
+// JavaScript code to fade out the alert after 3 seconds
+document.addEventListener('DOMContentLoaded', function() {
+  var alertElement = document.querySelector('.alert');
+  setTimeout(function() {
+    alertElement.classList.remove('show');
+    alertElement.classList.add('fade');
+  }, 2000);
+});
