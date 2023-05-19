@@ -10,16 +10,16 @@ $firstName = "";
 $lastName = "";
 
 $queryCondition = "";
-if (! empty($_POST["search"])) {
+if (!empty($_POST["search"])) {
     foreach ($_POST["search"] as $k => $v) {
-        if (! empty($v)) {
+        if (!empty($v)) {
 
             $queryCases = array(
                 "firstName",
                 "lastName"
             );
             if (in_array($k, $queryCases)) {
-                if (! empty($queryCondition)) {
+                if (!empty($queryCondition)) {
                     $queryCondition .= " AND ";
                 } else {
                     $queryCondition .= " WHERE ";
@@ -54,7 +54,7 @@ if ($start < 0)
 $query = $sql . $orderby . " limit " . $start . "," . $perPage;
 $result = $database->select($query);
 
-if (! empty($result)) {
+if (!empty($result)) {
     $result["perpage"] = showperpage($sql, $perPage, $href);
 }
 ?>
@@ -79,66 +79,73 @@ if (! empty($result)) {
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!-- END IMPORTS -->
     <link rel="stylesheet" type="text/css" href="css/style1.css" />
-<link rel="stylesheet" type="text/css" href="css/table.css" />
-<link rel="stylesheet" type="text/css" href="css/form.css" />
+    <link rel="stylesheet" type="text/css" href="css/table.css" />
+    <link rel="stylesheet" type="text/css" href="css/form.css" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <!-- END IMPORTS -->
     <style>
-button, input[type=submit].btnSearch {
-    width: 140px;
-    font-size: 14px;
-    margin: 10px 0px 0px 10px;
-}
+        button,
+        input[type=submit].btnSearch {
+            width: 140px;
+            font-size: 14px;
+            margin: 10px 0px 0px 10px;
+        }
 
-.btnReset {
-    width: 140px;
-    padding: 8px 0px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 25px;
-    color: #000000;
-    border: 2px solid #d2d6dd;
-    margin-top: 10px;
-}
+        .btnReset {
+            width: 140px;
+            padding: 8px 0px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 25px;
+            color: #000000;
+            border: 2px solid #d2d6dd;
+            margin-top: 10px;
+        }
 
-button, input[type=submit].perpage-link {
-    width: auto;
-    font-size: 14px;
-    padding: 5px 10px;
-    border: 2px solid #d2d6dd;
-    border-radius: 4px;
-    margin: 0px 5px;
-    background-color: #fff;
-    cursor: pointer;
-}
+        button,
+        input[type=submit].perpage-link {
+            width: auto;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 2px solid #d2d6dd;
+            border-radius: 4px;
+            margin: 0px 5px;
+            background-color: #fff;
+            cursor: pointer;
+        }
 
-.current-page {
-    width: auto;
-    font-size: 14px;
-    padding: 5px 10px;
-    border: 2px solid #d2d6dd;
-    border-radius: 4px;
-    margin: 0px 5px;
-    background-color: #efefef;
-    cursor: pointer;
-}
-input, textarea, select {
-    box-sizing: border-box;
-    width: 170px;
-    height: initial;
-    padding: 8px 5px;
-    border: 1px solid #9a9a9a;
-    border-radius: 4px;
-}
-.table{
-    color: #000000;
-}
-th {
-    padding: 1.5rem;
-    text-align: left;
-}
-</style>
+        .current-page {
+            width: auto;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 2px solid #d2d6dd;
+            border-radius: 4px;
+            margin: 0px 5px;
+            background-color: #efefef;
+            cursor: pointer;
+        }
+
+        input,
+        textarea,
+        select {
+            box-sizing: border-box;
+            width: 170px;
+            height: initial;
+            padding: 8px 5px;
+            border: 1px solid #9a9a9a;
+            border-radius: 4px;
+        }
+
+        .table {
+            color: #000000;
+        }
+
+        th {
+            padding: 1.5rem;
+            text-align: left;
+        }
+    </style>
 </head>
 <!-- Image and text -->
 
@@ -202,10 +209,10 @@ th {
                                 role="tab" aria-controls="v-tabs-home" aria-selected="true">
                                 View</a>
                         </li>
-                        
-                        
-                        
-                       
+
+
+
+
                     </ul>
                 </div>
                 <!-- Tab navs -->
@@ -218,212 +225,255 @@ th {
                         aria-labelledby="v-tabs-home-tab">
                         <!-- Main content area -->
                         <div class="col-md-10">
-                           
-                                <div class="phppot-container">
-   
 
-        <div>
-            <form name="frmSearch" method="post" action="">
-                <div>
-                    <p>
-                        <input type="text" placeholder="firstName"
-                            name="search[firstName]"
-                            value="<?php echo $firstName; ?>" /> <input
-                            type="text" placeholder="lastName"
-                            name="search[lastName]"
-                            value="<?php echo $lastName; ?>" /> <input
-                            type="submit" name="go" class="btnSearch"
-                            value="Search"> <input type="reset"
-                            class="btnReset" value="Reset"
-                            onclick="window.location='index.php'">
-                    </p>
-                </div>
-                
-                <table class="stripped">
-                    <thead>
-                        <tr>
-                            <th>FirstName</th>
-                            <th>MiddleName</th>
-                            <th>LastName</th>
-                            <th>status</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Role</th>
+                            <div class="phppot-container">
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    if (! empty($result)) {
-                        foreach ($result as $key => $value) {
-                            if (is_numeric($key)) {
-                                ?>
-                     <tr>
-                        <ul>
-                            <td><?php echo $result[$key]['firstName']; ?></li></td>
-                            <td><?php echo $result[$key]['middleInitial']; ?></td>
-                            <td><?php echo $result[$key]['lastName']; ?></td>
-                            <td><?php echo $result[$key]['status']; ?></td>
-                            <td><?php echo $result[$key]['email']; ?></td>
-                            <td><?php echo$result[$key]['phoneNumber']; ?></td>
-                            <td><?php echo $result[$key]['role']; ?></td>
-                            </ul>
-                        </tr>
-                    <?php
-                            }
-                        }
-                    }
-                    if (isset($result["perpage"])) {
-                        ?>
-                        <tr>
-                            <td colspan="6" align=right > <?php echo $result["perpage"]; ?></td>
-                        </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-            </form>
-        </div>
-    </div>
-                                
+
+                                <div>
+                                    <form name="frmSearch" method="post" action="">
+                                        <div>
+                                            <p>
+                                                <input type="text" placeholder="firstName" name="search[firstName]"
+                                                    value="<?php echo $firstName; ?>" /> <input type="text"
+                                                    placeholder="lastName" name="search[lastName]"
+                                                    value="<?php echo $lastName; ?>" /> <input type="submit" name="go"
+                                                    class="btnSearch" value="Search"> <input type="reset"
+                                                    class="btnReset" value="Reset"
+                                                    onclick="window.location='index.php'">
+                                            </p>
+                                        </div>
+
+                                        <table class="stripped">
+                                            <thead>
+                                                <tr>
+                                                    <th>FirstName</th>
+                                                    <th>MiddleName</th>
+                                                    <th>LastName</th>
+                                                    <th>status</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Role</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                if (!empty($result)) {
+                                                    foreach ($result as $key => $value) {
+                                                        if (is_numeric($key)) {
+                                                            ?>
+                                                            <tr>
+                                                                <ul>
+                                                                    <td>
+                                                                        <?php echo $result[$key]['firstName']; ?>
+                                                                        </li>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $result[$key]['middleInitial']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $result[$key]['lastName']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $result[$key]['status']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $result[$key]['email']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $result[$key]['phoneNumber']; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <?php echo $result[$key]['role']; ?>
+                                                                    </td>
+                                                                </ul>
+                                                            </tr>
+                                                            <?php
+                                                        }
+                                                    }
+                                                }
+                                                if (isset($result["perpage"])) {
+                                                    ?>
+                                                    <tr>
+                                                        <td colspan="6" align=right>
+                                                            <?php echo $result["perpage"]; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+
                             </p>
                         </div>
                     </div>
-                   
-   
-                   
-                        <link rel="stylesheet" type="text/css" href="css/style.css">
-                            <div class="container bootstrap snippet">
+
+
+
+                    <link rel="stylesheet" type="text/css" href="css/style.css">
+                    <div class="container bootstrap snippet">
                         <div class="container">
-                         
-                          
-                                <div class="row">
+
+
+                            <div class="row">
                                 <div class="col-lg-2 col-sm-6">
-                                <div class="circle-tile ">
-                                    <a href="#"><div class="circle-tile-heading dark-blue"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
-                                    <div class="circle-tile-content dark-blue">
-                                    <div class="circle-tile-description text-faded"> Users</div>
-                                   
-                                                
-                                    <?php  $sql = "SELECT * from usertable";
-
-                                        if ($result = mysqli_query($con, $sql)) {
-
-                                            // Return the number of rows in result set
-                                            $rowcount = mysqli_num_rows( $result );
-                                            
-                                            // Display result
-
-                                        }
-                                                ?>
-                                                
-                                    <div class="circle-tile-number text-faded "> <?php printf("%d\n", $rowcount);?></div>
-                                    <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="col-lg-2 col-sm-6">
-                                            <div class="circle-tile ">
-                                                <a href="#"><div class="circle-tile-heading red"><i class="fa fa-pencil fa-3x" aria-hidden="true"></i></div></a>
-                                                <div class="circle-tile-content red">
-                                                <div class="circle-tile-description text-faded"> Total Exam </div>
-                                                            
-                                                <?php  $sql = "SELECT * from examinationtbl";
-
-                                        if ($result = mysqli_query($con, $sql)) {
-
-                                            // Return the number of rows in result set
-                                            $rowcount = mysqli_num_rows( $result );
-                                            
-                                            // Display result
-
-                                        }
-                                             ?>
-                                        <div class="circle-tile-number text-faded "> <?php printf("%d\n", $rowcount);?></div>
-                                        <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                    </div> 
-                                    <div class="col-lg-2 col-sm-6">
                                     <div class="circle-tile ">
-                                        <a href="#"><div class="circle-tile-heading blue"><i class="fa fa-graduation-cap fa-3x" aria-hidden="true"></i></div></a>
-                                        <div class="circle-tile-content blue">
-                                        <div class="circle-tile-description text-faded"> Total Student </div>
-                                        <?php  $sql = "SELECT * from usertable WHERE role = 'Student'";
+                                        <a href="#">
+                                            <div class="circle-tile-heading dark-blue"><i
+                                                    class="fa fa-users fa-fw fa-3x"></i></div>
+                                        </a>
+                                        <div class="circle-tile-content dark-blue">
+                                            <div class="circle-tile-description text-faded"> Users</div>
 
-                                                        if ($result = mysqli_query($con, $sql)) {
 
-                                                            // Return the number of rows in result set
-                                                            $rowcount = mysqli_num_rows( $result );
-                                                            
-                                                            // Display result
+                                            <?php $sql = "SELECT * from usertable";
 
-                                                        }
-                                                        ?>
-                                        <div class="circle-tile-number text-faded "> <?php printf("%d\n", $rowcount);?></div>
-                                        <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
+                                            if ($result = mysqli_query($con, $sql)) {
+
+                                                // Return the number of rows in result set
+                                                $rowcount = mysqli_num_rows($result);
+
+                                                // Display result
+                                            
+                                            }
+                                            ?>
+
+                                            <div class="circle-tile-number text-faded ">
+                                                <?php printf("%d\n", $rowcount); ?>
+                                            </div>
+                                            <a class="circle-tile-footer" href="#">More Info<i
+                                                    class="fa fa-chevron-circle-right"></i></a>
                                         </div>
                                     </div>
-                                    </div> 
-    <div class="col-lg-2 col-sm-6">
-      <div class="circle-tile ">
-        <a href="#"><div class="circle-tile-heading green"><i class="fa fa-check fa-3x" aria-hidden="true"></i></div></a>
-        <div class="circle-tile-content green">
-          <div class="circle-tile-description text-faded"> Verified </div>
-          <?php  $sql = "SELECT * from usertable WHERE status = 'verified'";
-
-                        if ($result = mysqli_query($con, $sql)) {
-
-                            // Return the number of rows in result set
-                            $rowcount = mysqli_num_rows( $result );
-                            
-                            // Display result
-
-                        }
-                        ?>
-        <div class="circle-tile-number text-faded "> <?php printf("%d\n", $rowcount);?></div>
-          <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
-        </div>
-      </div>
-    </div> 
-    <div class="col-lg-2 col-sm-6">
-      <div class="circle-tile ">
-        <a href="#"><div class="circle-tile-heading purple"><i class="fa fa-pencil-square fa-3x" aria-hidden="true"></i></div></a>
-        <div class="circle-tile-content purple">
-          <div class="circle-tile-description text-faded"> Examinee </div>
-          <?php  $sql = "SELECT * from examineetbl";
-
-                    if ($result = mysqli_query($con, $sql)) {
-
-                        // Return the number of rows in result set
-                        $rowcount = mysqli_num_rows( $result );
-                        
-                        // Display result
-
-                    }
-        ?>
-        <div class="circle-tile-number text-faded "> <?php printf("%d\n", $rowcount);?></div>
-          <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
-        </div>
-      </div>
-    </div> 
-
                                 </div>
+                                <div class="col-lg-2 col-sm-6">
+                                    <div class="circle-tile ">
+                                        <a href="#">
+                                            <div class="circle-tile-heading red"><i class="fa fa-pencil fa-3x"
+                                                    aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="circle-tile-content red">
+                                            <div class="circle-tile-description text-faded"> Total Exam </div>
+
+                                            <?php $sql = "SELECT * from examinationtbl";
+
+                                            if ($result = mysqli_query($con, $sql)) {
+
+                                                // Return the number of rows in result set
+                                                $rowcount = mysqli_num_rows($result);
+
+                                                // Display result
+                                            
+                                            }
+                                            ?>
+                                            <div class="circle-tile-number text-faded ">
+                                                <?php printf("%d\n", $rowcount); ?>
+                                            </div>
+                                            <a class="circle-tile-footer" href="#">More Info<i
+                                                    class="fa fa-chevron-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-sm-6">
+                                    <div class="circle-tile ">
+                                        <a href="#">
+                                            <div class="circle-tile-heading blue"><i class="fa fa-graduation-cap fa-3x"
+                                                    aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="circle-tile-content blue">
+                                            <div class="circle-tile-description text-faded"> Total Student </div>
+                                            <?php $sql = "SELECT * from usertable WHERE role = 'Student'";
+
+                                            if ($result = mysqli_query($con, $sql)) {
+
+                                                // Return the number of rows in result set
+                                                $rowcount = mysqli_num_rows($result);
+
+                                                // Display result
+                                            
+                                            }
+                                            ?>
+                                            <div class="circle-tile-number text-faded ">
+                                                <?php printf("%d\n", $rowcount); ?>
+                                            </div>
+                                            <a class="circle-tile-footer" href="#">More Info<i
+                                                    class="fa fa-chevron-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-sm-6">
+                                    <div class="circle-tile ">
+                                        <a href="#">
+                                            <div class="circle-tile-heading green"><i class="fa fa-check fa-3x"
+                                                    aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="circle-tile-content green">
+                                            <div class="circle-tile-description text-faded"> Verified </div>
+                                            <?php $sql = "SELECT * from usertable WHERE status = 'verified'";
+
+                                            if ($result = mysqli_query($con, $sql)) {
+
+                                                // Return the number of rows in result set
+                                                $rowcount = mysqli_num_rows($result);
+
+                                                // Display result
+                                            
+                                            }
+                                            ?>
+                                            <div class="circle-tile-number text-faded ">
+                                                <?php printf("%d\n", $rowcount); ?>
+                                            </div>
+                                            <a class="circle-tile-footer" href="#">More Info<i
+                                                    class="fa fa-chevron-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-sm-6">
+                                    <div class="circle-tile ">
+                                        <a href="#">
+                                            <div class="circle-tile-heading purple"><i class="fa fa-pencil-square fa-3x"
+                                                    aria-hidden="true"></i></div>
+                                        </a>
+                                        <div class="circle-tile-content purple">
+                                            <div class="circle-tile-description text-faded"> Examinee </div>
+                                            <?php $sql = "SELECT * from examineetbl";
+
+                                            if ($result = mysqli_query($con, $sql)) {
+
+                                                // Return the number of rows in result set
+                                                $rowcount = mysqli_num_rows($result);
+
+                                                // Display result
+                                            
+                                            }
+                                            ?>
+                                            <div class="circle-tile-number text-faded ">
+                                                <?php printf("%d\n", $rowcount); ?>
+                                            </div>
+                                            <a class="circle-tile-footer" href="#">More Info<i
+                                                    class="fa fa-chevron-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="v-tabs-messages" role="tabpanel"
-                        aria-labelledby="v-tabs-messages-tab">
-                        <div class="col-auto">
-                            
-                        </div>
-                        <!-- Sidebar navigation -->
-                        
+                </div>
+                <div class="tab-pane fade" id="v-tabs-messages" role="tabpanel" aria-labelledby="v-tabs-messages-tab">
+                    <div class="col-auto">
 
                     </div>
+                    <!-- Sidebar navigation -->
+
+
                 </div>
-                <!-- Tab content -->
             </div>
+            <!-- Tab content -->
         </div>
+    </div>
     </div>
 
     <!-- IMPORTS -->
