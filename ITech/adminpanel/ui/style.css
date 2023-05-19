@@ -78,4 +78,13 @@ input {
   border-color: var(--mdb-nav-pills-link-active-border-color);
 }
 
+tr.odd {
+    background-color: #f2f2f2;
+}
+
+tr.even {
+    background-color: #ffffff;
+}
+
+
 

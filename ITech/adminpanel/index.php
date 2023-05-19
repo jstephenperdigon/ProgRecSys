@@ -227,23 +227,22 @@
                                             <input type="text" id="answer-d" class="form-control" name="choiceD" />
                                             <label class="form-label" for="answer-d">Choice D</label>
                                         </div>
-                                        <div class="form-group mt-5">
-                                            <label for="correct-answer">Correct Answer:</label>
-                                            <select class="form-control" id="correct-answer" name="keyAnswer">
-                                            </select>
+                                        <div class="form-outline flex-fill mb-0 mt-5">
+                                            <input class="form-control" id="correct-answer" name="keyAnswer" />
+                                            <label class="form-label" for="correct-answer">Answer Key</label>
                                         </div>
                                         <button type="submit" name="addQuestion" class="btn btn-primary mt-5">Add
                                             Question</button>
                                     </form>
-                                    <div class="container">
+                                    <div class="container mt-5">
                                         <div class="container-fluid">
+                                            <h3 class="text-center">Manage Questions</h3>
                                             <div class="row">
                                                 <div class="col-md-8 mt-5">
                                                     <table class="table align-middle mb-0 bg-white">
                                                         <thead>
                                                             <tr>
-                                                                <th style="background-color: #202020; color: #fff;">
-                                                                    ID
+                                                                <th style="background-color: #202020; color: #fff;">ID
                                                                 </th>
                                                                 <th class="">QUESTION</th>
                                                                 <th>ANSWER</th>
@@ -252,7 +251,6 @@
                                                                 <th>C</th>
                                                                 <th>D</th>
                                                                 <th>ACTION</th>
-
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -265,8 +263,11 @@
                                                             $result = mysqli_query($con, $sql);
 
                                                             // Loop through the records and display them in the table
+                                                            $rowNumber = 0;
                                                             while ($row = mysqli_fetch_assoc($result)) {
-                                                                echo "<tr>";
+                                                                $rowNumber++;
+                                                                $rowClass = $rowNumber % 2 == 0 ? 'even' : 'odd'; // Apply different classes to even and odd rows
+                                                                echo "<tr class='$rowClass'>";
                                                                 echo "<td>" . $row['id'] . "</td>";
                                                                 echo "<td>" . $row['question'] . "</td>";
                                                                 echo "<td>" . $row['answer'] . "</td>";
@@ -279,7 +280,7 @@
                                                                 echo "</td>";
                                                                 echo "<td>";
                                                                 echo "<a data-id='" . $row['id'] . "' data-question='" . $row['question'] . "' data-answer='" . $row['answer'] . "' data-option1='" . $row['option1'] . "' data-option2='" . $row['option2'] . "' data-option3='" . $row['option3'] . "' data-option4='" . $row['option4'] . "' 
-                                                                class='btn btn-sm btn-warning edit-btn' style='box-shadow: none' onclick='showEditModal(this)'>Edit</a>";
+                            class='btn btn-sm btn-warning edit-btn' style='box-shadow: none' onclick='showEditModal(this)'>Edit</a>";
                                                                 echo "</td>";
                                                                 echo "</tr>";
                                                             }
@@ -292,6 +293,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

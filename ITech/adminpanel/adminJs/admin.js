@@ -35,32 +35,27 @@ if (window.history && window.history.pushState) {
     });
   });
   
-function deleteRecord(id) {
-  if (confirm("Are you sure you want to delete this record?")) {
-      // Send an AJAX request to delete the record
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "index.php", true);
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4) {
-              if (xhr.status === 200) {
-                  // Check the response and display a success message
-                  if (xhr.responseText.trim() === "success") {
-                      alert("Record deleted successfully.");
-                      // Refresh the page to update the table
-                      location.reload();
-                  } else {
-                      alert("Failed to delete the record.");
-                  }
-              } else {
-                  // Display an error message if the request fails
-                  alert("Error: " + xhr.status);
-              }
-          }
-      };
-      // Send the ID as a parameter to the PHP script
-      xhr.send("delete_id=" + encodeURIComponent(id));
-  }
+  function deleteRecord(button) {
+    if (confirm("Are you sure you want to delete this record?")) {
+        const recordId = button.getAttribute('data-id');
+
+        // Send an AJAX request to the server
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', './query/examinationController.php'); // Replace 'deleteQuestion.php' with the actual PHP file that handles the deletion
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Request was successful
+                console.log('Record deleted successfully');
+                // Remove the table row from the DOM
+                button.closest('tr').remove();
+            } else {
+                // Request failed
+                console.error('Failed to delete record');
+            }
+        };
+        xhr.send('id=' + encodeURIComponent(recordId));
+    }
 }
 
 function showEditModal(element) {
@@ -83,86 +78,6 @@ function showEditModal(element) {
   var editModal = new bootstrap.Modal(document.getElementById("editModal"));
   editModal.show();
 }
-
-// Fetch the input fields and select element
-const choiceAInput = document.getElementById('answer-a');
-const choiceBInput = document.getElementById('answer-b');
-const choiceCInput = document.getElementById('answer-c');
-const choiceDInput = document.getElementById('answer-d');
-const correctAnswerSelect = document.getElementById('correct-answer');
-
-// Add event listeners to the input fields
-choiceAInput.addEventListener('input', updateDropdownOptions);
-choiceBInput.addEventListener('input', updateDropdownOptions);
-choiceCInput.addEventListener('input', updateDropdownOptions);
-choiceDInput.addEventListener('input', updateDropdownOptions);
-
-// Function to update the dropdown options
-function updateDropdownOptions() {
-  // Clear existing options
-  correctAnswerSelect.innerHTML = '';
-
-  // Create options and append them to the select element
-  const options = [
-    { value: 'A', label: choiceAInput.value },
-    { value: 'B', label: choiceBInput.value },
-    { value: 'C', label: choiceCInput.value },
-    { value: 'D', label: choiceDInput.value }
-  ];
-
-  options.forEach(function (option) {
-    const optionElement = document.createElement('option');
-    optionElement.value = option.value;
-    optionElement.text = option.label;
-    correctAnswerSelect.appendChild(optionElement);
-  });
-}
-
-// Add event listener to the form submission
-document.getElementById('add-question-form').addEventListener('submit', function (event) {
-  event.preventDefault(); // Prevent form submission
-
-  // Get the selected dropdown option
-  const selectedOption = correctAnswerSelect.options[correctAnswerSelect.selectedIndex];
-
-  // Get the actual text value of the selected option
-  const selectedOptionValue = selectedOption.value;
-
-  // Get the values of the input fields
-  const question = document.getElementById('question-text').value;
-  const choiceA = choiceAInput.value;
-  const choiceB = choiceBInput.value;
-  const choiceC = choiceCInput.value;
-  const choiceD = choiceDInput.value;
-
-  // Create an object with the form data
-  const formData = {
-    question: question,
-    option1: choiceA,
-    option2: choiceB,
-    option3: choiceC,
-    option4: choiceD,
-    answer: selectedOptionValue
-  };
-
-  // Send an AJAX request to the server
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', './query/examinationController.php'); // Replace 'your-php-file.php' with the actual PHP file that handles the form submission
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.onload = function () {
-    if (xhr.status === 200) {
-      // Request was successful
-      console.log('Form submitted successfully');
-      // Reset the form
-      event.target.reset();
-    } else {
-      // Request failed
-      console.error('Form submission failed');
-    }
-  };
-  xhr.send(JSON.stringify(formData));
-});
-
 
 // JavaScript code to fade out the alert after 3 seconds
 document.addEventListener('DOMContentLoaded', function() {
