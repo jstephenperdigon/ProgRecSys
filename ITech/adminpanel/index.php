@@ -1,6 +1,28 @@
 <?php require_once "../components/controllerUserData.php"; ?>
 <?php require "./components/header.php"; ?>
 <?php require "./query/examinationController.php"; ?>
+<?php 
+
+ // Check if the delete form is submitted
+ if (isset($_POST['deleteQuestion'])) {
+    // Get the question ID to delete
+    $questionId = $_POST['questionId'];
+
+    // Delete the record from the database
+    $deleteSql = "DELETE FROM examinationtbl WHERE id = $questionId";
+    if (mysqli_query($con, $deleteSql)) {
+        $info = "Record Deleted";
+        $_SESSION['info'] = $info;
+        header('Location: index.php');
+        exit();
+    } else {
+        $errors['db-error'] = "Failed to delete record!";
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <title>
@@ -50,12 +72,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="editAnswer" class="form-label">Answer:</label>
-                            <select class="form-select" id="editAnswer" name="answer" required>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                            </select>
+                            <input tyle="text" class="form-control" id="editAnswer" name="answer" required/>
                         </div>
                         <div class="mb-3">
                             <label for="editOption1" class="form-label">Option A:</label>
@@ -255,8 +272,7 @@
                                                 <table class="table align-middle mb-0 bg-white">
                                                     <thead>
                                                         <tr class="text-center">
-                                                            <th style="background-color: #202020; color: #fff;">ID
-                                                            </th>
+                                                            <th style="background-color: #202020; color: #fff;">ID</th>
                                                             <th>QUESTION</th>
                                                             <th>ANSWER</th>
                                                             <th>A</th>
@@ -268,8 +284,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                        // Connect to the database
-                                                        $con = mysqli_connect('localhost', 'root', '', 'userform');
+                                                       
 
                                                         // Query the database for records
                                                         $sql = "SELECT * FROM examinationtbl";
@@ -289,11 +304,14 @@
                                                             echo "<td>" . $row['option3'] . "</td>";
                                                             echo "<td>" . $row['option4'] . "</td>";
                                                             echo "<td>";
-                                                            echo "<a onclick='deleteRecord(" . $row['id'] . ")' class='btn btn-sm btn-danger' style='box-shadow: none'>Delete</a>";
+                                                            echo "<form method='POST' action='index.php' onsubmit='return confirm(\"Are you sure you want to delete this record?\");'>";
+                                                            echo "<input type='hidden' name='questionId' value='" . $row['id'] . "'>";
+                                                            echo "<button type='submit' name='deleteQuestion' class='btn btn-sm btn-danger' style='box-shadow: none;'>Delete</button>";
+                                                            echo "</form>";
                                                             echo "</td>";
                                                             echo "<td>";
                                                             echo "<a data-id='" . $row['id'] . "' data-question='" . $row['question'] . "' data-answer='" . $row['answer'] . "' data-option1='" . $row['option1'] . "' data-option2='" . $row['option2'] . "' data-option3='" . $row['option3'] . "' data-option4='" . $row['option4'] . "' 
-                            class='btn btn-sm btn-warning edit-btn' style='box-shadow: none' onclick='showEditModal(this)'>Edit</a>";
+        class='btn btn-sm btn-warning edit-btn' style='box-shadow: none' onclick='showEditModal(this)'>Edit</a>";
                                                             echo "</td>";
                                                             echo "</tr>";
                                                         }
@@ -302,6 +320,7 @@
                                                         ?>
                                                     </tbody>
                                                 </table>
+
                                             </div>
                                         </div>
                                     </div>
@@ -392,63 +411,63 @@
                     </div>
                     <!-- Sidebar navigation -->
                     <div class="container mt-5 align-items-center">
-                    <h3 class="text-center">MANAGE USERS</h3>
-                    <div class="row align-items-center">
-                                            <div class="col-auto mt-5">
-                                            <table class="table align-middle mb-0 bg-white">
-                                            <thead class="text-center">
-                                                <tr>
-                                                    <th style="background-color: #202020; color: #fff;">ID</th>
-                                                    <th>FIRST NAME</th>
-                                                    <th>MIDDLE INITIAL</th>
-                                                    <th>LAST NAME</th>
-                                                    <th>EMAIL</th>
-                                                    <th>MOBILE NUMBER</th>
-                                                    <th>STATUS</th>
-                                                    <th>ROLE</th>
-                                                    <th>ACTIONS</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                // Connect to the database
-                                                $con = mysqli_connect('localhost', 'root', '', 'userform');
+                        <h3 class="text-center">MANAGE USERS</h3>
+                        <div class="row align-items-center">
+                            <div class="col-auto mt-5">
+                                <table class="table align-middle mb-0 bg-white">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th style="background-color: #202020; color: #fff;">ID</th>
+                                            <th>FIRST NAME</th>
+                                            <th>MIDDLE INITIAL</th>
+                                            <th>LAST NAME</th>
+                                            <th>EMAIL</th>
+                                            <th>MOBILE NUMBER</th>
+                                            <th>STATUS</th>
+                                            <th>ROLE</th>
+                                            <th>ACTIONS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        // Connect to the database
+                                        $con = mysqli_connect('localhost', 'root', '', 'userform');
 
-                                                // Query the database for records
-                                                $sql = "SELECT * FROM usertable";
-                                                $result = mysqli_query($con, $sql);
+                                        // Query the database for records
+                                        $sql = "SELECT * FROM usertable";
+                                        $result = mysqli_query($con, $sql);
 
-                                                // Loop through the records and display them in the table
-                                                $rowColor = false; // Variable to track the row color
-                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                    // Determine the row class based on the row color variable
-                                                    $rowClass = $rowColor ? 'even-row' : 'odd-row';
+                                        // Loop through the records and display them in the table
+                                        $rowColor = false; // Variable to track the row color
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            // Determine the row class based on the row color variable
+                                            $rowClass = $rowColor ? 'even-row' : 'odd-row';
 
-                                                    echo "<tr class='$rowClass'>";
-                                                    echo "<td>" . $row['id'] . "</td>";
-                                                    echo "<td>" . $row['lastName'] . "</td>";
-                                                    echo "<td>" . $row['middleInitial'] . "</td>";
-                                                    echo "<td>" . $row['firstName'] . "</td>";
-                                                    echo "<td>" . $row['email'] . "</td>";
-                                                    echo "<td>" . $row['phoneNumber'] . "</td>";
-                                                    echo "<td>" . $row['status'] . "</td>";
-                                                    echo "<td>" . $row['role'] . "</td>";
-                                                    echo "<td>";
-                                                    echo "<a href='edit_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Edit</a>";
-                                                    echo "</td>";
-                                                    echo "<td>";
-                                                    echo "<a href='delete_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
-                                                    echo "</td>";
-                                                    echo "</tr>";
+                                            echo "<tr class='$rowClass'>";
+                                            echo "<td>" . $row['id'] . "</td>";
+                                            echo "<td>" . $row['lastName'] . "</td>";
+                                            echo "<td>" . $row['middleInitial'] . "</td>";
+                                            echo "<td>" . $row['firstName'] . "</td>";
+                                            echo "<td>" . $row['email'] . "</td>";
+                                            echo "<td>" . $row['phoneNumber'] . "</td>";
+                                            echo "<td>" . $row['status'] . "</td>";
+                                            echo "<td>" . $row['role'] . "</td>";
+                                            echo "<td>";
+                                            echo "<a href='edit_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Edit</a>";
+                                            echo "</td>";
+                                            echo "<td>";
+                                            echo "<a href='delete_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
+                                            echo "</td>";
+                                            echo "</tr>";
 
-                                                    // Toggle the row color
-                                                    $rowColor = !$rowColor;
-                                                }
-                                                // Close the database connection
-                                                mysqli_close($con);
-                                                ?>
-                                            </tbody>
-                                        </table>
+                                            // Toggle the row color
+                                            $rowColor = !$rowColor;
+                                        }
+                                        // Close the database connection
+                                        mysqli_close($con);
+                                        ?>
+                                    </tbody>
+                                </table>
 
                             </div>
                         </div>

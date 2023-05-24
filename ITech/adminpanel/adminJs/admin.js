@@ -35,28 +35,6 @@ if (window.history && window.history.pushState) {
     });
   });
   
-  function deleteRecord(button) {
-    if (confirm("Are you sure you want to delete this record?")) {
-        const recordId = button.getAttribute('data-id');
-
-        // Send an AJAX request to the server
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', './query/examinationController.php'); // Replace 'deleteQuestion.php' with the actual PHP file that handles the deletion
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                // Request was successful
-                console.log('Record deleted successfully');
-                // Remove the table row from the DOM
-                button.closest('tr').remove();
-            } else {
-                // Request failed
-                console.error('Failed to delete record');
-            }
-        };
-        xhr.send('id=' + encodeURIComponent(recordId));
-    }
-}
 
 function showEditModal(element) {
   var id = element.getAttribute("data-id");
