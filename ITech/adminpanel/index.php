@@ -252,6 +252,8 @@
                                             <input class="form-control" id="form-control" name="role" />
                                             <label class="form-label" for="correct-answer">Question part</label>
                                         </div>
+                                        <button type="submit" name="addQuestion"
+                                                        class="btn btn-primary mt-4">Add Question</button>
                                     </div>
 
                                     <div class="container mt-5 align-items-center">
