@@ -220,48 +220,37 @@
                         <!-- Add question form -->
                         <div class="container">
                             <div class="row">
-                                <div class="col-auto ">
-                                    <div class="containerd-flex justify-content-center align-items-center">
-                                        <div class="card w-100">
-                                            <h3 class="card-header text-center">CREATE NEW QUESTION</h3>
-                                            <div class="card-body">
-                                                <form id="add-question-form" action="index.php" method="POST">
-                                                    <div class="form-group">
-                                                        <label class="form-label mt-3"
-                                                            for="question-text">Question:</label>
-                                                        <textarea class="form-control" id="question-text"
-                                                            name="question"></textarea>
-                                                    </div>
-                                                    <div class="form-outline flex-fill mt-3">
-                                                        <input type="text" id="answer-a" class="form-control"
-                                                            name="choiceA" />
-                                                        <label class="form-label" for="answer-a">Choice A</label>
-                                                    </div>
-                                                    <div class="form-outline flex-fill mt-3">
-                                                        <input type="text" id="answer-b" class="form-control"
-                                                            name="choiceB" />
-                                                        <label class="form-label" for="answer-b">Choice B</label>
-                                                    </div>
-                                                    <div class="form-outline flex-fill mt-3">
-                                                        <input type="text" id="answer-c" class="form-control"
-                                                            name="choiceC" />
-                                                        <label class="form-label" for="answer-c">Choice C</label>
-                                                    </div>
-                                                    <div class="form-outline flex-fill mt-3">
-                                                        <input type="text" id="answer-d" class="form-control"
-                                                            name="choiceD" />
-                                                        <label class="form-label" for="answer-d">Choice D</label>
-                                                    </div>
-                                                    <div class="form-outline flex-fill mt-3">
-                                                        <input class="form-control" id="correct-answer"
-                                                            name="keyAnswer" />
-                                                        <label class="form-label" for="correct-answer">Answer
-                                                            Key</label>
-                                                    </div>
-                                                    <button type="submit" name="addQuestion"
-                                                        class="btn btn-primary mt-4">Add Question</button>
-                                                </form>
-                                            </div>
+                                <div class="col-md-8 ">
+                                    <h3>Create a new question:</h3>
+                                    <form id="add-question-form" action="index.php" method="POST">
+                                        <div class="form-group">
+                                            <label class="form-label mt-5" for="question-text">Question:</label>
+                                            <textarea class="form-control" id="question-text"
+                                                name="question"></textarea>
+                                        </div>
+                                        <div class="form-outline flex-fill mb-0 mt-5">
+                                            <input type="text" id="answer-a" class="form-control" name="choiceA" />
+                                            <label class="form-label" for="answer-a">Choice A</label>
+                                        </div>
+                                        <div class="form-outline flex-fill mb-0 mt-5">
+                                            <input type="text" id="answer-b" class="form-control" name="choiceB" />
+                                            <label class="form-label" for="answer-b">Choice B</label>
+                                        </div>
+                                        <div class="form-outline flex-fill mb-0 mt-5">
+                                            <input type="text" id="answer-c" class="form-control" name="choiceC" />
+                                            <label class="form-label" for="answer-c">Choice C</label>
+                                        </div>
+                                        <div class="form-outline flex-fill mb-0 mt-5">
+                                            <input type="text" id="answer-d" class="form-control" name="choiceD" />
+                                            <label class="form-label" for="answer-d">Choice D</label>
+                                        </div>
+                                        <div class="form-outline flex-fill mb-0 mt-5">
+                                            <input class="form-control" id="correct-answer" name="keyAnswer" />
+                                            <label class="form-label" for="correct-answer">Answer Key</label>
+                                        </div>
+                                        <div class="form-outline flex-fill mb-0 mt-5">
+                                            <input class="form-control" id="form-control" name="role" />
+                                            <label class="form-label" for="correct-answer">Question part</label>
                                         </div>
                                     </div>
 
@@ -272,7 +261,8 @@
                                                 <table class="table align-middle mb-0 bg-white">
                                                     <thead>
                                                         <tr class="text-center">
-                                                            <th style="background-color: #202020; color: #fff;">ID</th>
+                                                            <th style="background-color: #202020; color: #fff;">ID
+                                                            </th>
                                                             <th>QUESTION</th>
                                                             <th>ANSWER</th>
                                                             <th>A</th>
@@ -284,11 +274,13 @@
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                       
+                                                        // Connect to the database
+                                                        $con = mysqli_connect('localhost', 'root', '', 'userform');
 
-                                                        // Query the database for records
-                                                        $sql = "SELECT * FROM examinationtbl";
-                                                        $result = mysqli_query($con, $sql);
+                                                            // Query the database for records
+                                                            $sql = "SELECT * FROM examinationtbl";
+                                                            
+                                                            $result = mysqli_query($con, $sql);
 
                                                         // Loop through the records and display them in the table
                                                         $rowNumber = 0;
@@ -304,14 +296,11 @@
                                                             echo "<td>" . $row['option3'] . "</td>";
                                                             echo "<td>" . $row['option4'] . "</td>";
                                                             echo "<td>";
-                                                            echo "<form method='POST' action='index.php' onsubmit='return confirm(\"Are you sure you want to delete this record?\");'>";
-                                                            echo "<input type='hidden' name='questionId' value='" . $row['id'] . "'>";
-                                                            echo "<button type='submit' name='deleteQuestion' class='btn btn-sm btn-danger' style='box-shadow: none;'>Delete</button>";
-                                                            echo "</form>";
+                                                            echo "<a onclick='deleteRecord(" . $row['id'] . ")' class='btn btn-sm btn-danger' style='box-shadow: none'>Delete</a>";
                                                             echo "</td>";
                                                             echo "<td>";
                                                             echo "<a data-id='" . $row['id'] . "' data-question='" . $row['question'] . "' data-answer='" . $row['answer'] . "' data-option1='" . $row['option1'] . "' data-option2='" . $row['option2'] . "' data-option3='" . $row['option3'] . "' data-option4='" . $row['option4'] . "' 
-        class='btn btn-sm btn-warning edit-btn' style='box-shadow: none' onclick='showEditModal(this)'>Edit</a>";
+                            class='btn btn-sm btn-warning edit-btn' style='box-shadow: none' onclick='showEditModal(this)'>Edit</a>";
                                                             echo "</td>";
                                                             echo "</tr>";
                                                         }
@@ -320,11 +309,9 @@
                                                         ?>
                                                     </tbody>
                                                 </table>
-
                                             </div>
                                         </div>
                                     </div>
-
 
                                 </div>
                             </div>
@@ -333,11 +320,11 @@
                 </div>
                 <div class="tab-pane fade" id="v-tabs-messages" role="tabpanel" aria-labelledby="v-tabs-messages-tab">
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col mx-auto">
-                                <form method="POST" action="index.php">
-                                    <h1 class="text-center">ADD RECORD</h1>
-                                    <div class="card-body mt-5">
+                        <div class="row mt-5">
+                            <div class="col-md-6 mx-auto">
+                                <form method="POST" action="process.php">
+                                    <h1 class="text-center mt-5">ADD RECORD</h1>
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-outline form-group flex-fill mb-3">
@@ -397,6 +384,10 @@
                                                     <input type="radio" id="choiceB1" name="q2" />
                                                     <label for="choiceB1">Administrator</label>
                                                 </li>
+                                                <li>
+                                                    <input type="radio" id="choiceC1" name="q2" />
+                                                    <label for="choiceC1">Developer</label>
+                                                </li>
                                             </ul>
 
                                         </div>
@@ -411,68 +402,67 @@
                     </div>
                     <!-- Sidebar navigation -->
                     <div class="container mt-5 align-items-center">
-                        <h3 class="text-center">MANAGE USERS</h3>
-                        <div class="row align-items-center">
-                            <div class="col-auto mt-5">
-                                <table class="table align-middle mb-0 bg-white">
-                                    <thead class="text-center">
-                                        <tr>
-                                            <th style="background-color: #202020; color: #fff;">ID</th>
-                                            <th>FIRST NAME</th>
-                                            <th>MIDDLE INITIAL</th>
-                                            <th>LAST NAME</th>
-                                            <th>EMAIL</th>
-                                            <th>MOBILE NUMBER</th>
-                                            <th>STATUS</th>
-                                            <th>ROLE</th>
-                                            <th>ACTIONS</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        // Connect to the database
-                                        $con = mysqli_connect('localhost', 'root', '', 'userform');
+                    <h3 class="text-center">MANAGE USERS</h3>
+                    <div class="row align-items-center">
+                                            <div class="col-auto mt-5">
+                                            <table class="table align-middle mb-0 bg-white">
+                                            <thead class="text-center">
+                                                <tr>
+                                                    <th style="background-color: #202020; color: #fff;">ID</th>
+                                                    <th>FIRST NAME</th>
+                                                    <th>MIDDLE INITIAL</th>
+                                                    <th>LAST NAME</th>
+                                                    <th>EMAIL</th>
+                                                    <th>MOBILE NUMBER</th>
+                                                    <th>STATUS</th>
+                                                    <th>ROLE</th>
+                                                    <th>ACTIONS</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                // Connect to the database
+                                                $con = mysqli_connect('localhost', 'root', '', 'userform');
 
-                                        // Query the database for records
-                                        $sql = "SELECT * FROM usertable";
-                                        $result = mysqli_query($con, $sql);
+                                                // Query the database for records
+                                                $sql = "SELECT * FROM usertable";
+                                                $result = mysqli_query($con, $sql);
 
-                                        // Loop through the records and display them in the table
-                                        $rowColor = false; // Variable to track the row color
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            // Determine the row class based on the row color variable
-                                            $rowClass = $rowColor ? 'even-row' : 'odd-row';
+                                                // Loop through the records and display them in the table
+                                                $rowColor = false; // Variable to track the row color
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    // Determine the row class based on the row color variable
+                                                    $rowClass = $rowColor ? 'even-row' : 'odd-row';
 
-                                            echo "<tr class='$rowClass'>";
-                                            echo "<td>" . $row['id'] . "</td>";
-                                            echo "<td>" . $row['lastName'] . "</td>";
-                                            echo "<td>" . $row['middleInitial'] . "</td>";
-                                            echo "<td>" . $row['firstName'] . "</td>";
-                                            echo "<td>" . $row['email'] . "</td>";
-                                            echo "<td>" . $row['phoneNumber'] . "</td>";
-                                            echo "<td>" . $row['status'] . "</td>";
-                                            echo "<td>" . $row['role'] . "</td>";
-                                            echo "<td>";
-                                            echo "<a href='edit_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Edit</a>";
-                                            echo "</td>";
-                                            echo "<td>";
-                                            echo "<a href='delete_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
-                                            echo "</td>";
-                                            echo "</tr>";
+                                                    echo "<tr class='$rowClass'>";
+                                                    echo "<td>" . $row['id'] . "</td>";
+                                                    echo "<td>" . $row['lastName'] . "</td>";
+                                                    echo "<td>" . $row['middleInitial'] . "</td>";
+                                                    echo "<td>" . $row['firstName'] . "</td>";
+                                                    echo "<td>" . $row['email'] . "</td>";
+                                                    echo "<td>" . $row['phoneNumber'] . "</td>";
+                                                    echo "<td>" . $row['status'] . "</td>";
+                                                    echo "<td>" . $row['role'] . "</td>";
+                                                    echo "<td>";
+                                                    echo "<a href='edit_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Edit</a>";
+                                                    echo "</td>";
+                                                    echo "<td>";
+                                                    echo "<a href='delete_record.php?id=" . $row['id'] . "' class='btn btn-sm btn-danger'>Delete</a>";
+                                                    echo "</td>";
+                                                    echo "</tr>";
 
-                                            // Toggle the row color
-                                            $rowColor = !$rowColor;
-                                        }
-                                        // Close the database connection
-                                        mysqli_close($con);
-                                        ?>
-                                    </tbody>
-                                </table>
+                                                    // Toggle the row color
+                                                    $rowColor = !$rowColor;
+                                                }
+                                                // Close the database connection
+                                                mysqli_close($con);
+                                                ?>
+                                            </tbody>
+                                        </table>
 
                             </div>
                         </div>
                     </div>
-
 
                 </div>
             </div>

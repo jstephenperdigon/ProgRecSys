@@ -26,7 +26,7 @@ if ($email != false && $password != false) {
 
 <head>
   <!-- Required meta tags -->
-  <title>User</title>
+   <title> <?php echo $fetch_info['firstName'] ?> | Settings </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
