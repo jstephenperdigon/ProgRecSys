@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2023 at 10:21 AM
+-- Generation Time: May 25, 2023 at 12:57 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -48,7 +48,7 @@ CREATE TABLE `admintable` (
 CREATE TABLE `answertbl` (
   `id` int(11) NOT NULL,
   `questionid` int(11) NOT NULL,
-  `optionnumber` int(11) NOT NULL,
+  `choice` varchar(11) NOT NULL,
   `optionname` varchar(255) NOT NULL,
   `userid` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -57,18 +57,21 @@ CREATE TABLE `answertbl` (
 -- Dumping data for table `answertbl`
 --
 
-INSERT INTO `answertbl` (`id`, `questionid`, `optionnumber`, `optionname`, `userid`) VALUES
-(1, 9, 2, '', ''),
-(2, 8, 2, '', ''),
-(3, 9, 3, '', ''),
-(4, 10, 2, '', ''),
-(5, 11, 3, '', ''),
-(6, 12, 2, '', ''),
-(7, 13, 2, '', ''),
-(8, 14, 3, '', ''),
-(9, 15, 3, '', ''),
-(10, 16, 4, '', ''),
-(11, 17, 3, '', '');
+INSERT INTO `answertbl` (`id`, `questionid`, `choice`, `optionname`, `userid`) VALUES
+(83, 8, 'A', 'A. Consciousness', ''),
+(84, 9, 'B', 'B. Negative reinforcement', ''),
+(85, 10, 'C', 'C. Gestalt psychology', ''),
+(86, 11, 'D', 'D. None of the above', ''),
+(87, 12, 'B', 'B. Humanistic psychology', ''),
+(88, 13, 'C', 'C. Calculus', ''),
+(89, 8, 'A', 'A. Consciousness', ''),
+(90, 9, 'B', 'B. Negative reinforcement', ''),
+(91, 10, 'C', 'C. Gestalt psychology', ''),
+(92, 11, 'D', 'D. None of the above', ''),
+(93, 12, 'C', 'C. Psychoanalysis', ''),
+(94, 13, 'B', 'B. Algebra', ''),
+(95, 14, 'A', 'A. 2.718', ''),
+(96, 15, 'D', 'D. None of the above', '');
 
 -- --------------------------------------------------------
 
@@ -227,7 +230,10 @@ INSERT INTO `examinationtbl` (`id`, `uid`, `question`, `answer`, `option1`, `opt
 (139, 'BS-PubAdmin', 'What is public policy?', 'C', 'A. The process of designing and constructing public buildings', 'B. The study of international relations', 'C. The course of action or inaction chosen by public authorities to address a particular issue', 'D. The study of economic systems', '2023-05-19 04:50:55.000000'),
 (140, 'BS-PubAdmin', 'What is bureaucratic accountability?', 'B', 'A. The study of public opinion and polling', 'B. The obligation of public officials to provide an account of their actions and decisions', 'C. The process of creating government budgets', 'D. The study of urban planning and development', '2023-05-19 04:50:55.000000'),
 (141, 'BS-PubAdmin', 'What is public budgeting?', 'A', 'A. The process of allocating and managing public funds', 'B. The study of public health systems', 'C. The practice of organizing public events and celebrations', 'D. The study of social welfare policies', '2023-05-19 04:50:55.000000'),
-(142, 'BS-PubAdmin', 'What is administrative law?', 'D', 'A. The study of diplomatic relations between countries', 'B. The process of implementing public infrastructure projects', 'C. The study of public opinion and polling', 'D. The body of law that governs the actions of administrative agencies and ensures procedural fairness', '2023-05-19 04:50:55.000000');
+(142, 'BS-PubAdmin', 'What is administrative law?', 'D', 'A. The study of diplomatic relations between countries', 'B. The process of implementing public infrastructure projects', 'C. The study of public opinion and polling', 'D. The body of law that governs the actions of administrative agencies and ensures procedural fairness', '2023-05-19 04:50:55.000000'),
+(154, '646f2e49ed1a7', '123', '', '123', '123', '123', '123', '2023-05-25 17:45:45.971861'),
+(155, '646f2f5a4c73b', '', '', '', '', '', '', '2023-05-25 17:50:18.313682'),
+(156, '646f32e231d5f', 'dfasdfsa', '', 'a', 'b', 'c', 'd', '2023-05-25 18:05:22.204697');
 
 -- --------------------------------------------------------
 
@@ -324,13 +330,13 @@ ALTER TABLE `usertable`
 -- AUTO_INCREMENT for table `answertbl`
 --
 ALTER TABLE `answertbl`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `examinationtbl`
 --
 ALTER TABLE `examinationtbl`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT for table `users`
