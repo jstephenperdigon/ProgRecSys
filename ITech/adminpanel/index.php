@@ -1,28 +1,6 @@
 <?php require_once "../components/controllerUserData.php"; ?>
 <?php require "./components/header.php"; ?>
 <?php require "./query/examinationController.php"; ?>
-<?php 
-
- // Check if the delete form is submitted
- if (isset($_POST['deleteQuestion'])) {
-    // Get the question ID to delete
-    $questionId = $_POST['questionId'];
-
-    // Delete the record from the database
-    $deleteSql = "DELETE FROM examinationtbl WHERE id = $questionId";
-    if (mysqli_query($con, $deleteSql)) {
-        $info = "Record Deleted";
-        $_SESSION['info'] = $info;
-        header('Location: index.php');
-        exit();
-    } else {
-        $errors['db-error'] = "Failed to delete record!";
-    }
-}
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <title>
@@ -72,7 +50,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="editAnswer" class="form-label">Answer:</label>
-                            <input tyle="text" class="form-control" id="editAnswer" name="answer" required/>
+                            <select class="form-select" id="editAnswer" name="answer" required>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="editOption1" class="form-label">Option A:</label>
@@ -220,40 +203,56 @@
                         <!-- Add question form -->
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-8 ">
-                                    <h3>Create a new question:</h3>
-                                    <form id="add-question-form" action="index.php" method="POST">
-                                        <div class="form-group">
-                                            <label class="form-label mt-5" for="question-text">Question:</label>
-                                            <textarea class="form-control" id="question-text"
-                                                name="question"></textarea>
-                                        </div>
-                                        <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input type="text" id="answer-a" class="form-control" name="choiceA" />
-                                            <label class="form-label" for="answer-a">Choice A</label>
-                                        </div>
-                                        <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input type="text" id="answer-b" class="form-control" name="choiceB" />
-                                            <label class="form-label" for="answer-b">Choice B</label>
-                                        </div>
-                                        <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input type="text" id="answer-c" class="form-control" name="choiceC" />
-                                            <label class="form-label" for="answer-c">Choice C</label>
-                                        </div>
-                                        <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input type="text" id="answer-d" class="form-control" name="choiceD" />
-                                            <label class="form-label" for="answer-d">Choice D</label>
-                                        </div>
-                                        <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input class="form-control" id="correct-answer" name="keyAnswer" />
-                                            <label class="form-label" for="correct-answer">Answer Key</label>
-                                        </div>
-                                        <div class="form-outline flex-fill mb-0 mt-5">
-                                            <input class="form-control" id="form-control" name="role" />
-                                            <label class="form-label" for="correct-answer">Question part</label>
-                                        </div>
-                                        <button type="submit" name="addQuestion"
+                                <div class="col-auto ">
+                                    <div class="containerd-flex justify-content-center align-items-center">
+                                        <div class="card w-100">
+                                            <h3 class="card-header text-center">CREATE NEW QUESTION</h3>
+                                            <div class="card-body">
+                                                <form id="add-question-form" action="index.php" method="POST">
+                                                    <div class="form-group">
+                                                        <label class="form-label mt-3"
+                                                            for="question-text">Question:</label>
+                                                        <textarea class="form-control" id="question-text"
+                                                            name="question"></textarea>
+                                                    </div>
+                                                    <div class="form-outline flex-fill mt-3">
+                                                        <input type="text" id="answer-a" class="form-control"
+                                                            name="choiceA" />
+                                                        <label class="form-label" for="answer-a">Choice A</label>
+                                                    </div>
+                                                    <div class="form-outline flex-fill mt-3">
+                                                        <input type="text" id="answer-b" class="form-control"
+                                                            name="choiceB" />
+                                                        <label class="form-label" for="answer-b">Choice B</label>
+                                                    </div>
+                                                    <div class="form-outline flex-fill mt-3">
+                                                        <input type="text" id="answer-c" class="form-control"
+                                                            name="choiceC" />
+                                                        <label class="form-label" for="answer-c">Choice C</label>
+                                                    </div>
+                                                    <div class="form-outline flex-fill mt-3">
+                                                        <input type="text" id="answer-d" class="form-control"
+                                                            name="choiceD" />
+                                                        <label class="form-label" for="answer-d">Choice D</label>
+                                                    </div>
+                                                    
+                                                    <div class="dropdown flex-fill mt-3">
+                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="keyAnswer">
+                                                            Answer
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#" value = 1 >Choice A</a>
+                                                            <a class="dropdown-item" href="#" value = 2 >Choice B</a>
+                                                            <a class="dropdown-item" href="#" value = 3 >Choice C</a>
+                                                            <a class="dropdown-item" href="#" value = 4 >Choice D</a>
+                                                        </div>
+
+                                                        </div>
+                                                    <button type="submit" name="addQuestion"
                                                         class="btn btn-primary mt-4">Add Question</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="container mt-5 align-items-center">
@@ -277,12 +276,11 @@
                                                     <tbody>
                                                         <?php
                                                         // Connect to the database
-                                                        $con = mysqli_connect('localhost', 'root', '', 'userform');
+                                                        $con = mysqli_connect('localhost', 'root', '', 'progrecsys');
 
-                                                            // Query the database for records
-                                                            $sql = "SELECT * FROM examinationtbl";
-                                                            
-                                                            $result = mysqli_query($con, $sql);
+                                                        // Query the database for records
+                                                        $sql = "SELECT * FROM examinationtbl";
+                                                        $result = mysqli_query($con, $sql);
 
                                                         // Loop through the records and display them in the table
                                                         $rowNumber = 0;
@@ -315,6 +313,7 @@
                                         </div>
                                     </div>
 
+
                                 </div>
                             </div>
                         </div>
@@ -322,11 +321,11 @@
                 </div>
                 <div class="tab-pane fade" id="v-tabs-messages" role="tabpanel" aria-labelledby="v-tabs-messages-tab">
                     <div class="container-fluid">
-                        <div class="row mt-5">
-                            <div class="col-md-6 mx-auto">
-                                <form method="POST" action="process.php">
-                                    <h1 class="text-center mt-5">ADD RECORD</h1>
-                                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mx-auto">
+                                <form method="POST" action="index.php">
+                                    <h1 class="text-center">ADD RECORD</h1>
+                                    <div class="card-body mt-5">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-outline form-group flex-fill mb-3">
@@ -386,10 +385,6 @@
                                                     <input type="radio" id="choiceB1" name="q2" />
                                                     <label for="choiceB1">Administrator</label>
                                                 </li>
-                                                <li>
-                                                    <input type="radio" id="choiceC1" name="q2" />
-                                                    <label for="choiceC1">Developer</label>
-                                                </li>
                                             </ul>
 
                                         </div>
@@ -424,7 +419,7 @@
                                             <tbody>
                                                 <?php
                                                 // Connect to the database
-                                                $con = mysqli_connect('localhost', 'root', '', 'userform');
+                                                $con = mysqli_connect('localhost', 'root', '', 'progrecsys');
 
                                                 // Query the database for records
                                                 $sql = "SELECT * FROM usertable";
@@ -465,6 +460,7 @@
                             </div>
                         </div>
                     </div>
+
 
                 </div>
             </div>

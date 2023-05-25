@@ -31,7 +31,7 @@ if (isset($_POST['delete_id'])) {
     $id = $_POST['delete_id'];
 
     // Connect to the database
-    $con = mysqli_connect('localhost', 'root', '', 'userform');
+    $con = mysqli_connect('localhost', 'root', '', 'progrecsys');
 
     // Prepare the SQL query to delete the record
     $sql = "DELETE FROM examinationtbl WHERE id = '$id'";
