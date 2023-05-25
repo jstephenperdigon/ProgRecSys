@@ -35,8 +35,6 @@ if (window.history && window.history.pushState) {
     });
   });
   
-<<<<<<< HEAD
-=======
   function deleteRecord(id) {
     if (confirm("Are you sure you want to delete this record?")) {
         // Send an AJAX request to the server
@@ -60,7 +58,6 @@ if (window.history && window.history.pushState) {
         xhr.send('delete_id=' + encodeURIComponent(id));
     }
 }
->>>>>>> Answer-database
 
 function showEditModal(element) {
   var id = element.getAttribute("data-id");
