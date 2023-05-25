@@ -331,30 +331,31 @@ $answers = $con->query($sequel);
         // Display the current question and answer options
         echo '
         <div class="form-step' . ($currentQuestion === 1 ? ' form-step-active' : '') . '">
-          <h4 class="fw-bold text-center mt-3">' . $question . '</h4>
-          <ul class="answer text-center">
-            <li>
-              <input type="radio" id=' . $questionId . ' name="' . $option1 . '"value = "A" />
-              <label for="choiceA' . $questionId . '">' . $option1 . '</label>
-            </li>
-            <li>
-              <input type="radio" id=' . $questionId . ' name="' . $option2 . '" value = "B" />
-              <label for="choiceB' . $questionId . '">' . $option2 . '</label>
-            </li>
-            <li>
-              <input type="radio" id=' . $questionId . ' name="' . $option3. '" value = "C" />
-              <label for="choiceC' . $questionId . '">' . $option3 . '</label>
-            </li>
-            <li>
-              <input type="radio" id=' . $questionId . ' name="' . $option4 . '" value = "D" />
-              <label for="choiceD' . $questionId . '">' . $option4 . '</label>
-            </li>
-          </ul>
-          <div class="btns-group">
-            <a href="#" class="btn-body btn-prev' . ($currentQuestion === 1 ? ' disabled' : '') . '">Previous</a>
-            <a href="#" class="btn-body btn-next justify-content-end">Next</a>
-          </div>
-        </div>
+  <h4 class="fw-bold text-center mt-3">' . $question . '</h4>
+  <ul class="answer text-center">
+    <li>
+      <input type="radio" id="' . $questionId . '_choiceA" name="question_' . $questionId . ' " data-value= "' . $option1 . '" value="A" />
+      <label for="' . $questionId . '_choiceA">' . $option1 . '</label>
+    </li>
+    <li>
+      <input type="radio" id="' . $questionId . '_choiceB" name="question_' . $questionId . '" data-value= "' . $option2 . '" value="B" />
+      <label for="' . $questionId . '_choiceB">' . $option2 . '</label>
+    </li>
+    <li>
+      <input type="radio" id="' . $questionId . '_choiceC" name="question_' . $questionId . '" data-value= "' . $option3 . '" value="C" />
+      <label for="' . $questionId . '_choiceC">' . $option3 . '</label>
+    </li>
+    <li>
+      <input type="radio" id="' . $questionId . '_choiceD" name="question_' . $questionId . '" data-value= "' . $option4 . '" value="D" />
+      <label for="' . $questionId . '_choiceD">' . $option4 . '</label>
+    </li>
+  </ul>
+  <div class="btns-group">
+    <a href="#" class="btn-body btn-prev' . ($currentQuestion === 1 ? ' disabled' : '') . '">Previous</a>
+    <a href="#" class="btn-body btn-next justify-content-end">Next</a>
+  </div>
+</div>
+
         ';
 
         $currentQuestion++;

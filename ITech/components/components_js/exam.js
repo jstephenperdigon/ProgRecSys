@@ -8,11 +8,10 @@ let formStepsNum = 0;
 
 nextBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
-      submitForm();
-      formStepsNum++;
-      updateFormSteps();
-      updateProgressbar();
-    
+    submitForm();
+    formStepsNum++;
+    updateFormSteps();
+    updateProgressbar();
   });
 });
 
@@ -24,14 +23,14 @@ function submitForm() {
 
   // Prepare the data to be sent to the server
   const data = {
-    answers: []
+    answers: [],
   };
 
   selectedInputs.forEach(function (input) {
     const answer = {
       questionId: input.id, // Assuming the radio button's ID represents the question ID
       ChoiceID: input.value,
-      optionName: input.name  
+      optionName: input.dataset.value,
     };
 
     data.answers.push(answer);
@@ -41,13 +40,13 @@ function submitForm() {
   const xhr = new XMLHttpRequest();
 
   // Define the request method, URL, and asynchronous flag
-  xhr.open('POST', './query/ControllerExamination.php', true);
+  xhr.open("POST", "./query/ControllerExamination.php", true);
 
   // Set the request header
-  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.setRequestHeader("Content-Type", "application/json");
 
   // Define the callback function for handling the response
-  xhr.onreadystatechange = function() {
+  xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         // Request was successful, handle the response
@@ -62,6 +61,7 @@ function submitForm() {
   // Convert the data to JSON and send the request
   xhr.send(JSON.stringify(data));
 }
+
 prevBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     formStepsNum--;
@@ -94,70 +94,64 @@ function updateProgressbar() {
     ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
 }
 
-  // Select elements
-  const timer = document.getElementById('timer');
+const timer = document.getElementById("timer");
+let time = JSON.parse(localStorage.getItem("quizTime")) || 3600;
+let intervalId;
+updateTimerDisplay(time);
 
-  // Set initial values
-  let time = JSON.parse(localStorage.getItem('quizTime')) || 3600;
-  let intervalId;
+intervalId = setInterval(() => {
+  time--;
   updateTimerDisplay(time);
-  
-  // Start the timer
-  intervalId = setInterval(() => {
-    time--;
-    updateTimerDisplay(time);
-    localStorage.setItem('quizTime', JSON.stringify(time));
-    if (time === 0) {
-      clearInterval(intervalId);
-      alert('Time is up!');
-      localStorage.removeItem('quizTime');
-    }
-  }, 1000);
-  
-  function updateTimerDisplay(time) {
-    const hours = Math.floor(time / 3600);
-    const minutes = Math.floor((time % 3600) / 60);
-    const seconds = time % 60;
-    timer.textContent = `${padZeroes(hours)}:${padZeroes(minutes)}:${padZeroes(seconds)}`;
+  localStorage.setItem("quizTime", JSON.stringify(time));
+  if (time === 0) {
+    clearInterval(intervalId);
+    alert("Time is up!");
+    localStorage.removeItem("quizTime");
   }
-  
-  function padZeroes(num) {
-    return num.toString().padStart(2, '0');
-  }
- 
+}, 1000);
+
+function updateTimerDisplay(time) {
+  const hours = Math.floor(time / 3600);
+  const minutes = Math.floor((time % 3600) / 60);
+  const seconds = time % 60;
+  timer.textContent = `${padZeroes(hours)}:${padZeroes(
+    minutes
+  )}:${padZeroes(seconds)}`;
+}
+
+function padZeroes(num) {
+  return num.toString().padStart(2, "0");
+}
+
+var radioButtons = document.querySelectorAll("input[type='radio']");
+
+radioButtons.forEach(function (radioButton) {
+  radioButton.addEventListener("click", function (event) {
+    var clickedRadio = event.target;
+
+    // Uncheck all other radio buttons in the same group
+    var radioGroup = document.getElementsByName(clickedRadio.name);
+    radioGroup.forEach(function (radio) {
+      if (radio !== clickedRadio) {
+        radio.checked = false;
+      }
+    });
+  });
+});
 
 // Disable previous button on the first question
-if (prevBtns.classList.contains('disabled')) {
-  prevBtns.addEventListener('click', function (event) {
+if (prevBtns.classList.contains("disabled")) {
+  prevBtns.addEventListener("click", function (event) {
     event.preventDefault();
   });
 }
 
 // Enable/disable previous button based on the current question
 nextBtns.forEach(function (button, index) {
-  button.addEventListener('click', function () {
-    prevBtns.classList.remove('disabled');
+  button.addEventListener("click", function () {
+    prevBtns.classList.remove("disabled");
     if (index === 0) {
-      prevBtns.classList.add('disabled');
+      prevBtns.classList.add("disabled");
     }
   });
 });
-
-
-
- /* var radioButtons = document.querySelectorAll("input[type='radio']");
-
-radioButtons.forEach(function(radioButton) {
-  radioButton.addEventListener("click", function(event) {
-    var clickedRadio = event.target;
-
-    // Uncheck all other radio buttons
-    radioButtons.forEach(function(radio) {
-      if (radio !== clickedRadio) {
-        radio.checked = false;
-      }
-    });
-  });
-}); */
-
-
