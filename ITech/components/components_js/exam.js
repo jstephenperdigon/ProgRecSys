@@ -8,12 +8,59 @@ let formStepsNum = 0;
 
 nextBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
-    formStepsNum++;
-    updateFormSteps();
-    updateProgressbar();
+      submitForm();
+      formStepsNum++;
+      updateFormSteps();
+      updateProgressbar();
+    
   });
 });
 
+function submitForm() {
+  // Get the selected radio inputs
+  const selectedInputs = document.querySelectorAll(
+    ".form-step-active input[type='radio']:checked"
+  );
+
+  // Prepare the data to be sent to the server
+  const data = {
+    answers: []
+  };
+
+  selectedInputs.forEach(function (input) {
+    const answer = {
+      questionId: input.id, // Assuming the radio button's ID represents the question ID
+      optionNumber: input.value
+    };
+
+    data.answers.push(answer);
+  });
+
+  // Create a new XMLHttpRequest object
+  const xhr = new XMLHttpRequest();
+
+  // Define the request method, URL, and asynchronous flag
+  xhr.open('POST', './query/ControllerExamination.php', true);
+
+  // Set the request header
+  xhr.setRequestHeader('Content-Type', 'application/json');
+
+  // Define the callback function for handling the response
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        // Request was successful, handle the response
+        // ...
+      } else {
+        // Request encountered an error, handle the error
+        // ...
+      }
+    }
+  };
+
+  // Convert the data to JSON and send the request
+  xhr.send(JSON.stringify(data));
+}
 prevBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     formStepsNum--;
@@ -76,6 +123,26 @@ function updateProgressbar() {
   function padZeroes(num) {
     return num.toString().padStart(2, '0');
   }
+ 
+
+// Disable previous button on the first question
+if (prevBtns.classList.contains('disabled')) {
+  prevBtns.addEventListener('click', function (event) {
+    event.preventDefault();
+  });
+}
+
+// Enable/disable previous button based on the current question
+nextBtns.forEach(function (button, index) {
+  button.addEventListener('click', function () {
+    prevBtns.classList.remove('disabled');
+    if (index === 0) {
+      prevBtns.classList.add('disabled');
+    }
+  });
+});
+
+
 
  /* var radioButtons = document.querySelectorAll("input[type='radio']");
 
