@@ -35,6 +35,32 @@ if (window.history && window.history.pushState) {
     });
   });
   
+<<<<<<< HEAD
+=======
+  function deleteRecord(id) {
+    if (confirm("Are you sure you want to delete this record?")) {
+        // Send an AJAX request to the server
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', './query/examinationController.php'); // Replace 'your_php_file.php' with the actual PHP file that handles the deletion
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Request was successful
+                console.log('Record deleted successfully');
+                // Remove the table row from the DOM
+                const button = document.querySelector('[data-id="' + id + '"]');
+                if (button) {
+                    button.closest('tr').remove();
+                }
+            } else {
+                // Request failed
+                console.error('Failed to delete record');
+            }
+        };
+        xhr.send('delete_id=' + encodeURIComponent(id));
+    }
+}
+>>>>>>> Answer-database
 
 function showEditModal(element) {
   var id = element.getAttribute("data-id");

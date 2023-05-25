@@ -237,6 +237,7 @@
                                                     </div>
                                                     
                                                     <div class="dropdown flex-fill mt-3">
+<<<<<<< HEAD
                                                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             Answer
                                                         </button>
@@ -245,6 +246,16 @@
                                                             <a class="dropdown-item" href="#">Choice B</a>
                                                             <a class="dropdown-item" href="#">Choice C</a>
                                                             <a class="dropdown-item" href="#">Choice D</a>
+=======
+                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="keyAnswer">
+                                                            Answer
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#" value = 1 >Choice A</a>
+                                                            <a class="dropdown-item" href="#" value = 2 >Choice B</a>
+                                                            <a class="dropdown-item" href="#" value = 3 >Choice C</a>
+                                                            <a class="dropdown-item" href="#" value = 4 >Choice D</a>
+>>>>>>> Answer-database
                                                         </div>
 
                                                         </div>
