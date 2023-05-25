@@ -334,7 +334,7 @@ $answers = $con->query($sequel);
   <h4 class="fw-bold text-center mt-3">' . $question . '</h4>
   <ul class="answer text-center">
     <li>
-      <input type="radio" id="' . $questionId . '_choiceA" name="question_' . $questionId . ' " data-value= "' . $option1 . '" value="A" />
+      <input type="radio" id="' . $questionId . '_choiceA" name="question_' . $questionId . '" data-value= "' . $option1 . '" value="A" />
       <label for="' . $questionId . '_choiceA">' . $option1 . '</label>
     </li>
     <li>
