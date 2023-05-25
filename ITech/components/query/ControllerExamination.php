@@ -7,7 +7,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 $answers = $data['answers'];
 
 // Connect to the database (adjust the credentials as needed)
-$con = mysqli_connect('localhost', 'root', '', 'userform');
+$con = mysqli_connect('localhost', 'root', '', 'progrecsys');
 
 // Check connection
 if ($con->connect_error) {

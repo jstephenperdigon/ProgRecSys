@@ -269,7 +269,7 @@
                                                     <tbody>
                                                         <?php
                                                         // Connect to the database
-                                                        $con = mysqli_connect('localhost', 'root', '', 'userform');
+                                                        $con = mysqli_connect('localhost', 'root', '', 'progrecsys');
 
                                                         // Query the database for records
                                                         $sql = "SELECT * FROM examinationtbl";
@@ -412,7 +412,7 @@
                                             <tbody>
                                                 <?php
                                                 // Connect to the database
-                                                $con = mysqli_connect('localhost', 'root', '', 'userform');
+                                                $con = mysqli_connect('localhost', 'root', '', 'progrecsys');
 
                                                 // Query the database for records
                                                 $sql = "SELECT * FROM usertable";
