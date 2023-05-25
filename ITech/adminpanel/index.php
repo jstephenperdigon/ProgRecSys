@@ -235,12 +235,19 @@
                                                             name="choiceD" />
                                                         <label class="form-label" for="answer-d">Choice D</label>
                                                     </div>
-                                                    <div class="form-outline flex-fill mt-3">
-                                                        <input class="form-control" id="correct-answer"
-                                                            name="keyAnswer" />
-                                                        <label class="form-label" for="correct-answer">Answer
-                                                            Key</label>
-                                                    </div>
+                                                    
+                                                    <div class="dropdown flex-fill mt-3">
+                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="keyAnswer">
+                                                            Answer
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="#" value = 1 >Choice A</a>
+                                                            <a class="dropdown-item" href="#" value = 2 >Choice B</a>
+                                                            <a class="dropdown-item" href="#" value = 3 >Choice C</a>
+                                                            <a class="dropdown-item" href="#" value = 4 >Choice D</a>
+                                                        </div>
+
+                                                        </div>
                                                     <button type="submit" name="addQuestion"
                                                         class="btn btn-primary mt-4">Add Question</button>
                                                 </form>

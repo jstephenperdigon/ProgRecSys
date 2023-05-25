@@ -18,10 +18,10 @@ if ($con->connect_error) {
 $insertedRows = 0;
 foreach ($answers as $answer) {
     $questionId = $answer['questionId'];
-    $optionNumber = $answer['optionNumber'];
+    $ChoiceID = $answer['ChoiceID'];
     $optionName = $answer['optionName'];
     // Prepare the SQL statement
-    $sql = "INSERT INTO answertbl (questionid, optionnumber, optionname) VALUES ('$questionId', '$optionNumber', '$optionName')";
+    $sql = "INSERT INTO answertbl (questionid, choice, optionname) VALUES ('$questionId', '$ChoiceID', '$optionName')";
 
     if ($con->query($sql) === TRUE) {
         $insertedRows++;

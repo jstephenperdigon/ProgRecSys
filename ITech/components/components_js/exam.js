@@ -30,7 +30,7 @@ function submitForm() {
   selectedInputs.forEach(function (input) {
     const answer = {
       questionId: input.id, // Assuming the radio button's ID represents the question ID
-      optionNumber: input.value,
+      ChoiceID: input.value,
       optionName: input.name  
     };
 

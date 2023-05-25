@@ -334,19 +334,19 @@ $answers = $con->query($sequel);
           <h4 class="fw-bold text-center mt-3">' . $question . '</h4>
           <ul class="answer text-center">
             <li>
-              <input type="radio" id=' . $questionId . ' name="' . $option1 . '"value = 1 />
+              <input type="radio" id=' . $questionId . ' name="' . $option1 . '"value = "A" />
               <label for="choiceA' . $questionId . '">' . $option1 . '</label>
             </li>
             <li>
-              <input type="radio" id=' . $questionId . ' name="' . $option2 . '" value = 2 />
+              <input type="radio" id=' . $questionId . ' name="' . $option2 . '" value = "B" />
               <label for="choiceB' . $questionId . '">' . $option2 . '</label>
             </li>
             <li>
-              <input type="radio" id=' . $questionId . ' name="' . $option3. '" value = 3 />
+              <input type="radio" id=' . $questionId . ' name="' . $option3. '" value = "C" />
               <label for="choiceC' . $questionId . '">' . $option3 . '</label>
             </li>
             <li>
-              <input type="radio" id=' . $questionId . ' name="' . $option4 . '" value = 4 />
+              <input type="radio" id=' . $questionId . ' name="' . $option4 . '" value = "D" />
               <label for="choiceD' . $questionId . '">' . $option4 . '</label>
             </li>
           </ul>
