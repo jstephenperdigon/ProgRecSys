@@ -236,18 +236,15 @@
                                                         <label class="form-label" for="answer-d">Choice D</label>
                                                     </div>
                                                     
-                                                    <div class="dropdown flex-fill mt-3">
-                                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="keyAnswer">
-                                                            Answer
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="#" value = 1 >Choice A</a>
-                                                            <a class="dropdown-item" href="#" value = 2 >Choice B</a>
-                                                            <a class="dropdown-item" href="#" value = 3 >Choice C</a>
-                                                            <a class="dropdown-item" href="#" value = 4 >Choice D</a>
-                                                        </div>
-
-                                                        </div>
+                                                    <div class="form-group mt-5">
+                                                    <label for="correct-answer">Correct Answer:</label>
+                                                    <select class="form-control" id="correct-answer" name="keyAnswer">
+                                                    <option value="A">A</option>
+                                                    <option value="B">B</option>
+                                                    <option value="C">C</option>
+                                                    <option value="D">D</option>
+                                                    </select>
+                                                    </div>
                                                     <button type="submit" name="addQuestion"
                                                         class="btn btn-primary mt-4">Add Question</button>
                                                 </form>
