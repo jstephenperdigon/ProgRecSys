@@ -294,7 +294,7 @@ $answers = $con->query($sequel);
 
   <?php
   // Query the database to fetch all questions and answers
-  $sql = "SELECT id, question, answer, option1, option2, option3, option4 FROM examinationtbl WHERE role = 'part1'";
+  $sql = "SELECT id, question, answer, option1, option2, option3, option4 FROM examinationtbl";
   $result = mysqli_query($con, $sql);
   ?>
   <form action="#" class="form container" method="POST">
