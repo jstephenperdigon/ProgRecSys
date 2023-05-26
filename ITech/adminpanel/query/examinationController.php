@@ -10,9 +10,10 @@ if (isset($_POST['addQuestion'])) {
     $choiceB = mysqli_real_escape_string($con, $_POST['choiceB']);
     $choiceC = mysqli_real_escape_string($con, $_POST['choiceC']);
     $choiceD = mysqli_real_escape_string($con, $_POST['choiceD']);
-   
-    $query = "INSERT INTO examinationtbl (uid, question, answer, option1, option2, option3, option4) 
-              VALUES ('$uid', '$question', '$keyAnswer', '$choiceA', '$choiceB', '$choiceC', '$choiceD')";
+    $Program= mysqli_real_escape_string($con, $_POST['Program']);
+
+    $query = "INSERT INTO examinationtbl (uid, question, answer, option1, option2, option3, option4, program) 
+              VALUES ('$uid', '$question', '$keyAnswer', '$choiceA', '$choiceB', '$choiceC', '$choiceD', '$Program')";
     if (mysqli_query($con, $query)) {
         $info = "Question Added";
         $_SESSION['info'] = $info;

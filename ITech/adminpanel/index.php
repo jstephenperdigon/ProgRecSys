@@ -235,6 +235,12 @@
                                                             name="choiceD" />
                                                         <label class="form-label" for="answer-d">Choice D</label>
                                                     </div>
+                                                   
+                                                    <div class="form-outline flex-fill mt-3">
+                                                        <input type="text" id="Program" class="form-control"
+                                                            name="Program" />
+                                                        <label class="form-label" for="Program">Program</label>
+                                                    </div>
                                                     
                                                     <div class="form-group mt-5">
                                                     <label for="correct-answer">Correct Answer:</label>
@@ -263,10 +269,12 @@
                                                             </th>
                                                             <th>QUESTION</th>
                                                             <th>ANSWER</th>
+                                                            <th>PROGRAM</th>
                                                             <th>A</th>
                                                             <th>B</th>
                                                             <th>C</th>
                                                             <th>D</th>
+                                                            
                                                             <th>ACTION</th>
                                                         </tr>
                                                     </thead>
@@ -288,10 +296,11 @@
                                                             echo "<td>" . $row['id'] . "</td>";
                                                             echo "<td>" . $row['question'] . "</td>";
                                                             echo "<td>" . $row['answer'] . "</td>";
+                                                            echo "<td>" . $row['program'] . "</td>";
                                                             echo "<td>" . $row['option1'] . "</td>";
                                                             echo "<td>" . $row['option2'] . "</td>";
                                                             echo "<td>" . $row['option3'] . "</td>";
-                                                            echo "<td>" . $row['option4'] . "</td>";
+                                                            echo "<td>" . $row['option4'] . "</td>"; 
                                                             echo "<td>";
                                                             echo "<a onclick='deleteRecord(" . $row['id'] . ")' class='btn btn-sm btn-danger' style='box-shadow: none'>Delete</a>";
                                                             echo "</td>";
