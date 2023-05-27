@@ -60,7 +60,33 @@ $response = [
 // Send the response as JSON
 header('Content-Type: application/json');
 echo json_encode($response);
+
 ?>
 
+<?php
+// Assuming you have started the session and the user is logged in
 
+if (isset($_POST['submitExam'])) {
+    // Retrieve the current logged-in username from the session
+    $email = $_SESSION['email'];
 
+    // Fetching data from examinationtbl
+    $examId = mysqli_real_escape_string($con, $_POST['examId']);
+    $fetchExamQuery = "SELECT uniqid, question, answerkey FROM examinationtbl WHERE examId = '$examId'";
+    $examResult = mysqli_query($con, $fetchExamQuery);
+
+    // Inserting data into calculationtbl
+    while ($examRow = mysqli_fetch_assoc($examResult)) {
+        $uniqid = $examRow['uniqid'];
+        $question = $examRow['question'];
+        $answerKey = $examRow['answerkey'];
+
+        // Perform your calculations or processing here
+
+        // Insert the calculated data into calculationtbl
+        $insertQuery = "INSERT INTO calculationtbl (uniqid, question, answerkey, username) 
+                        VALUES ('$uniqid', '$question', '$answerKey', '$username')";
+        mysqli_query($con, $insertQuery);
+    }
+}
+?>

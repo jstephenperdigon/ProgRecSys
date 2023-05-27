@@ -370,7 +370,7 @@ $answers = $con->query($sequel);
     <div class="form-step">
       <div class="btns-group">
         <a href="#" class="btn-body btn-prev ">Previous</a>
-        <input type="submit" value="Submit" class="btn-body" />
+        <input type="submit" value="Submit" name="submitExam" class="btn-body" />
       </div>
     </div>
   </form>
