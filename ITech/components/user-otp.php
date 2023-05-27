@@ -177,65 +177,6 @@ if ($email == false) {
     });
 
     // BACK SPACE KEY FOR OTP INPUT FIELDS // 
-
-    // RESEND OTP TIMER //
-    const resendOtpButton = document.getElementById("resend-otp");
-    let timer = getRemainingTime(); // Get remaining time from sessionStorage, or set to 60 seconds
-
-    // Start countdown timer
-    const countdown = setInterval(() => {
-      timer--;
-      if (timer === 0) {
-        clearInterval(countdown);
-        enableResendOtpButton();
-      } else {
-        updateResendOtpButton();
-      }
-    }, 1000);
-
-    // Add event listener to resend OTP code when button is clicked
-    resendOtpButton.addEventListener("click", () => {
-      // Resend the OTP code here
-      setLastClickTimestamp();
-      disableResendOtpButton();
-      timer = 60;
-      countdown();
-    });
-
-    // Helper functions
-    function getRemainingTime() {
-      const lastClickTimestamp = sessionStorage.getItem("resend-otp-timestamp");
-      if (lastClickTimestamp) {
-        const elapsedSeconds = Math.floor((Date.now() - lastClickTimestamp) / 1000);
-        return Math.max(60 - elapsedSeconds, 0);
-      } else {
-        return 60;
-      }
-    }
-
-    function setLastClickTimestamp() {
-      sessionStorage.setItem("resend-otp-timestamp", Date.now());
-    }
-
-    function disableResendOtpButton() {
-      resendOtpButton.disabled = true;
-      resendOtpButton.classList.add("disabled");
-    }
-
-    function enableResendOtpButton() {
-      resendOtpButton.disabled = false;
-      resendOtpButton.textContent = "Resend OTP";
-      resendOtpButton.classList.remove("disabled");
-      sessionStorage.removeItem("resend-otp-timestamp"); // Remove timestamp from sessionStorage when timer reaches zero
-    }
-
-    function updateResendOtpButton() {
-      resendOtpButton.textContent = `Resend OTP: ${timer}s`;
-    }
-
-// RESEND OTP TIMER //
-
-
   </script>
 
   <script>

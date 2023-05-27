@@ -94,8 +94,10 @@ function updateProgressbar() {
     ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
 }
 
+
+
 const timer = document.getElementById("timer");
-let time = JSON.parse(localStorage.getItem("quizTime")) || 3600;
+let time = JSON.parse(localStorage.getItem("quizTime")) || 600;
 let intervalId;
 updateTimerDisplay(time);
 
@@ -111,17 +113,15 @@ intervalId = setInterval(() => {
 }, 1000);
 
 function updateTimerDisplay(time) {
-  const hours = Math.floor(time / 3600);
-  const minutes = Math.floor((time % 3600) / 60);
+  const minutes = Math.floor(time / 60);
   const seconds = time % 60;
-  timer.textContent = `${padZeroes(hours)}:${padZeroes(
-    minutes
-  )}:${padZeroes(seconds)}`;
+  timer.textContent = `${padZeroes(minutes)}:${padZeroes(seconds)}`;
 }
 
 function padZeroes(num) {
   return num.toString().padStart(2, "0");
 }
+
 
 var radioButtons = document.querySelectorAll("input[type='radio']");
 

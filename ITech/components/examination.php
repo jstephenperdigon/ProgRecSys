@@ -250,7 +250,7 @@ $answers = $con->query($sequel);
     <div class="container">
       <div class="row justify-content-end align-items-center">
         <div class="col-auto ">
-          <a class="navbar-brand" href="home.php"><img src="../img/logo.png" id="navLogo">
+          <a class="navbar-brand" href="home.php">          <a class="navbar-brand"><img src="../img/logo.png" style="height: 100px; width: 100px; margin-top: 20px; margin-bottom: 20px;" >
           </a>
         </div>
         <div class="col justify-content-start">
@@ -286,7 +286,7 @@ $answers = $con->query($sequel);
       <div class="col">
         <h2 class="text-center mb-4">Time Remaining</h2>
         <div class="text-center">
-          <h5 id="timer">01:00:00</h5>
+          <h5 id="timer">00:00:00</h5>
         </div>
       </div>
     </div>

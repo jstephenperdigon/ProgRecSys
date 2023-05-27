@@ -61,11 +61,11 @@ if ($email == false) {
 </head>
 
 <body>
-  <nav class="nav fixed-top navbar-light bg-white shadow">
+<nav class="nav fixed-top navbar-light bg-white shadow">
     <div class="container ">
       <div class="row justify-content-end align-items-center">
         <div class="col-auto ">
-          <a class="navbar-brand"><img src="../img/logo.png" id="navLogo">
+          <a class="navbar-brand"><img src="../img/logo.png" style="height: 100px; width: 100px; margin-top: 20px; margin-bottom: 20px;" >
           </a>
         </div>
         <div class="col justify-content-start">
@@ -77,69 +77,65 @@ if ($email == false) {
     </div>
   </nav>
   <section class="dark">
-    <div class="card-2 container height-100 d-flex justify-content-center align-items-center"
-      style="margin-top: 300px;">
-      <form id="otp-form" class="needs-validation" action="reset-code.php" method="POST" autocomplete="off" novalidate>
-        <h5 class="text-center">VERIFICATION CODE SENT<div class="fa fa-check-circle" style="color: green;" width="24"
-            height="24" role="img" aria-label="Success:"></div>
-        </h5>
+  <div class="card-2 container height-100 d-flex justify-content-center align-items-center" style="margin-top: 300px;">
+    <form id="otp-form" class="needs-validation" action="reset-code.php" method="POST" autocomplete="off" novalidate>
+      <h5 class="text-center">VERIFICATION CODE SENT<div class="fa fa-check-circle" style="color: green;" width="24"
+          height="24" role="img" aria-label="Success:"></div>
+      </h5>
+      <?php
+      if (isset($_SESSION['info']) && count($errors) === 0) {
+        ?>
+        <div class="alert alert-success text-center fade show">
+          <?php echo $_SESSION['info']; ?>
+        </div>
         <?php
-        if (isset($_SESSION['info'])) {
+        unset($_SESSION['info']); // Clear the success message variable
+      }
+      ?>
+      <?php
+      if (count($errors) > 0) {
+        foreach ($errors as $showerror) {
           ?>
-          <div class="alert alert-success text-center">
-            <?php echo $_SESSION['info']; ?>
+          <div class="alert alert-danger text-center">
+            <?php echo $showerror; ?>
           </div>
           <?php
         }
-        ?>
-        <?php
-        if (count($errors) > 0) {
-          foreach ($errors as $showerror) {
-            ?>
-            <div class="container alert alert-danger text-center">
-              <?php
-              echo $showerror;
-          }
-          ?>
-          </div>
-          <?php
-        }
-        ?>
-        <div class="form-group">
-          <div class="input-group d-flex flex-row justify-content-center mt-2 mb-3">
-            <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
-              class="m-2 form-control otp-input text-center" name="otp1" maxlength="1" id="input1" autofocus required />
-            <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
-              class="m-2 form-control otp-input text-center bg-white " name="otp2" maxlength="1" id="input2" disabled
-              required />
-            <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
-              class="m-2 form-control otp-input text-center bg-white " name="otp3" maxlength="1" id="input3" disabled
-              required />
-            <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
-              class="m-2 form-control otp-input text-center bg-white " name="otp4" maxlength="1" id="input4" disabled
-              required />
-            <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
-              class="m-2 form-control otp-input text-center bg-white " name="otp5" maxlength="1" id="input5" disabled
-              required />
-            <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
-              class="m-2 form-control otp-input text-center bg-white " name="otp6" maxlength="1" id="input6" disabled
-              required />
-          </div>
-          <div class="valid-feedback">Valid.</div>
-          <div class="invalid-feedback">Please enter a valid OTP code.</div>
+        unset($showerror); // Clear the errors array
+      }
+      ?>
+      <div class="form-group">
+        <div class="input-group d-flex flex-row justify-content-center mt-2 mb-3">
+          <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
+            class="m-2 form-control otp-input text-center" name="otp1" maxlength="1" id="input1" autofocus required />
+          <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
+            class="m-2 form-control otp-input text-center bg-white " name="otp2" maxlength="1" id="input2" disabled
+            required />
+          <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
+            class="m-2 form-control otp-input text-center bg-white " name="otp3" maxlength="1" id="input3" disabled
+            required />
+          <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
+            class="m-2 form-control otp-input text-center bg-white " name="otp4" maxlength="1" id="input4" disabled
+            required />
+          <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
+            class="m-2 form-control otp-input text-center bg-white " name="otp5" maxlength="1" id="input5" disabled
+            required />
+          <input type="number" style="height: 55px; width: 40px; border-radius: 15px;"
+            class="m-2 form-control otp-input text-center bg-white " name="otp6" maxlength="1" id="input6" disabled
+            required />
         </div>
-        <div class="text-center">
-          <!-- Resend OTP button with 60 seconds timer -->
-          <button id="resend-otp" class="mt-4 btn btn-primary btn-lg btn-rounded form-control mt-5" disabled>Resend
-            OTP</button>
-          <button type="submit" id="otp-check" name="check-reset-otp"
-            class="btn btn-primary mt-5 invisible">SUBMIT</button>
-        </div>
-
-      </form>
-    </div>
-  </section>
-
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please enter a valid OTP code.</div>
+      </div>
+      <div class="text-center">
+        <!-- Resend OTP button with 60 seconds timer -->
+        <button id="resend-otp" type="submit" name="resend-otp" class="mt-4 btn btn-primary btn-lg btn-rounded form-control mt-5 next action-button">Resend OTP</button>
+        <button type="submit" name="cancel" class="mt-4 btn btn-danger btn-md btn-rounded form-control next action-button">Cancel</button>
+        <button type="submit" id="otp-check" name="check-reset-otp" class="btn btn-primary mt-5 invisible">SUBMIT</button>
+      </div>
+    </form>
+  </div>
+</section>
 
 
 
@@ -268,7 +264,7 @@ if ($email == false) {
     });
   </script>
 
-
+<script src="adminJs/admin.js"></script>
   <!-- IMPORTS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

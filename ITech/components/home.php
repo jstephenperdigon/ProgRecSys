@@ -11,9 +11,6 @@ if ($email != false && $password != false) {
     $status = $fetch_info['status'];
     $code = $fetch_info['code'];
     if ($status == "verified") {
-      if ($code != 0) {
-        header('Location: reset-code.php');
-      }
     } else {
       header('Location: user-otp.php');
     }
