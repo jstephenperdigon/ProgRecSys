@@ -1,7 +1,5 @@
 <!-- ADD QUESTION -->
 <?php
-
-
 if (isset($_POST['addQuestion'])) {
     $uid = uniqid();
     $keyAnswer = mysqli_real_escape_string($con, $_POST['keyAnswer']);

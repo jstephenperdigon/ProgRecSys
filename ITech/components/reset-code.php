@@ -65,7 +65,7 @@ if ($email == false) {
     <div class="container ">
       <div class="row justify-content-end align-items-center">
         <div class="col-auto ">
-          <a class="navbar-brand"><img src="../img/logo.png" id="navLogo">
+          <a class="navbar-brand"><img src="../img/logo.png" style="height: 100px; width: 100px; margin-top: 20px; margin-bottom: 20px;" >
           </a>
         </div>
         <div class="col justify-content-start">
@@ -86,20 +86,22 @@ if ($email == false) {
         <?php
         if (isset($_SESSION['info'])) {
           ?>
-          <div class="alert alert-success text-center">
+          <div class="alert alert-success text-center fade show">
             <?php echo $_SESSION['info']; ?>
           </div>
           <?php
+          unset($_SESSION['info']); // Clear the success message variable
         }
         ?>
         <?php
         if (count($errors) > 0) {
           foreach ($errors as $showerror) {
             ?>
-            <div class="container alert alert-danger text-center">
+            <div class="alert alert-danger text-center">
               <?php
               echo $showerror;
           }
+          unset($showerror); // Clear the errors array
           ?>
           </div>
           <?php
@@ -130,8 +132,7 @@ if ($email == false) {
         </div>
         <div class="text-center">
           <!-- Resend OTP button with 60 seconds timer -->
-          <button id="resend-otp" class="mt-4 btn btn-primary btn-lg btn-rounded form-control mt-5" disabled>Resend
-            OTP</button>
+<button id="resend-otp" type="submit" name="resend-otp" class="mt-4 btn btn-primary btn-lg btn-rounded form-control mt-5 next action-button">Resend OTP</button>
           <button type="submit" id="otp-check" name="check-reset-otp"
             class="btn btn-primary mt-5 invisible">SUBMIT</button>
         </div>
@@ -183,63 +184,6 @@ if ($email == false) {
 
     // BACK SPACE KEY FOR OTP INPUT FIELDS // 
 
-    // RESEND OTP TIMER //
-    const resendOtpButton = document.getElementById("resend-otp");
-    let timer = getRemainingTime(); // Get remaining time from localStorage, or set to 60 seconds
-
-    // Start countdown timer
-    const countdown = setInterval(() => {
-      timer--;
-      if (timer === 0) {
-        clearInterval(countdown);
-        enableResendOtpButton();
-      } else {
-        updateResendOtpButton();
-      }
-    }, 1000);
-
-    // Add event listener to resend OTP code when button is clicked
-    resendOtpButton.addEventListener("click", () => {
-      // Resend the OTP code here
-      setLastClickTimestamp();
-      disableResendOtpButton();
-      timer = 60;
-      countdown();
-    });
-
-    // Helper functions
-    function getRemainingTime() {
-      const lastClickTimestamp = localStorage.getItem("resend-otp-timestamp");
-      if (lastClickTimestamp) {
-        const elapsedSeconds = Math.floor((Date.now() - lastClickTimestamp) / 1000);
-        return Math.max(60 - elapsedSeconds, 0);
-      } else {
-        return 60;
-      }
-    }
-
-    function setLastClickTimestamp() {
-      localStorage.setItem("resend-otp-timestamp", Date.now());
-    }
-
-    function disableResendOtpButton() {
-      resendOtpButton.disabled = true;
-      resendOtpButton.classList.add("disabled");
-    }
-
-    function enableResendOtpButton() {
-      resendOtpButton.disabled = false;
-      resendOtpButton.textContent = "Resend OTP";
-      resendOtpButton.classList.remove("disabled");
-      localStorage.removeItem("resend-otp-timestamp"); // Remove timestamp from localStorage when timer reaches zero
-    }
-
-    function updateResendOtpButton() {
-      resendOtpButton.textContent = `Resend OTP: ${timer}s`;
-    }
-
-// RESEND OTP TIMER // 
-
   </script>
 
   <script>
@@ -266,9 +210,18 @@ if ($email == false) {
         });
       });
     });
+
   </script>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Fade out success and error alerts after a delay
+    $('#success-alert').delay(3000).fadeOut('slow');
+    $('#error-alert').delay(3000).fadeOut('slow');
+  });
+</script>
+    <script src="components_js/reset-code.js"></script>
   <!-- IMPORTS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

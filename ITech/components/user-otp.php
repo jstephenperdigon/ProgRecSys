@@ -72,20 +72,24 @@ if ($email == false) {
         <?php
         if (isset($_SESSION['info'])) {
           ?>
-          <div class="alert alert-success text-center">
+          <div class="alert alert-success text-center fade show">
             <?php echo $_SESSION['info']; ?>
           </div>
           <?php
-        }
+           unset($_SESSION['info']); // Clear the success message variable
+          }
+         
         ?>
         <?php
         if (count($errors) > 0) {
           foreach ($errors as $showerror) {
             ?>
-            <div class="container alert alert-danger text-center">
+            <div class="container alert alert-danger text-center fade show">
               <?php
               echo $showerror;
+           
           }
+          unset($showerror); // Clear the errors array
           ?>
           </div>
           <?php
@@ -116,7 +120,8 @@ if ($email == false) {
         </div>
         <div class="text-center">
           <!-- Resend OTP button with 60 seconds timer -->
-          <button id="resend-otp" class="mt-4 btn btn-primary btn-lg btn-rounded form-control mt-5" disabled>Resend
+          <button id="resend-otp" name="resend-otp" class="mt-4 btn btn-primary btn-lg btn-rounded form-control mt-5"
+            disabled>Resend
             OTP</button>
 
 
@@ -131,6 +136,9 @@ if ($email == false) {
 
 
   <script>
+
+
+
     // Get all the OTP input fields
     var otpInputs = document.querySelectorAll('.otp-input');
 
@@ -172,7 +180,7 @@ if ($email == false) {
 
     // RESEND OTP TIMER //
     const resendOtpButton = document.getElementById("resend-otp");
-    let timer = getRemainingTime(); // Get remaining time from localStorage, or set to 60 seconds
+    let timer = getRemainingTime(); // Get remaining time from sessionStorage, or set to 60 seconds
 
     // Start countdown timer
     const countdown = setInterval(() => {
@@ -196,7 +204,7 @@ if ($email == false) {
 
     // Helper functions
     function getRemainingTime() {
-      const lastClickTimestamp = localStorage.getItem("resend-otp-timestamp");
+      const lastClickTimestamp = sessionStorage.getItem("resend-otp-timestamp");
       if (lastClickTimestamp) {
         const elapsedSeconds = Math.floor((Date.now() - lastClickTimestamp) / 1000);
         return Math.max(60 - elapsedSeconds, 0);
@@ -206,7 +214,7 @@ if ($email == false) {
     }
 
     function setLastClickTimestamp() {
-      localStorage.setItem("resend-otp-timestamp", Date.now());
+      sessionStorage.setItem("resend-otp-timestamp", Date.now());
     }
 
     function disableResendOtpButton() {
@@ -218,14 +226,15 @@ if ($email == false) {
       resendOtpButton.disabled = false;
       resendOtpButton.textContent = "Resend OTP";
       resendOtpButton.classList.remove("disabled");
-      localStorage.removeItem("resend-otp-timestamp"); // Remove timestamp from localStorage when timer reaches zero
+      sessionStorage.removeItem("resend-otp-timestamp"); // Remove timestamp from sessionStorage when timer reaches zero
     }
 
     function updateResendOtpButton() {
       resendOtpButton.textContent = `Resend OTP: ${timer}s`;
     }
 
-// RESEND OTP TIMER // 
+// RESEND OTP TIMER //
+
 
   </script>
 
@@ -253,6 +262,16 @@ if ($email == false) {
         });
       });
     });
+
+
+    // JavaScript code to fade out the alert after 3 seconds
+document.addEventListener('DOMContentLoaded', function() {
+  var alertElement = document.querySelector('.alert');
+  setTimeout(function() {
+    alertElement.classList.remove('show');
+    alertElement.classList.add('fade');
+  }, 2000);
+});
   </script>
 
 

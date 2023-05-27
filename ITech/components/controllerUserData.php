@@ -148,7 +148,6 @@ if (isset($_POST['signup'])) {
 
 
 
-
 //if user click verification code submit button
 if (isset($_POST['check'])) {
     $_SESSION['info'] = "";
@@ -305,6 +304,76 @@ if (isset($_POST['login-now'])) {
     header('Location: ../index.php');
 }
 
+
+if (isset($_POST['resend-otp'])) {
+    // Get the email address from the session
+    $email = mysqli_real_escape_string($con, $_SESSION['email']);
+
+    // Check if the email address exists in the usertable
+    $email_check = "SELECT * FROM usertable WHERE email = '$email'";
+    $res = mysqli_query($con, $email_check);
+    
+    if (mysqli_num_rows($res) > 0) {
+        // Generate new OTP codes
+        $code1 = rand(1, 9);
+        $code2 = rand(1, 9);
+        $code3 = rand(1, 9);
+        $code4 = rand(1, 9);
+        $code5 = rand(1, 9);
+        
+        // Update the user's OTP codes in the usertable
+        $update_code = "UPDATE usertable SET code = '$code1', code1 = '$code2', code2 = '$code3', code3 = '$code4', code4 = '$code5' WHERE email = '$email'";
+        mysqli_query($con, $update_code);
+        
+        // Fetch the user's first name from the database
+        $fetch_query = "SELECT firstName FROM usertable WHERE email = '$email'";
+        $fetch_result = mysqli_query($con, $fetch_query);
+
+        if ($fetch_result && mysqli_num_rows($fetch_result) > 0) {
+            $user = mysqli_fetch_assoc($fetch_result);
+            $firstName = $user['firstName'];
+
+            // Prepare the email message
+            $subject = "Your One-Time Password (OTP) Code";
+            $sender = "From: UCC.ITECH <ucc.itech@gmail.com>\r\n";
+            $sender .= "MIME-Version: 1.0\r\n";
+            $sender .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+            $otpCode = "$code1$code2$code3$code4$code5";
+            
+            $message = "<html>
+                <body><p> Hi, <b>$firstName</b>.</p><br><br>
+                    <p>We recently received a request to sign in to your Gmail account from a new device or location.
+                    To ensure the security of your account, we have sent a One-Time Password (OTP) code to your registered phone number or email address</p><br><br>
+                    Please enter the following OTP code to verify your identity and sign in to your Gmail account:<br><br>
+                    <h1> $otpCode </h1> <br>
+                    If you did not make this request or are unsure about the authenticity of this message, please immediately change your account password and enable two-factor authentication.
+                    If you need further assistance, please contact our support team.<br>
+                    Thank you for helping us keep your Gmail account secure.<br>
+                    Welcome to Program Recommendation System! 
+                    <br>
+                    Best regards,
+                    ITech
+                </body>
+            </html>";
+
+            // Send the email
+            if (mail($email, $subject, $message, $sender)) {
+                $info = "A code has been sent to:  $email";
+                $_SESSION['info'] = $info;
+                $_SESSION['email'] = $email;
+                header('location: reset-code.php');
+                exit();
+            } else {
+                $errors['otp-error'] = "Failed while sending code!";
+            }
+        } else {
+            echo "<script>alert('Failed to fetch user details');</script>";
+        }
+    } else {
+        echo "<script>alert('Email does not exist in our records');</script>";
+    }
+}
 
 
        
