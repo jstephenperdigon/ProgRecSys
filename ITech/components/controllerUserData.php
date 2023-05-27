@@ -304,7 +304,6 @@ if (isset($_POST['login-now'])) {
     header('Location: ../index.php');
 }
 
-
 if (isset($_POST['resend-otp'])) {
     // Get the email address from the session
     $email = mysqli_real_escape_string($con, $_SESSION['email']);
@@ -312,7 +311,7 @@ if (isset($_POST['resend-otp'])) {
     // Check if the email address exists in the usertable
     $email_check = "SELECT * FROM usertable WHERE email = '$email'";
     $res = mysqli_query($con, $email_check);
-    
+
     if (mysqli_num_rows($res) > 0) {
         // Generate new OTP codes
         $code1 = rand(1, 9);
@@ -320,11 +319,11 @@ if (isset($_POST['resend-otp'])) {
         $code3 = rand(1, 9);
         $code4 = rand(1, 9);
         $code5 = rand(1, 9);
-        
+
         // Update the user's OTP codes in the usertable
         $update_code = "UPDATE usertable SET code = '$code1', code1 = '$code2', code2 = '$code3', code3 = '$code4', code4 = '$code5' WHERE email = '$email'";
         mysqli_query($con, $update_code);
-        
+
         // Fetch the user's first name from the database
         $fetch_query = "SELECT firstName FROM usertable WHERE email = '$email'";
         $fetch_result = mysqli_query($con, $fetch_query);
@@ -340,7 +339,7 @@ if (isset($_POST['resend-otp'])) {
             $sender .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
             $otpCode = "$code1$code2$code3$code4$code5";
-            
+
             $message = "<html>
                 <body><p> Hi, <b>$firstName</b>.</p><br><br>
                     <p>We recently received a request to sign in to your Gmail account from a new device or location.
@@ -373,10 +372,18 @@ if (isset($_POST['resend-otp'])) {
     } else {
         echo "<script>alert('Email does not exist in our records');</script>";
     }
+} elseif (isset($_POST['cancel'])) {
+    // Get the email address from the session
+    $email = mysqli_real_escape_string($con, $_SESSION['email']);
+
+    // Reset the OTP codes in the usertable to zero
+    $reset_code = "UPDATE usertable SET code = '0', code1 = '0', code2 = '0', code3 = '0', code4 = '0' WHERE email = '$email'";
+    mysqli_query($con, $reset_code);
+
+    // Redirect to the desired page
+    header('location: ../index.php');
+    exit();
 }
 
-
-       
-       
        
         
