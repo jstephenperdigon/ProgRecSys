@@ -118,7 +118,7 @@ if (isset($_COOKIE['email']) && isset($_COOKIE['password'])) {
 
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow ">
     <div class="container">
-      <a class="navbar-brand" href="index.php"><img src="img/logo.png" id="navLogo"></a>
+      <a class="navbar-brand" href="index.php"><img src="img/logo.png" style="height: 100px; width: 100px; margin-top: 20px; margin-bottom: 20px;"></a>
       <!-- Toggle button -->
       <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

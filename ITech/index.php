@@ -286,7 +286,6 @@
             <p><i class="fas fa-home mr-3"></i> Caloocan City, Philippines</p>
             <p><a href="#" style="color:#fff;"><i class="fas fa-envelope mr-3"></i> ucc.itech@gmail.com</p></a>
             <p><a href="#" style="color:#fff;"><i class="fas fa-phone mr-3"></i> +6391 5829 0523</p></a>
-            <p><i class="fas fa-print mr-3"></i> +123 123</p>
           </div>
           <!-- Grid column -->
 

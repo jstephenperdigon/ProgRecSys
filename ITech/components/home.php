@@ -59,27 +59,11 @@ if ($email != false && $password != false) {
     <div class="container">
       <div class="row justify-content-end align-items-center">
         <div class="col-auto ">
-          <a class="navbar-brand" href="home.php"><img src="../img/logo.png" id="navLogo">
+          <a class="navbar-brand" href="home.php"><img src="../img/logo.png" style="height: 100px; width: 100px; margin-top: 20px; margin-bottom: 20px;">
           </a>
         </div>
         <div class="col justify-content-start">
           Program Recommendation System
-        </div>
-        <div class="col text-center">
-          <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="home-tab0" data-mdb-toggle="tab" data-mdb-target="#home0"
-                type="button" role="tab" aria-controls="home" aria-selected="true">
-                Home
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="contact-tab0" data-mdb-toggle="tab" data-mdb-target="#contact0" type="button"
-                role="tab" aria-controls="contact" aria-selected="false">
-
-              </button>
-            </li>
-          </ul>
         </div>
         <div class="col text-center">
           <!-- Example split primary button -->

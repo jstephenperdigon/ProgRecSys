@@ -89,7 +89,7 @@
         <div class="container">
             <div class="row justify-content-end align-items-center">
                 <div class="col-auto ">
-                    <a class="navbar-brand"><img src="../img/logo.png" id="navLogo">
+                    <a class="navbar-brand"><img src="../img/logo.png" style="height: 100px; width: 100px; margin-top: 20px; margin-bottom: 20px;">
                     </a>
                 </div>
                 <div class="col justify-content-start">
@@ -100,7 +100,6 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="contact-tab0" data-mdb-toggle="tab" data-mdb-target="#contact0"
                                 type="button" role="tab" aria-controls="contact" aria-selected="false">
-
                             </button>
                         </li>
                     </ul>
